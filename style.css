@@ -1,0 +1,382 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
+@import url("https://fonts.cdnfonts.com/css/chocolate-box");
+
+/* @font-face {
+    font-family: 'ChocolateBox';
+    src: url('/fonts/C_BOX.TTF') format('ttf'),
+         url('/fonts/C_BOX_D.TTF') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+} */
+
+h1,h2,h3,h4,h5,h6{
+    font-family: 'ChocolateBox';
+}
+
+body{
+    background-color: antiquewhite;
+     font-family: "Cinzel Decorative", serif;
+}
+
+.side-menu{
+        padding: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.nav-menu-link{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-menu-link a{
+    text-decoration: none;
+    color: #a99752;
+    font-weight: 600;
+    font-family: "Cinzel Decorative", serif;
+}
+
+.nav-menu-link img{
+    width: 7vh;
+}
+
+.side-menu-col{
+    background-color: #f4e7cb;
+    box-shadow: 0px 0px 10px 5px #d7c8b2;
+    height: 100vh;
+}
+
+.background-image {
+    background-image: url(img/masjid.png);
+    background-repeat: no-repeat;
+
+    background-size: cover;
+    margin: 18px;
+    position: relative;
+    border-radius: 30px;
+}
+
+.background-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(0 0 0 / 28%);
+    backdrop-filter: blur(2px);
+    border-radius: 30px;
+}
+
+.namaz-card-wrapper{
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    padding: 10px 20px;
+}
+
+.namaz-card,.sehri-iftar-card{
+    background-color: #f4e7cb6e;
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    box-shadow: 0 0 5px 5px #f4e7cbe3;
+}
+
+.namaz-card h5 ,.sehri-iftar-card h5{
+    color: cornsilk;
+    text-align: center;
+    font-size: 30px;
+}
+
+.namaz-card h6 ,.sehri-iftar-card h6{
+        color: #005c32;
+    text-align: center;
+    font-size: 25px;
+}
+
+.search-bar{
+    display: flex;
+    justify-content: end;
+    padding: 10px 20px;
+}
+
+.search-bar .input-group-text{
+    width: auto;
+   background-color: #f4e7cb6e;
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+}
+
+
+
+.highlight {
+       background-color: #f4e7cb6e;
+    transform: scale(1.05);
+    transition: all 0.3sease-in-out;
+    border: 5px solid #ffc107;
+}
+
+.current {
+    background-color: #75b79896;
+    box-shadow: 0 0 5px 5px #198754;
+}
+
+.sehri-iftaar-wrap{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+        padding: 10px 20px;
+}
+
+
+
+.search-bar .input-group{
+    width: auto;
+        backdrop-filter: blur(10px);
+    background-color: #f4e7cb6e;
+    border-radius: 30px;
+    box-shadow: 6px 0px 5px 4px #f4e7cbe3;
+}
+
+
+
+.search-bar input{
+
+    width: auto;
+    background-color: #f4e7cb6e;
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    /* box-shadow: 0 0 5px 5px #f4e7cbe3; */
+}
+
+.islamic-date{
+        text-align: center;
+    font-size: 80px;
+       color: rgb(255 254 230);
+    text-shadow: 0 0 10px #000;
+}
+
+.daily-quote{
+    font-family: "Cinzel Decorative", serif;
+    color: blanchedalmond;
+    text-shadow: 0 0 10px #ffd700, 0 0 20px #fff;
+    text-align: center;
+    font-size: 30px;
+    text-decoration: wavy;
+    font-weight: 600;
+
+}
+
+.good-advice{
+        z-index: 999;
+    position: relative;
+}
+
+.advice-div {
+    height: 44.3vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 
+    font-family: 'Nastaliq', serif;
+  */
+
+
+/* Hijri Calendar */
+
+#calendar{
+    margin: 20px;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+    margin-bottom: 0;
+    background: #a99752;
+    padding: 15px;
+}
+
+.fc .fc-toolbar-title {
+    font-size: 1.75em;
+    margin: 0px;
+    color: beige;
+    padding: 10px;
+}
+
+.fc-scrollgrid-section-header{
+    background-color: #f6da9d;
+}
+
+.fc .fc-daygrid-day-frame {
+    min-height: 100%;
+    position: relative;
+    padding: 30px;
+    text-align: center;
+    color: black;
+    height: 20px;
+        display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background: #fff3cd; */
+}
+
+.fc .fc-daygrid-day-number {
+    font-weight: 600;
+    padding: 4px;
+    position: relative;
+    z-index: 4;
+    font-size: 20px;
+    color: #a99752;
+    text-decoration: none;
+    font-family: "Cinzel Decorative", serif;
+}
+
+.fc-theme-standard td, .fc-theme-standard th {
+    border: 1px solid #ffc107;
+}   
+
+.fc .fc-col-header-cell-cushion {
+    display: inline-block;
+    padding: 2px 4px;
+    font-size: 20px;
+    color: #a99752;
+    text-decoration: none;
+    font-family: 'ChocolateBox';
+}
+
+.fc-theme-standard td{
+    background: #fff3cd;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+    background-color: #ffe48e;
+}
+
+
+/* Ramzan Styling */
+.table-ramzan{
+    height: 70vh;
+}
+
+.table-ramzan-inner{
+            border: 1px solid goldenrod;
+
+}
+
+.table-ramzan-inner thead .sticky-top th{
+    background-color: #a99752;
+    color: beige;
+}
+
+#ramzan-timetable tr td{
+    background: #fff3cd;
+        color: #a99752;
+    font-weight: 600;
+}
+
+.ramzan-title{
+      display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ramzan-title iframe{
+
+    height: 30vh;
+    filter: drop-shadow(2px 4px 6px #ffac71);
+}
+
+.ramzan-title h2{
+        color: #a99752;
+    filter: drop-shadow(2px 4px 6px #ffc107);
+    /* color: #ffc107; */
+    font-size: 40px;
+        margin-bottom: 0px;
+}
+.ramzan-title p{
+    color: #a99752b8;
+    font-weight: 600;
+    /* text-align: center; */
+    /* justify-content: center; */
+    font-size: 15px;
+    text-decoration: underline;
+    margin-bottom: 0px;
+}
+
+   .ramzan-highlight td {
+            background-color: #75b79896 !important;
+            color: antiquewhite !important;
+            ;
+        }
+
+        .table-ramzan::-webkit-scrollbar {
+    width: 8px;
+}
+
+.table-ramzan::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.table-ramzan::-webkit-scrollbar-thumb {
+    background:#d7c8b2;
+    border-radius: 10px;
+}
+
+.table-ramzan::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+@media screen and (max-width: 768px) { 
+    .fc .fc-toolbar{
+        display: block;
+        text-align: center;
+    }
+
+    .side-menu{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .nav-menu-link img {
+    width: 5vh;
+    }
+
+    .nav-menu-link span{
+        
+    font-size: 15px;
+    }
+
+    .side-menu-col{
+   
+    height: auto;
+}
+
+#calendar {
+    margin: 20px 0px;
+}
+
+/* Ramzan */
+.ramzan-title h2{
+    margin-top: 20px;
+}
+
+.decoration-ramzan{
+    display: none;
+}
+
+.ramzan-title{
+    display: block;
+}
+
+ .ramzan-title p{
+    margin-bottom: 0px;
+}
+}
