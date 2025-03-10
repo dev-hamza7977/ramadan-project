@@ -77,7 +77,10 @@ body{
     display: flex;
     align-items: flex-end;
     gap: 20px;
-    padding: 10px 20px;
+}
+
+.owl-carousel .owl-stage-outer{
+        padding: 10px;
 }
 
 .namaz-card,.sehri-iftar-card{
@@ -85,6 +88,7 @@ body{
     backdrop-filter: blur(10px);
     border-radius: 30px;
     box-shadow: 0 0 5px 5px #f4e7cbe3;
+    width: 15rem;
 }
 
 .namaz-card h5 ,.sehri-iftar-card h5{
@@ -280,15 +284,16 @@ body{
     font-weight: 600;
 }
 
-.ramzan-title{
+.svg-wrapper{
       display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.ramzan-title iframe{
-
-    height: 30vh;
+.ramzan-title svg{
+    fill: #a99752;
+    height: 17vh;
+    /* height: 30vh; */
     filter: drop-shadow(2px 4px 6px #ffac71);
 }
 
@@ -335,6 +340,71 @@ body{
 
 
 @media screen and (max-width: 768px) { 
+
+
+
+    /* Home Page */
+
+.search-bar{
+    justify-content: center;
+            padding: 30px 0px;
+}
+
+    .sehri-iftaar-wrap{
+        gap: 30px;
+    }
+
+.background-image {
+    background-image: url(img/masjid.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 18px;
+    position: relative;
+    border-radius: 30px;
+    background-position: center;
+}
+
+.advice-div{
+    height: 28.3vh;
+}
+
+    .islamic-date {
+    text-align: center;
+    font-size: calc(1.375rem + 1.5vw);
+    color: rgb(255 254 230);
+    text-shadow: 0 0 10px #000;
+}
+
+.namaz-card,.sehri-iftar-card{
+    width: 15rem;
+}
+
+.owl-carousel .owl-stage-outer {
+    padding: 10px 0px;
+}
+
+.mobile-flex{
+ display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.namaz-card h5, .sehri-iftar-card h5 {
+    color: cornsilk;
+    text-align: center;
+    font-size: 1.25rem;
+}
+
+.namaz-card h6, .sehri-iftar-card h6 {
+    color: #005c32;
+    text-align: center;
+    font-size: 1rem;}
+
+    .daily-quote{
+        font-size: 1rem;
+    }
+
+    /* Hijr Calender */
     .fc .fc-toolbar{
         display: block;
         text-align: center;
@@ -355,15 +425,22 @@ body{
     }
 
     .side-menu-col{
-   
-    height: auto;
-}
+      height: auto;
+        position: sticky;
+        bottom: 0;
+        z-index: 1;
+        }
 
 #calendar {
     margin: 20px 0px;
 }
 
 /* Ramzan */
+
+.ramzan-title svg{
+    width: 100%;
+    height: auto;
+}
 .ramzan-title h2{
     margin-top: 20px;
 }
@@ -373,7 +450,11 @@ body{
 }
 
 .ramzan-title{
-    display: block;
+   display: block;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
 }
 
  .ramzan-title p{

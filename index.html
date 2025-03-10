@@ -7,8 +7,12 @@
     <title>Ramadan</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="style.css?v=1.0">
 
 </head>
 
@@ -31,14 +35,14 @@
                                     </div>
                                     <div class="sehri-iftaar">
                                         <div class="sehri-iftaar-wrap">
-                                            <div class="card sehri-iftar-card" style="width: 15rem;">
+                                            <div class="card sehri-iftar-card">
                                                 <div class="card-body">
                                                     <h5 class="card-title">SEHRI</h5>
                                                     <h6 class="card-subtitle mb-2 ">Card subtitle</h6>
                                                     <div class="current-prayer-info"></div>
                                                 </div>
                                             </div>
-                                            <div class="card sehri-iftar-card" style="width: 15rem;">
+                                            <div class="card sehri-iftar-card">
                                                 <div class="card-body">
                                                     <h5 class="card-title">IFTARI</h5>
                                                     <h6 class="card-subtitle mb-2 ">Card subtitle</h6>
@@ -61,48 +65,69 @@
                                             </div>
                                         </div>
                                     </div>
+
+
                                     <div class="namaz-card-wrapper">
-                                        <div class="card namaz-card" data-namaz="Isha" style="width: 15rem;">
-                                            <div class="card-body">
-                                                <h5 class="card-title">ISHA</h5>
-                                                <h6 class="card-subtitle mb-2 ">Card subtitle</h6>
+                                        <div class="owl-carousel owl-theme">
+                                            <div class="item">
+                                                <div class="mobile-flex">
+                                                    <div class="card namaz-card" data-namaz="Isha">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">ISHA</h5>
+                                                            <h6 class="card-subtitle mb-2 ">Card subtitle</h6>
+                                                        </div>
 
-
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="card namaz-card" data-namaz="Maghrib" style="width: 15rem;">
-                                            <div class="card-body">
-                                                <h5 class="card-title">MAGHRIB</h5>
-                                                <h6 class="card-subtitle mb-2 ">Card subtitle</h6>
+                                            <div class="item">
+                                                <div class="mobile-flex">
+                                                    <div class="card namaz-card" data-namaz="Maghrib">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">MAGHRIB</h5>
+                                                            <h6 class="card-subtitle mb-2 ">Card subtitle</h6>
+                                                        </div>
 
-
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="card namaz-card" data-namaz="Asr" style="width: 15rem;">
-                                            <div class="card-body">
-                                                <h5 class="card-title">ASR</h5>
-                                                <h6 class="card-subtitle mb-2 ">Card subtitle</h6>
+                                            <div class="item">
+                                                <div class="mobile-flex">
+                                                    <div class="card namaz-card" data-namaz="Asr">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">ASR</h5>
+                                                            <h6 class="card-subtitle mb-2 ">Card subtitle</h6>
+                                                        </div>
 
-
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="card namaz-card" data-namaz="Dhuhr" style="width: 15rem;">
-                                            <div class="card-body">
-                                                <h5 class="card-title">ZOHAR</h5>
-                                                <h6 class="card-subtitle mb-2 ">Card subtitle</h6>
+                                            <div class="item">
+                                                <div class="mobile-flex">
+                                                    <div class="card namaz-card" data-namaz="Dhuhr">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">ZOHAR</h5>
+                                                            <h6 class="card-subtitle mb-2 ">Card subtitle</h6>
+                                                        </div>
 
-
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="card namaz-card" data-namaz="Fajr" style="width: 15rem;">
-                                            <div class="card-body">
-                                                <h5 class="card-title">FAJR</h5>
-                                                <h6 class="card-subtitle mb-2 ">Card subtitle</h6>
+                                            <div class="item">
+                                                <div class="mobile-flex">
+                                                    <div class="card namaz-card" data-namaz="Fajr">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">FAJR</h5>
+                                                            <h6 class="card-subtitle mb-2 ">Card subtitle</h6>
+                                                        </div>
 
-
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
+
                                     <footer>
                                         <p>Made with Love By Meghani Hamza</p>
                                     </footer>
@@ -160,8 +185,33 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <!-- jQuery (Required) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Owl Carousel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
     <script src="script.js"></script>
+
+    <script>
+        $('.owl-carousel').owlCarousel({
+            stagePadding: 5,
+            loop: false,
+            nav: false,
+            responsive: {
+                0: {
+                    items: 1,
+
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 5
+                }
+            }
+        })
+    </script>
 </body>
 
 </html>
