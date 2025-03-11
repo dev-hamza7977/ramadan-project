@@ -288,13 +288,15 @@ body{
       display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 20px;
 }
 
 .ramzan-title svg{
-    fill: #a99752;
-    height: 17vh;
-    /* height: 30vh; */
-    filter: drop-shadow(2px 4px 6px #ffac71);
+       fill: #a99752;
+    height: 30vh;
+    width: auto;
+    filter: drop-shadow(2px 4px 1px #ffac71);
+    margin-top: -30px;
 }
 
 .ramzan-title h2{
@@ -338,6 +340,27 @@ body{
     background: #555;
 }
 
+/* Dua */
+
+.dua-card{
+    background-color: transparent;
+        box-shadow: 0px 0px 9px 11px #ffecad;
+}
+
+.dua-card p{
+    color:#a99852;
+}
+
+.dua-card .card-header{
+ background: #a99752;
+    color: #fff3cd;
+
+}
+
+.dua-crad-wrapper .col-lg-4{
+    padding: 20px;
+}
+   
 
 @media screen and (max-width: 768px) { 
 
@@ -437,12 +460,21 @@ body{
 
 /* Ramzan */
 
-.ramzan-title svg{
-    width: 100%;
-    height: auto;
-}
+    .ramzan-title svg {
+        width: 100%;
+        height: auto;
+        margin-top: -23px;}
+
 .ramzan-title h2{
     margin-top: 20px;
+}
+
+.svg-mob{
+    display: none;
+} 
+
+.svg-wrapper{
+    display: block;
 }
 
 .decoration-ramzan{

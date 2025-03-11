@@ -507,38 +507,57 @@ function adjustTime(time, offset) {
 }
 
 
-    function convertToMinutes(time) {
-        const [hours, minutes] = time.split(":").map(Number);
-        return hours * 60 + minutes;
-    }
+function convertToMinutes(time) {
+    if (!time) return 0;
+    const [hours, minutes] = time.split(":").map(Number);
+    return hours * 60 + minutes;
+}
 
-    async function fetchHijriDate(gregorianDate) {
-        try {
-            let response = await fetch(`https://api.aladhan.com/v1/gToH?gregorian=${gregorianDate}`);
-            let data = await response.json();
-            document.querySelector(".islamic-date").innerText = 
-                `${data.data.hijri.day} ${data.data.hijri.month.en} ${data.data.hijri.year}`;
-        } catch (error) {
-            document.querySelector(".islamic-date").innerText = "Failed to load date";
+
+
+
+
+
+async function fetchHijriDate(gregorianDate, maghribTime) {
+    try {
+        let response = await fetch(`https://api.aladhan.com/v1/gToH?gregorian=${gregorianDate}`);
+        let data = await response.json();
+        
+        let hijriDay = parseInt(data.data.hijri.day, 10);
+        let hijriMonth = data.data.hijri.month.en;
+        let hijriYear = data.data.hijri.year;
+
+        let now = new Date();
+        let currentMinutes = now.getHours() * 60 + now.getMinutes();
+        let maghribMinutes = convertToMinutes(maghribTime);
+
+        // If current time is after Maghrib, use the next day's Hijri date
+        if (currentMinutes >= maghribMinutes) {
+            hijriDay += 0;
         }
+
+        document.querySelector(".islamic-date").innerText = `${hijriDay} ${hijriMonth} ${hijriYear}`;
+        updateDailyQuote(hijriDay);
+    } catch (error) {
+        document.querySelector(".islamic-date").innerText = "Failed to load date";
     }
+}
 
-    const quotes = [
-        `"Whoever bows before Allah, <br> Allah makes the world bow before him."`,
-        `"Indeed, with hardship comes ease. <br> (Quran 94:6)"`,
-        `"Be like a flower that gives its fragrance <br> even to the hand that crushes it."`,
-        `"The best among you are those <br> who have the best manners and character."`,
-        `"A moment of patience in a moment of anger <br> prevents a thousand moments of regret."`
-    ];
+const quotes = [
+    `"Whoever bows before Allah, <br> Allah makes the world bow before him."`,
+    `"Indeed, with hardship comes ease. <br> (Quran 94:6)"`,
+    `"Be like a flower that gives its fragrance <br> even to the hand that crushes it."`,
+    `"The best among you are those <br> who have the best manners and character."`,
+    `"A moment of patience in a moment of anger <br> prevents a thousand moments of regret."`
+];
 
-    function updateDailyQuote() {
-        let today = new Date();
-        let quoteIndex = today.getDate() % quotes.length;
-        document.querySelector(".daily-quote").innerHTML = quotes[quoteIndex];
-    }
+function updateDailyQuote(hijriDay) {
+    let quoteIndex = hijriDay % quotes.length;
+    document.querySelector(".daily-quote").innerHTML = quotes[quoteIndex];
+}
 
-    updateDailyQuote();
 });
+
 
 
 
