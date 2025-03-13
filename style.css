@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
 @import url("https://fonts.cdnfonts.com/css/chocolate-box");
+@import url('https://fonts.googleapis.com/css2?family=Cairo+Play:wght@200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap'); 
+
 
 /* @font-face {
     font-family: 'ChocolateBox';
@@ -32,6 +38,7 @@ body{
     text-align: center;
     flex-direction: column;
     align-items: center;
+    padding: 10px;
 }
 
 .nav-menu-link a{
@@ -51,6 +58,13 @@ body{
     height: 100vh;
 }
 
+ .nav-active{
+            background: #3b535a;
+    border-radius: 10px;
+    box-shadow: (1px 1px 1px 1px black);
+    box-shadow: 0 0 5px 5px #88b8c7;
+    }
+
 .background-image {
     background-image: url(img/masjid.png);
     background-repeat: no-repeat;
@@ -59,6 +73,17 @@ body{
     margin: 18px;
     position: relative;
     border-radius: 30px;
+}
+
+.index-note-text{
+        z-index: 1000;
+    color: #ffebcd;
+    font-weight: 800;
+    /* color: indianred; */
+    background: aquamarine;
+    background-color: #f4e7cb6e;
+    padding: 10px;
+    border-radius: 15px;
 }
 
 .background-image::before {
@@ -135,6 +160,7 @@ body{
     justify-content: space-between;
     width: 100%;
         padding: 10px 20px;
+        align-items: center;
 }
 
 
@@ -352,6 +378,7 @@ body{
 .dua-card p{
     color:#a99852;
     font-weight: 700;
+    font-size: 17px;
 }
 
 .dua-card .card-header{
@@ -361,10 +388,12 @@ body{
 }
 
 .dua-crad-wrapper{
-    height: 70vh;
+        height: 69vh;
     overflow-y: scroll;
     overflow-x: hidden;
 }
+
+
 
 .dua-crad-wrapper .col-lg-4, .dua-crad-wrapper .col-lg-6{
     padding: 20px;
@@ -388,11 +417,87 @@ body{
     background: #555;
 }
 
+.language-switcher {
+    display: flex;
+    justify-content: center;
+    margin-top: -50px;
+    margin-bottom: 20px;
+}
 
+.toggleContainer {
+   position: relative;
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   width: fit-content;
+   border: 3px solid #343434;
+   border-radius: 20px;
+   background: #a99752;
+   font-weight: bold;
+   color: #343434;
+   cursor: pointer;
+ }
+ .toggleContainer::before {
+content: '';
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    left: 0%;
+    border-radius: 20px;
+    background: #fff3cd;
+    transition: all 0.3s;
+ }
+ .toggleCheckbox:checked + .toggleContainer::before {
+    left: 50%;
+ }
+ .toggleContainer div {
+   padding: 6px;
+   text-align: center;
+   z-index: 1;
+ }
+ .toggleCheckbox {
+   display: none;
+ }
+ .toggleCheckbox:checked + .toggleContainer div:first-child{
+   color: white;
+   transition: color 0.3s;
+ }
+ .toggleCheckbox:checked + .toggleContainer div:last-child{
+   color: #343434;
+   transition: color 0.3s;
+ }
+ .toggleCheckbox + .toggleContainer div:first-child{
+   color: #343434;
+   transition: color 0.3s;
+ }
+ .toggleCheckbox + .toggleContainer div:last-child{
+   color: white;
+   transition: color 0.3s;
+ }
+
+ .arabic-text {
+  font-family: "Cairo Play", sans-serif;
+          direction: rtl;
+          font-size: 25px;
+    }
+
+    /* Urdu font */
+    .urdu-text {
+font-family: "IBM Plex Sans Arabic", sans-serif;     
+direction: rtl;
+        font-size: 25px;
+    }
+
+   
 
 @media screen and (max-width: 768px) { 
 
+.nav-menu-link{
+    padding: 5px;
+}
 
+.index-note-text{
+    font-size: 10px;
+}
 
     /* Home Page */
 
@@ -519,5 +624,10 @@ body{
 
  .ramzan-title p{
     margin-bottom: 0px;
+}
+
+/* Dua */
+.language-switcher{
+    margin-top: 0px;
 }
 }

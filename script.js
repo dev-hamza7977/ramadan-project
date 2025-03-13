@@ -518,9 +518,34 @@ function convertToMinutes(time) {
 
 
 
+// async function fetchHijriDate(gregorianDate, maghribTime) {
+//     try {
+//         let response = await fetch(`https://api.aladhan.com/v1/gToH?gregorian=${gregorianDate}`);
+//         let data = await response.json();
+        
+//         let hijriDay = parseInt(data.data.hijri.day, 10);
+//         let hijriMonth = data.data.hijri.month.en;
+//         let hijriYear = data.data.hijri.year;
+
+//         let now = new Date();
+//         let currentMinutes = now.getHours() * 60 + now.getMinutes();
+//         let maghribMinutes = convertToMinutes(maghribTime);
+
+//         // If current time is after Maghrib, use the next day's Hijri date
+//         if (currentMinutes >= maghribMinutes) {
+//             hijriDay += 0;
+//         }
+
+//         document.querySelector(".islamic-date").innerText = `${hijriDay} ${hijriMonth} ${hijriYear}`;
+//         updateDailyQuote(hijriDay);
+//     } catch (error) {
+//         document.querySelector(".islamic-date").innerText = "Failed to load date";
+//     }
+// }
+
 async function fetchHijriDate(gregorianDate, maghribTime) {
     try {
-        let response = await fetch(`https://api.aladhan.com/v1/gToH?gregorian=${gregorianDate}`);
+        let response = await fetch(`https://api.aladhan.com/v1/gToH?date=${gregorianDate}`);
         let data = await response.json();
         
         let hijriDay = parseInt(data.data.hijri.day, 10);
@@ -531,9 +556,15 @@ async function fetchHijriDate(gregorianDate, maghribTime) {
         let currentMinutes = now.getHours() * 60 + now.getMinutes();
         let maghribMinutes = convertToMinutes(maghribTime);
 
-        // If current time is after Maghrib, use the next day's Hijri date
+        // If current time is after Maghrib, adjust the Hijri date forward
         if (currentMinutes >= maghribMinutes) {
-            hijriDay += 0;
+            hijriDay += -1;
+        }
+
+        // Handle month transition if it's the last day of the Hijri month
+        if (hijriDay > 30) { // Adjust if needed for month lengths
+            hijriDay = 1;
+            // Fetch next month name and year if necessary
         }
 
         document.querySelector(".islamic-date").innerText = `${hijriDay} ${hijriMonth} ${hijriYear}`;
@@ -542,6 +573,10 @@ async function fetchHijriDate(gregorianDate, maghribTime) {
         document.querySelector(".islamic-date").innerText = "Failed to load date";
     }
 }
+
+
+
+
 
 const quotes = [
     `"Whoever bows before Allah, <br> Allah makes the world bow before him."`,

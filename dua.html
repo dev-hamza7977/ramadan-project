@@ -8,9 +8,9 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=1.2">
+    <link rel="stylesheet" href="style.css?v=1.3">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
 
     <style>
@@ -778,6 +778,13 @@
                                     </svg>
                                 </div>
                             </div>
+                            <div class="language-switcher" id="language-toggle">
+                                <input type="checkbox" id="toggle" class="toggleCheckbox" />
+                                <label for="toggle" class='toggleContainer'>
+                                    <div>ENGLISH</div>
+                                    <div>عربي</div>
+                                </label>
+                            </div>
                             <div class="dua-crad-wrapper">
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -786,19 +793,24 @@
                                             <div class="col-lg-4">
                                                 <div class="card dua-card">
                                                     <div class="card-header">
-                                                        <h5 class="card-title mb-0 text-center">3rd Ashra Dua</h5>
-
+                                                        <h5 class="card-title mb-0 text-center translation animate__animated animate__bounce"
+                                                            data-en="3rd Ashra Dua" data-ur="تیسرے عشرے کی دعا">3rd
+                                                            Ashra Dua</h5>
                                                     </div>
                                                     <div class="card-body">
-
-                                                        <p class="card-text text-center">Allahumma qina ‘adhab an-naar
-                                                            wa adkhilna jannata ma‘a al-abrar, ya ‘Azizu ya Ghaffar</p>
-                                                        <p class="text-center">
-                                                            <u>Translation:</u> <br>
+                                                        <p class="card-text text-center transliteration "
+                                                            data-en="Allahumma qina ‘adhab an-naar wa adkhilna jannata ma‘a al-abrar, ya ‘Azizu ya Ghaffar"
+                                                            data-ar="اللهم قنا عذاب النار وأدخلنا الجنة مع الأبرار، يا عزيز يا غفار">
+                                                            Allahumma qina ‘adhab an-naar wa adkhilna jannata ma‘a
+                                                            al-abrar, ya ‘Azizu ya Ghaffar
+                                                        </p>
+                                                        <p class="text-center mb-0"><u>Translation:</u></p>
+                                                        <p class="text-center translation"
+                                                            data-en="O Allah, protect us from the punishment of the Fire and admit us into Paradise with the righteous. O Almighty, O Most Forgiving."
+                                                            data-ur="اے اللہ، ہمیں آگ کے عذاب سے بچا اور ہمیں نیک لوگوں کے ساتھ جنت میں داخل فرما۔ اے زبردست، اے معاف کرنے والے۔">
                                                             O Allah, protect us from the punishment of the Fire and
-                                                            admit us into Paradise with the righteous. O Almighty, O
-                                                            Most
-                                                            Forgiving.
+                                                            admit us into Paradise with the
+                                                            righteous. O Almighty, O Most Forgiving.
                                                         </p>
                                                     </div>
                                                 </div>
@@ -807,15 +819,24 @@
                                             <div class="col-lg-4">
                                                 <div class="card dua-card">
                                                     <div class="card-header">
-                                                        <h5 class="card-title mb-0 text-center">2nd Ashra Dua</h5>
+                                                        <h5 class="card-title mb-0 text-center translation animate__animated animate__bounceInUp"
+                                                            data-en="2nd
+                                                            Ashra Dua" data-ur="دوسرے عشرے کی دعا">2nd
+                                                            Ashra Dua</h5>
 
                                                     </div>
                                                     <div class="card-body">
 
-                                                        <p class="card-text text-center">Allahummaghfir lana zunubana ya
-                                                            arhamar rahimeen</p>
-                                                        <p class="text-center">
-                                                            <u>Translation:</u> <br>
+                                                        <p class="card-text text-center transliteration"
+                                                            data-en="Allahummaghfir lana zunubana ya arhamar rahimeen"
+                                                            data-ar="اللَّهُمَّ ٱغْفِرْ لَنَا ذُنُوبَنَا يَا أَرْحَمَ ٱلرَّاحِمِينَ">
+                                                            Allahummaghfir lana zunubana ya arhamar rahimeen
+                                                        </p>
+                                                        <p class="text-center mb-0"><u>Translation:</u></p>
+                                                        <p class="text-center translation"
+                                                            data-en="O Allah, forgive our sins, O Most Merciful of the merciful."
+                                                            data-ur="اے اللہ! ہمارے گناہوں کو معاف فرما، اے سب سے زیادہ رحم کرنے والے">
+
                                                             O Allah, forgive our sins, O Most Merciful of the merciful.
                                                         </p>
                                                     </div>
@@ -825,15 +846,23 @@
                                             <div class="col-lg-4">
                                                 <div class="card dua-card">
                                                     <div class="card-header">
-                                                        <h5 class="card-title mb-0 text-center">1St Ashra Dua</h5>
+                                                        <h5 class="card-title mb-0 text-center translation animate__animated animate__bounce"
+                                                            data-en="1St
+                                                            Ashra Dua" data-ur="پہلے عشرے کی دعا">1St
+                                                            Ashra Dua</h5>
 
                                                     </div>
                                                     <div class="card-body">
-
-                                                        <p class="card-text text-center">Allahumma arhamni Ya
+                                                        <p class="card-text text-center transliteration"
+                                                            data-en="Allahumma arhamni Ya  Arham-mar-Rahimeen"
+                                                            data-ar="اللَّهُمَّ ٱرْحَمْنِي يَا أَرْحَمَ ٱلرَّاحِمِينَ">
+                                                            Allahumma arhamni Ya
                                                             Arham-mar-Rahimeen</p>
-                                                        <p class="text-center">
-                                                            <u>Translation:</u> <br>
+                                                        <p class="text-center"><u>Translation:</u></p>
+                                                        <p class="text-center translation"
+                                                            data-en="O Allah, forgive our sins, O Most Merciful of the merciful."
+                                                            data-ur="اے اللہ! مجھ پر رحم فرما، اے سب سے زیادہ رحم فرمانے والے۔">
+
                                                             Oh Allah have mercy upon me, O Most Merciful.
                                                         </p>
                                                     </div>
@@ -846,16 +875,26 @@
                                             <div class="col-lg-4">
                                                 <div class="card dua-card">
                                                     <div class="card-header">
-                                                        <h5 class="card-title mb-0 text-center">Iftari Dua</h5>
+                                                        <h5 class="card-title mb-0 text-center translation animate__animated animate__rotateIn"
+                                                            data-en="Iftari Dua" data-ur="افطار کی دعا">Iftari Dua</h5>
 
                                                     </div>
                                                     <div class="card-body">
 
-                                                        <p class="card-text text-center">Allahumma inni laka sumtu, wa
+                                                        <p class="card-text text-center transliteration"
+                                                            data-ar="اللَّهُمَّ إِنِّي لَكَ صُمْتُ، وَبِكَ آمَنْتُ، وَعَلَيْكَ تَوَكَّلْتُ، وَعَلَىٰ رِزْقِكَ أَفْطَرْتُ، فَتَقَبَّلْ مِنِّي"
+                                                            data-en="Allahumma inni laka sumtu, wa
+                                                            bika aamantu, wa ‘alayka tawakkaltu, wa ‘ala rizqika
+                                                            aftartu, fataqabbal minni.">Allahumma inni laka sumtu, wa
                                                             bika aamantu, wa ‘alayka tawakkaltu, wa ‘ala rizqika
                                                             aftartu, fataqabbal minni.</p>
-                                                        <p class="text-center">
-                                                            <u>Translation:</u> <br>
+                                                        <p class="text-center mb-0"><u>Translation</u></p>
+                                                        <p class="text-center translation"
+                                                            data-ur="اے اللہ! میں نے تیرے لیے روزہ رکھا، تجھ پر ایمان لایا، تجھ پر بھروسہ کیا، اور تیرے رزق سے افطار کیا، پس اسے مجھ سے قبول فرما۔"
+                                                            data-en=" O Allah! I fasted for You, and I believe in You, and I put
+                                                            my trust in You, and with Your sustenance, I break my fast.
+                                                            So accept it from me.">
+
                                                             O Allah! I fasted for You, and I believe in You, and I put
                                                             my trust in You, and with Your sustenance, I break my fast.
                                                             So accept it from me.
@@ -867,15 +906,25 @@
                                             <div class="col-lg-4">
                                                 <div class="card dua-card">
                                                     <div class="card-header">
-                                                        <h5 class="card-title mb-0 text-center">lailatul Qadr Dua</h5>
+                                                        <h5 class="card-title mb-0 text-center translation animate__animated animate__zoomIn"
+                                                            data-en="lailatul Qadr dua" data-ur="لیلۃ القدر کی دعا">
+                                                            lailatul Qadr Dua</h5>
 
                                                     </div>
                                                     <div class="card-body">
 
-                                                        <p class="card-text text-center">Allahumma innaka afuwwun
+                                                        <p class="card-text text-center transliteration"
+                                                            data-ar="اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنَّا يَا كَرِيمُ"
+                                                            data-en=" Allahumma innaka afuwwun
+                                                            tuhibbul afwa fafu anna ya Kareem.">
+                                                            Allahumma innaka afuwwun
                                                             tuhibbul afwa fafu anna ya Kareem.</p>
-                                                        <p class="text-center">
-                                                            <u>Translation:</u> <br>
+                                                        <p class="mb-0 text-center"><u>Translation:</u></p>
+                                                        <p class="text-center translation" data-en="
+                                                            O Allah, You are Most Forgiving, and You love forgiveness,
+                                                            so forgive us, O Most Generous."
+                                                            data-ur="اے اللہ! بے شک تو معاف کرنے والا ہے، معاف کرنے کو پسند کرتا ہے، پس ہمیں معاف فرما، اے سب سے زیادہ کرم والے!">
+
                                                             O Allah, You are Most Forgiving, and You love forgiveness,
                                                             so forgive us, O Most Generous.
                                                         </p>
@@ -883,51 +932,28 @@
                                                 </div>
                                             </div>
 
-                                            <!-- <div class="col-lg-4">
-                                                <div class="card dua-card">
-                                                    <div class="card-header">
-                                                        <h5 class="card-title mb-0 text-center">Iftari Dua</h5>
 
-                                                    </div>
-                                                    <div class="card-body">
-
-                                                        <p class="card-text text-center">Subhanal Malikil Quddus;
-                                                            Subhana dhil Mulki wal Malakuti; Subhana dhil
-                                                            izzati wal aDhmati wal haybati wal
-                                                            Qudrati; wal kibriyaa’i wal jabaroot;<br>Subhanal Malikil
-                                                            hayyil ladhi,
-                                                            la yunaamu wa layamutu; Subbuhun,
-                                                            Quddusun, Rabbuna Rabbul malaa’ikati war-rooh; Allahumma
-                                                            Ajirnee Minan
-                                                            Naar; Ya Mujeero, Ya Mujeero, Ya Mujeer.</p>
-                                                        <p class="text-center">
-                                                            <u>Translation:</u> <br>
-                                                            Glory be to the Owner of the Kingdom of the earth and the
-                                                            heavens. Glory be to He who commands Respect and Honour and
-                                                            Magnificence & Awe and Power and Greatness and Omnipotence.
-                                                            Glory be to the Sovereign, the Ever-living. Who does not
-                                                            sleep nor die. He is the Most Praised, the Most Holy, Our
-                                                            Lord and the Lord of all the Angels and the Spirit. O Allah!
-                                                            Save us from the Fire of Hell.
-                                                            O Protector! O Protector! O Protector!
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div> -->
 
                                             <div class="col-lg-4">
                                                 <div class="card dua-card">
                                                     <div class="card-header">
-                                                        <h5 class="card-title mb-0 text-center">Sehri Dua</h5>
+                                                        <h5 class="card-title mb-0 text-center translation animate__animated animate__rollIn"
+                                                            data-ur="سحری کی دعا" data-en="Sehri Dua">Sehri Dua</h5>
 
                                                     </div>
                                                     <div class="card-body">
 
-                                                        <p class="card-text text-center">Nawaitu an asuma ghadan lillahi
+                                                        <p class="card-text text-center transliteration"
+                                                            data-ar="نَوَيْتُ أَنْ أَصُومَ غَدًا لِلَّهِ تَعَالَىٰ مِنْ فَرْضِ رَمَضَانَ"
+                                                            data-en="Nawaitu an asuma ghadan lillahi
+                                                            ta'ala min fardi Ramadan.">
+                                                            Nawaitu an asuma ghadan lillahi
                                                             ta'ala min fardi Ramadan.
                                                         </p>
-                                                        <p class="text-center">
-                                                            <u>Translation:</u> <br>
+                                                        <p class="text-center mb-0"><u>Translation:</u></p>
+                                                        <p class="text-center translation" data-en=" I intend to fast tomorrow for the sake of Allah, as an
+                                                            obligation of Ramadan."
+                                                            data-ur="میں نے اللہ تعالیٰ کے لیے، فرض رمضان کا روزہ رکھنے کی نیت کی۔">
                                                             I intend to fast tomorrow for the sake of Allah, as an
                                                             obligation of Ramadan.
                                                         </p>
@@ -943,22 +969,43 @@
                                             <div class="col-lg-6">
                                                 <div class="card dua-card">
                                                     <div class="card-header">
-                                                        <h5 class="card-title mb-0 text-center">Taraweeh Dua</h5>
+                                                        <h5 class="card-title mb-0 text-center translation animate__animated animate__zoomInDown"
+                                                            data-ur="تراویح کی دعا" data-en="Taraweeh dua">Taraweeh Dua
+                                                        </h5>
 
                                                     </div>
                                                     <div class="card-body">
 
-                                                        <p class="card-text text-center">Subhanal Malikil Quddus;
+                                                        <p class="card-text text-center transliteration"
+                                                            data-ar="سُبْحَانَ الْمَلِكِ الْقُدُّوسِ، سُبْحَانَ ذِي الْمُلْكِ وَالْمَلَكُوتِ، سُبْحَانَ ذِي الْعِزَّةِ وَالْعَظَمَةِ وَالْهَيْبَةِ وَالْقُدْرَةِ وَالْكِبْرِيَاءِ وَالْجَبَرُوتِ  سُبْحَانَ الْمَلِكِ الْحَيِّ الَّذِي لَا يُنَامُ وَلَا يَمُوتُ، سُبُّوحٌ، قُدُّوسٌ، رَبُّنَا وَرَبُّ الْمَلَائِكَةِ وَالرُّوحِ، اللَّهُمَّ أَجِرْنِي مِنَ النَّارِ، يَا مُجِيرُ، يَا مُجِيرُ، يَا مُجِيرُ"
+                                                            data-en="Subhanal Malikil Quddus; Subhana dhil Mulki wal Malakuti; Subhana dhil izzati wal aDhmati wal haybati wal
+                                                            Qudrati; wal kibriyaa’i wal jabaroot; Subhanal Malikil hayyil ladhi, la yunaamu wa layamutu; Subbuhun,  Quddusun, Rabbuna Rabbul malaa’ikati war-rooh; Allahumma Ajirnee Minan Naar;  Ya Mujeero, Ya Mujeero, Ya Mujeer.">
+                                                            Subhanal Malikil Quddus;
                                                             Subhana dhil Mulki wal Malakuti; Subhana dhil
                                                             izzati wal aDhmati wal haybati wal
-                                                            Qudrati; wal kibriyaa’i wal jabaroot;<br>Subhanal Malikil
+                                                            Qudrati; wal kibriyaa’i wal jabaroot; Subhanal Malikil
                                                             hayyil ladhi,
                                                             la yunaamu wa layamutu; Subbuhun,
                                                             Quddusun, Rabbuna Rabbul malaa’ikati war-rooh; Allahumma
                                                             Ajirnee Minan
                                                             Naar; Ya Mujeero, Ya Mujeero, Ya Mujeer.</p>
-                                                        <p class="text-center">
-                                                            <u>Translation:</u> <br>
+                                                        <p class="text-center mb-0"><u>Translation</u></p>
+                                                        <p class="text-center translation" data-ur="زمین اور آسمان کی بادشاہت کے مالک کی پاکی بیان کرتا ہوں۔  
+پاک ہے وہ ذات جو عزت، عظمت، جلال، ہیبت، قدرت، بزرگی اور غلبے کا مالک ہے۔  
+
+پاک ہے وہ بادشاہ، جو ہمیشہ زندہ ہے، نہ سوتا ہے اور نہ مرتا ہے۔  
+وہی سب سے زیادہ تعریف کے لائق، سب سے زیادہ مقدس، ہمارا رب اور تمام فرشتوں اور روح (جبریل علیہ السلام) کا رب ہے۔  
+
+اے اللہ! ہمیں جہنم کی آگ سے بچا لے۔  
+اے محافظ! اے محافظ! اے محافظ!" data-en="  Glory be to the Owner of the Kingdom of the earth and the
+                                                            heavens. Glory be to He who commands Respect and Honour and
+                                                            Magnificence & Awe and Power and Greatness and Omnipotence.
+                                                            Glory be to the Sovereign, the Ever-living. Who does not
+                                                            sleep nor die. He is the Most Praised, the Most Holy, Our
+                                                            Lord and the Lord of all the Angels and the Spirit. O Allah!
+                                                            Save us from the Fire of Hell.
+                                                            O Protector! O Protector! O Protector!">
+
                                                             Glory be to the Owner of the Kingdom of the earth and the
                                                             heavens. Glory be to He who commands Respect and Honour and
                                                             Magnificence & Awe and Power and Greatness and Omnipotence.
@@ -974,12 +1021,23 @@
                                             <div class="col-lg-6">
                                                 <div class="card dua-card">
                                                     <div class="card-header">
-                                                        <h5 class="card-title mb-0 text-center">Dua E Qunoot</h5>
+                                                        <h5 class="card-title mb-0 text-center translation"
+                                                            data-ur="دو قنوت" data-en="Dua E Qunoot">Dua E Qunoot</h5>
 
                                                     </div>
                                                     <div class="card-body">
 
-                                                        <p class="card-text text-center">Allah humma inna nasta-eenoka
+                                                        <p class="card-text text-center transliteration"
+                                                            data-ar="اللَّهُمَّ إِنَّا نَسْتَعِينُكَ وَنَسْتَغْفِرُكَ وَنُؤْمِنُ بِكَ وَنَتَوَكَّلُ عَلَيْكَ وَنُثْنِي عَلَيْكَ الْخَيْرَ، وَنَشْكُرُكَ وَلَا نَكْفُرُكَ وَنَخْلَعُ وَنَتْرُكُ مَنْ يَفْجُرُكَ، اللَّهُمَّ إِيَّاكَ نَعْبُدُ وَلَكَ نُصَلِّي وَنَسْجُدُ، وَإِلَيْكَ نَسْعَى وَنَحْفِزُ، وَنَرْجُو رَحْمَتَكَ وَنَخْشَى عَذَابَكَ، إِنَّ عَذَابَكَ بِالْكُفَّارِ مُلْحِقٌ."
+                                                            data-en="Allah humma inna nasta-eenoka
+                                                            wa nastaghfiruka wa nu'minu bika wa natawakkalu alaika wa
+                                                            nusni alaikal khair, wa
+                                                            nashkuruka wala nakfuruka wa nakhla-oo wa natruku mai
+                                                            yafjuruka, Allah humma iyyaka na'budu wa laka nusalli wa
+                                                            nasjud;
+                                                            wa ilaika nas aaa wa nahfizu wa narju rahma taka wa nakhshaa
+                                                            azaabaka; inna azaabaka bil kuffari mulhik.">
+                                                            Allah humma inna nasta-eenoka
                                                             wa nastaghfiruka wa nu'minu bika wa natawakkalu alaika wa
                                                             nusni alaikal khair, wa
                                                             nashkuruka wala nakfuruka wa nakhla-oo wa natruku mai
@@ -988,8 +1046,23 @@
                                                             wa ilaika nas aaa wa nahfizu wa narju rahma taka wa nakhshaa
                                                             azaabaka; inna azaabaka bil kuffari mulhik.
                                                         </p>
-                                                        <p class="text-center">
-                                                            <u>Translation:</u> <br>
+                                                        <p class="text-center mb-0"><u>Translation:</u></p>
+                                                        <p class="text-center translation" data-ur="اے اللہ! ہم تجھ سے مدد طلب کرتے ہیں اور تجھ سے بخشش کے طلبگار ہیں، ہم تجھ پر ایمان رکھتے ہیں، تجھ پر بھروسہ کرتے ہیں، تیری تعریف بیان کرتے ہیں، اور تیرے شکر گزار ہیں، تیرے ناشکرے نہیں ہیں، اور ہم ان لوگوں سے علیحدگی اختیار کرتے ہیں جو تیری نافرمانی کرتے ہیں۔  
+
+اے اللہ! ہم تیری ہی عبادت کرتے ہیں، تیرے لیے ہی نماز پڑھتے اور سجدہ کرتے ہیں، تیرے قریب ہونے کی کوشش کرتے ہیں اور تیری رضا کے لیے خود کو پیش کرتے ہیں۔ ہم تیری رحمت کے امیدوار ہیں اور تیرے عذاب سے ڈرتے ہیں۔  
+
+بے شک، تیرا عذاب کافروں کو گھیر لینے والا ہے، اے اللہ!" data-en=" O Allah! We implore You for help and beg forgiveness of You
+                                                            and believe in You and rely on You and extol You and we are
+                                                            thankful to You and are not ungrateful to You and we
+                                                            alienate and forsake those who disobey You. O Allah! You
+                                                            alone do
+                                                            we worship and for You do we pray and prostrate and we
+                                                            betake to please You and present ourselves for the service
+                                                            in
+                                                            Your cause and we hope for Your mercy and fear Your
+                                                            chastisement. Undoubtedly, Your torment is going to overtake
+                                                            infidels O Allah!">
+
                                                             O Allah! We implore You for help and beg forgiveness of You
                                                             and believe in You and rely on You and extol You and we are
                                                             thankful to You and are not ungrateful to You and we
@@ -1045,10 +1118,10 @@
                                     </a>
                                 </div>
                                 <div class="nav-menu-link">
-                                    <a href="blog.html">
+                                    <a href="contact.html">
                                         <img src="nav-icon/blogs.png" alt="">
                                         <br>
-                                        <span>Blogs</span>
+                                        <span>Contact</span>
                                     </a>
                                 </div>
                             </div>
@@ -1068,56 +1141,44 @@
 
 
 
-    <!-- 
-    <div class="language-swicher">
-        <div class="switch">
-            <input id="language-toggle" class="check-toggle check-toggle-round-flat" type="checkbox">
-            <label for="language-toggle"></label>
-            <span class="on">AR</span>
-            <span class="off">EN</span>
-        </div>
-    </div>
 
-    <div class="dua-crad-wrapper">
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="card dua-card">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0 text-center">3rd Ashra Dua</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text text-center transliteration"
-                            data-en="Allahumma qina ‘adhab an-naar wa adkhilna jannata ma‘a al-abrar, ya ‘Azizu ya Ghaffar"
-                            data-ar="اللهم قنا عذاب النار وأدخلنا الجنة مع الأبرار، يا عزيز يا غفار">
-                            Allahumma qina ‘adhab an-naar wa adkhilna jannata ma‘a al-abrar, ya ‘Azizu ya Ghaffar
-                        </p>
-                        <p class="text-center translation"
-                            data-en="O Allah, protect us from the punishment of the Fire and admit us into Paradise with the righteous. O Almighty, O Most Forgiving."
-                            data-ur="اے اللہ، ہمیں آگ کے عذاب سے بچا اور ہمیں نیک لوگوں کے ساتھ جنت میں داخل فرما۔ اے زبردست، اے معاف کرنے والے۔">
-                            <u>Translation:</u> <br>
-                            O Allah, protect us from the punishment of the Fire and admit us into Paradise with the
-                            righteous. O Almighty, O Most Forgiving.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get the current page URL
+            let currentPage = window.location.pathname.split("/").pop();
 
-    document.getElementById('language-toggle').addEventListener('change', function() {
-    const transliterations = document.querySelectorAll('.transliteration');
-    const translations = document.querySelectorAll('.translation');
+            // Get all menu links
+            let menuLinks = document.querySelectorAll(".nav-menu-link a");
 
-    transliterations.forEach(el => {
-    el.innerText = this.checked ? el.dataset.ar : el.dataset.en;
-    });
+            menuLinks.forEach(link => {
+                let linkHref = link.getAttribute("href");
 
-    translations.forEach(el => {
-    el.innerHTML = `<u>Translation:</u> <br>` + (this.checked ? el.dataset.ur : el.dataset.en);
-    });
-    }); -->
+                if (currentPage === linkHref) {
+                    link.parentElement.classList.add("nav-active");
+                }
+            });
+        });
+    </script>
+
+    <script>
 
 
+        document.getElementById('toggle').addEventListener('change', function () {
+            const transliterations = document.querySelectorAll('.transliteration');
+            const translations = document.querySelectorAll('.translation');
+
+            transliterations.forEach(el => {
+                el.innerText = this.checked ? el.dataset.ar : el.dataset.en;
+                el.classList.toggle('arabic-text', this.checked); // Apply Arabic font
+            });
+
+            translations.forEach(el => {
+                el.innerHTML = this.checked ? el.dataset.ur : el.dataset.en;
+                el.classList.toggle('urdu-text', this.checked); // Apply Urdu font
+            });
+        });
+
+    </script>
 
 </body>
 
