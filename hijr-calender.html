@@ -101,35 +101,29 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Prevent translation by dynamically adding a meta tag
+            var metaTag = document.createElement('meta');
+            metaTag.name = "google";
+            metaTag.content = "notranslate";
+            document.head.appendChild(metaTag);
+
+            // Prevent translation for the calendar element
+            var calendarEl = document.getElementById('calendar');
+            if (calendarEl) {
+                calendarEl.setAttribute('translate', 'no');
+            }
+
             if (typeof moment().iYear !== 'function') {
                 console.error("moment-hijri plugin is not loaded correctly.");
                 return;
             }
 
-            var calendarEl = document.getElementById('calendar');
-
-            if (!calendarEl) {
-                console.error("Calendar element not found.");
-                return;
-            }
-
-            // Arabic Hijri Month Names
             var hijriMonthsInArabic = {
-                0: "مُحَرَّم",
-                1: "صَفَر",
-                2: "رَبِيع ٱلأَوَّل",
-                3: "رَبِيع ٱلثَّانِي",
-                4: "جُمَادَىٰ ٱلأُولَىٰ",
-                5: "جُمَادَىٰ ٱلثَّانِيَة",
-                6: "رَجَب",
-                7: "شَعْبَان",
-                8: "رَمَضَان",
-                9: "شَوَّال",
-                10: "ذُو ٱلْقَعْدَة",
-                11: "ذُو ٱلْحِجَّة"
+                0: "مُحَرَّم", 1: "صَفَر", 2: "رَبِيع ٱلأَوَّل", 3: "رَبِيع ٱلثَّانِي",
+                4: "جُمَادَىٰ ٱلأُولَىٰ", 5: "جُمَادَىٰ ٱلثَّانِيَة", 6: "رَجَب", 7: "شَعْبَان",
+                8: "رَمَضَان", 9: "شَوَّال", 10: "ذُو ٱلْقَعْدَة", 11: "ذُو ٱلْحِجَّة"
             };
 
-            // Convert to Arabic Numbers
             function convertToArabicNumbers(number) {
                 const arabicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
                 return number.toString().replace(/\d/g, digit => arabicDigits[digit]);
@@ -138,7 +132,6 @@
             function getHijriMonthRange(startDate, endDate) {
                 let startHijriMonth = moment(startDate).iMonth();
                 let endHijriMonth = moment(endDate).iMonth();
-
                 let startHijriMonthArabic = hijriMonthsInArabic[startHijriMonth];
                 let endHijriMonthArabic = hijriMonthsInArabic[endHijriMonth];
 
@@ -149,7 +142,7 @@
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                locale: 'ar', // Arabic Language
+                locale: 'ar',
                 height: 695,
                 headerToolbar: {
                     left: 'prev,next today',
@@ -164,22 +157,22 @@
                     let titleElement = document.querySelector('.fc-toolbar-title');
                     if (titleElement) {
                         titleElement.innerText = `${gregorianMonth} / ${hijriMonthRange}`;
+                        titleElement.setAttribute('translate', 'no'); // Prevent translation on title
                     }
-
-                    console.log("Gregorian Month:", gregorianMonth, "Hijri Month:", hijriMonthRange);
                 },
                 dayCellContent: function (arg) {
                     var gregorianDate = moment(arg.date).format('D');
                     var hijriDate = convertToArabicNumbers(moment(arg.date).subtract(1, 'day').iDate());
 
                     return {
-                        html: `<div>${gregorianDate}<br><span style="font-family: 'Noto Naskh Arabic', sans-serif;">${hijriDate}</span></div>`
+                        html: `<div translate="no">${gregorianDate}<br><span style="font-family: 'Noto Naskh Arabic', sans-serif;">${hijriDate}</span></div>`
                     };
                 }
             });
 
             calendar.render();
         });
+
 
     </script>
 
