@@ -31,7 +31,7 @@
                                     <a href="index.html">
                                         <img src="nav-icon/house.png" alt="">
                                         <br>
-                                        <span>Home Test</span>
+                                        <span>Home</span>
                                     </a>
                                 </div>
                                 <div class="nav-menu-link">
@@ -101,9 +101,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Check if Moment.js and Moment-Hijri are loaded
-            if (typeof moment !== 'function' || typeof moment().iYear !== 'function') {
-                console.error("Moment.js or Moment-Hijri is not loaded correctly.");
+            if (typeof moment().iYear !== 'function') {
+                console.error("moment-hijri plugin is not loaded correctly.");
                 return;
             }
 
@@ -114,45 +113,43 @@
                 return;
             }
 
-            // Hijri months in Urdu
-            var hijriMonthsInUrdu = {
-                0: "محرم",
-                1: "صفر",
-                2: "ربیع الاول",
-                3: "ربیع الثانی",
-                4: "جمادی الاول",
-                5: "جمادی الثانی",
-                6: "رجب",
-                7: "شعبان",
-                8: "رمضان",
-                9: "شوال",
-                10: "ذوالقعدہ",
-                11: "ذوالحجہ"
+            // Arabic Hijri Month Names
+            var hijriMonthsInArabic = {
+                0: "مُحَرَّم",
+                1: "صَفَر",
+                2: "رَبِيع ٱلأَوَّل",
+                3: "رَبِيع ٱلثَّانِي",
+                4: "جُمَادَىٰ ٱلأُولَىٰ",
+                5: "جُمَادَىٰ ٱلثَّانِيَة",
+                6: "رَجَب",
+                7: "شَعْبَان",
+                8: "رَمَضَان",
+                9: "شَوَّال",
+                10: "ذُو ٱلْقَعْدَة",
+                11: "ذُو ٱلْحِجَّة"
             };
 
-            // Convert numbers to Urdu digits
-            function convertToUrduNumbers(number) {
-                const urduDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-                return number.toString().replace(/\d/g, digit => urduDigits[digit]);
+            // Convert to Arabic Numbers
+            function convertToArabicNumbers(number) {
+                const arabicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+                return number.toString().replace(/\d/g, digit => arabicDigits[digit]);
             }
 
-            // Get Hijri month range
             function getHijriMonthRange(startDate, endDate) {
-                let startHijriMonth = moment(startDate, 'YYYY-MM-DD').locale('ar-SA').iMonth();
-                let endHijriMonth = moment(endDate, 'YYYY-MM-DD').locale('ar-SA').iMonth();
+                let startHijriMonth = moment(startDate).iMonth();
+                let endHijriMonth = moment(endDate).iMonth();
 
-                let startHijriMonthUrdu = hijriMonthsInUrdu[startHijriMonth] || "نامعلوم";
-                let endHijriMonthUrdu = hijriMonthsInUrdu[endHijriMonth] || "نامعلوم";
+                let startHijriMonthArabic = hijriMonthsInArabic[startHijriMonth];
+                let endHijriMonthArabic = hijriMonthsInArabic[endHijriMonth];
 
-                return startHijriMonthUrdu === endHijriMonthUrdu
-                    ? startHijriMonthUrdu
-                    : `${startHijriMonthUrdu} - ${endHijriMonthUrdu}`;
+                return startHijriMonthArabic === endHijriMonthArabic
+                    ? startHijriMonthArabic
+                    : `${startHijriMonthArabic} - ${endHijriMonthArabic}`;
             }
 
-            // Initialize FullCalendar
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                locale: 'en',
+                locale: 'ar', // Arabic Language
                 height: 695,
                 headerToolbar: {
                     left: 'prev,next today',
@@ -160,10 +157,8 @@
                     right: 'dayGridMonth,timeGridWeek,timeGridDay'
                 },
                 events: [],
-
-                // When the calendar updates, change the title to include Hijri month
                 datesSet: function (info) {
-                    let gregorianMonth = moment(info.view.currentStart).format('MMMM');
+                    let gregorianMonth = moment(info.view.currentStart).locale('ar').format('MMMM');
                     let hijriMonthRange = getHijriMonthRange(info.view.currentStart, info.view.currentEnd);
 
                     let titleElement = document.querySelector('.fc-toolbar-title');
@@ -173,32 +168,17 @@
 
                     console.log("Gregorian Month:", gregorianMonth, "Hijri Month:", hijriMonthRange);
                 },
-
-                // Customize each day cell to show both Hijri and Gregorian dates
                 dayCellContent: function (arg) {
                     var gregorianDate = moment(arg.date).format('D');
-
-                    var hijriDate = moment(arg.date).locale('ar-SA').iDate();
-                    if (!hijriDate) {
-                        console.warn("Hijri date not available, using fallback.");
-                        hijriDate = "?"; // Fallback for missing Hijri dates
-                    }
-
-                    hijriDate = convertToUrduNumbers(hijriDate);
+                    var hijriDate = convertToArabicNumbers(moment(arg.date).subtract(1, 'day').iDate());
 
                     return {
-                        html: `<div>${gregorianDate}<br><span style="font-family: 'Noto Nastaliq Urdu', sans-serif;">${hijriDate}</span></div>`
+                        html: `<div>${gregorianDate}<br><span style="font-family: 'Noto Naskh Arabic', sans-serif;">${hijriDate}</span></div>`
                     };
                 }
             });
 
-            // Render the calendar
             calendar.render();
-
-            // Fix for some mobile devices: Refresh calendar on window resize
-            window.addEventListener('resize', function () {
-                calendar.render();
-            });
         });
 
     </script>
