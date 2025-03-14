@@ -99,7 +99,7 @@
         });
     </script>
 
-    <!-- <script>
+    <script>
         document.addEventListener('DOMContentLoaded', function () {
             if (typeof moment().iYear !== 'function') {
                 console.error("moment-hijri plugin is not loaded correctly.");
@@ -179,70 +179,70 @@
 
             calendar.render();
         });
-    </script> -->
-
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Debugging: Check if moment-hijri is loaded
-            if (typeof moment().iYear !== 'function') {
-                console.error("moment-hijri plugin is not loaded correctly.");
-                return;
-            }
-
-            var calendarEl = document.getElementById('calendar');
-
-            if (!calendarEl) {
-                console.error("Calendar element not found.");
-                return;
-            }
-
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                locale: 'en',
-                height: 695,
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                },
-                events: [
-                    {
-                        title: 'Event 1 - ' + moment('2024-03-05', 'YYYY-MM-DD').subtract(0, 'day').format('iYYYY/iMM/iDD'),
-                        start: '2024-03-05'
-                    },
-                    {
-                        title: 'Event 2 - ' + moment('2024-03-10', 'YYYY-MM-DD').subtract(0, 'day').format('iYYYY/iMM/iDD'),
-                        start: '2024-03-10'
-                    }
-                ],
-                datesSet: function (info) {
-                    let gregorianMonth = moment(info.view.currentStart).format('MMMM'); // Gregorian Month (e.g., March)
-                    let hijriMonth = moment(info.view.currentStart).subtract(0, 'day').format('iMMMM iYYYY'); // Adjusted Hijri Month and Year
-
-                    let titleElement = document.querySelector('.fc-toolbar-title');
-
-                    if (titleElement) {
-                        titleElement.innerText = `${gregorianMonth} / ${hijriMonth}`; // Show both Gregorian & adjusted Hijri months
-                    }
-
-                    console.log("Gregorian Month:", gregorianMonth, "Hijri Month:", hijriMonth); // Debugging: Check months
-                },
-                dayCellContent: function (arg) {
-                    var gregorianDate = moment(arg.date).format('D'); // Gregorian Day
-                    var hijriDate = moment(arg.date).subtract(1, 'day').format('iD'); // Adjusted Hijri Day
-
-                    console.log("Gregorian Date:", gregorianDate, "Hijri Date:", hijriDate); // Debugging: Check dates
-
-                    return {
-                        html: `<div>${gregorianDate}<br>${hijriDate}</div>` // Display both Gregorian and adjusted Hijri dates
-                    };
-                }
-            });
-
-            calendar.render();
-        });
     </script>
+
+
+    <!-- <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Debugging: Check if moment-hijri is loaded
+        if (typeof moment().iYear !== 'function') {
+            console.error("moment-hijri plugin is not loaded correctly.");
+            return;
+        }
+
+        var calendarEl = document.getElementById('calendar');
+
+        if (!calendarEl) {
+            console.error("Calendar element not found.");
+            return;
+        }
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'en',
+            height: 695,
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            events: [
+                {
+                    title: 'Event 1 - ' + moment('2024-03-05', 'YYYY-MM-DD').subtract(0, 'day').format('iYYYY/iMM/iDD'),
+                    start: '2024-03-05'
+                },
+                {
+                    title: 'Event 2 - ' + moment('2024-03-10', 'YYYY-MM-DD').subtract(0, 'day').format('iYYYY/iMM/iDD'),
+                    start: '2024-03-10'
+                }
+            ],
+            datesSet: function (info) {
+                let gregorianMonth = moment(info.view.currentStart).format('MMMM'); // Gregorian Month (e.g., March)
+                let hijriMonth = moment(info.view.currentStart).subtract(0, 'day').format('iMMMM iYYYY'); // Adjusted Hijri Month and Year
+
+                let titleElement = document.querySelector('.fc-toolbar-title');
+
+                if (titleElement) {
+                    titleElement.innerText = `${gregorianMonth} / ${hijriMonth}`; // Show both Gregorian & adjusted Hijri months
+                }
+
+                console.log("Gregorian Month:", gregorianMonth, "Hijri Month:", hijriMonth); // Debugging: Check months
+            },
+            dayCellContent: function (arg) {
+                var gregorianDate = moment(arg.date).format('D'); // Gregorian Day
+                var hijriDate = moment(arg.date).subtract(1, 'day').format('iD'); // Adjusted Hijri Day
+
+                console.log("Gregorian Date:", gregorianDate, "Hijri Date:", hijriDate); // Debugging: Check dates
+
+                return {
+                    html: `<div>${gregorianDate}<br>${hijriDate}</div>` // Display both Gregorian and adjusted Hijri dates
+                };
+            }
+        });
+
+        calendar.render();
+    });
+</script> -->
 
 </body>
 
