@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
     <!-- FullCalendar CSS -->
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/main.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/main.min.css">
 </head>
 
 <body>
@@ -181,10 +181,8 @@
         });
     </script> -->
 
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Debugging: Check if moment-hijri is loaded
             if (typeof moment().iYear !== 'function') {
                 console.error("moment-hijri plugin is not loaded correctly.");
                 return;
@@ -196,25 +194,28 @@
                 console.error("Calendar element not found.");
                 return;
             }
-            var hijriMonthsInUrdu = {
-                0: "محرم", 1: "صفر", 2: "ربیع الاول", 3: "ربیع الثانی",
-                4: "جمادی الاول", 5: "جمادی الثانی", 6: "رجب", 7: "شعبان",
-                8: "رمضان", 9: "شوال", 10: "ذوالقعدہ", 11: "ذوالحجہ"
-            };
 
+            // Function to convert numbers into Urdu digits dynamically
             function convertToUrduNumbers(number) {
                 const urduDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
                 return number.toString().replace(/\d/g, digit => urduDigits[digit]);
             }
 
-            function getHijriMonthRange(startDate, endDate) {
-                let startHijriMonth = moment(startDate).iMonth();
-                let endHijriMonth = moment(endDate).iMonth();
-                return hijriMonthsInUrdu[startHijriMonth] === hijriMonthsInUrdu[endHijriMonth]
-                    ? hijriMonthsInUrdu[startHijriMonth]
-                    : `${hijriMonthsInUrdu[startHijriMonth]} - ${hijriMonthsInUrdu[endHijriMonth]}`;
+            // Function to get Hijri month name dynamically
+            function getHijriMonthName(date) {
+                let hijriMonthNumber = moment(date).iMonth(); // Get Hijri month index
+                return moment(date).locale('ur').format('iMMMM'); // Get full Hijri month name in Urdu
             }
 
+            // Function to get the Hijri month range dynamically
+            function getHijriMonthRange(startDate, endDate) {
+                let startHijriMonth = getHijriMonthName(startDate);
+                let endHijriMonth = getHijriMonthName(endDate);
+
+                return startHijriMonth === endHijriMonth
+                    ? startHijriMonth
+                    : `${startHijriMonth} - ${endHijriMonth}`;
+            }
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
@@ -229,171 +230,90 @@
                 datesSet: function (info) {
                     let gregorianMonth = moment(info.view.currentStart).format('MMMM');
                     let hijriMonthRange = getHijriMonthRange(info.view.currentStart, info.view.currentEnd);
+
                     let titleElement = document.querySelector('.fc-toolbar-title');
                     if (titleElement) {
                         titleElement.innerText = `${gregorianMonth} / ${hijriMonthRange}`;
                     }
+
+                    console.log("Gregorian Month:", gregorianMonth, "Hijri Month:", hijriMonthRange);
                 },
                 dayCellContent: function (arg) {
                     var gregorianDate = moment(arg.date).format('D');
                     var hijriDate = convertToUrduNumbers(moment(arg.date).iDate());
-                    return { html: `<div>${gregorianDate}<br><span style="font-family: 'Noto Nastaliq Urdu', sans-serif;">${hijriDate}</span></div>` };
+
+                    return {
+                        html: `<div>${gregorianDate}<br><span style="font-family: 'Noto Nastaliq Urdu', sans-serif;">${hijriDate}</span></div>`
+                    };
                 }
             });
 
             calendar.render();
         });
+
     </script>
 
-
     <!-- <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            if (typeof moment.iYear !== 'function') {
-                console.error("moment-hijri plugin is not loaded correctly.");
-                return;
-            }
+    document.addEventListener('DOMContentLoaded', function () {
+        // Debugging: Check if moment-hijri is loaded
+        if (typeof moment().iYear !== 'function') {
+            console.error("moment-hijri plugin is not loaded correctly.");
+            return;
+        }
 
-            var calendarEl = document.getElementById('calendar');
-            if (!calendarEl) {
-                console.error("Calendar element not found.");
-                return;
-            }
+        var calendarEl = document.getElementById('calendar');
 
-            var hijriMonthsInUrdu = {
-                0: "محرم", 1: "صفر", 2: "ربیع الاول", 3: "ربیع الثانی",
-                4: "جمادی الاول", 5: "جمادی الثانی", 6: "رجب", 7: "شعبان",
-                8: "رمضان", 9: "شوال", 10: "ذوالقعدہ", 11: "ذوالحجہ"
-            };
+        if (!calendarEl) {
+            console.error("Calendar element not found.");
+            return;
+        }
 
-            function convertToUrduNumbers(number) {
-                const urduDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-                return number.toString().replace(/\d/g, digit => urduDigits[digit]);
-            }
-
-            function getHijriMonthRange(startDate, endDate) {
-                let startHijriMonth = moment(startDate).iMonth();
-                let endHijriMonth = moment(endDate).iMonth();
-                return hijriMonthsInUrdu[startHijriMonth] === hijriMonthsInUrdu[endHijriMonth]
-                    ? hijriMonthsInUrdu[startHijriMonth]
-                    : `${hijriMonthsInUrdu[startHijriMonth]} - ${hijriMonthsInUrdu[endHijriMonth]}`;
-            }
-
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                locale: 'en',
-                height: 695,
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'en',
+            height: 695,
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            events: [
+                {
+                    title: 'Event 1 - ' + moment('2024-03-05', 'YYYY-MM-DD').subtract(0, 'day').format('iYYYY/iMM/iDD'),
+                    start: '2024-03-05'
                 },
-                events: [],
-                datesSet: function (info) {
-                    let gregorianMonth = moment(info.view.currentStart).format('MMMM');
-                    let hijriMonthRange = getHijriMonthRange(info.view.currentStart, info.view.currentEnd);
-                    let titleElement = document.querySelector('.fc-toolbar-title');
-                    if (titleElement) {
-                        titleElement.innerText = `${gregorianMonth} / ${hijriMonthRange}`;
-                    }
-                },
-                dayCellContent: function (arg) {
-                    var gregorianDate = moment(arg.date).format('D');
-                    var hijriDate = convertToUrduNumbers(moment(arg.date).iDate());
-                    return { html: `<div>${gregorianDate}<br><span style="font-family: 'Noto Nastaliq Urdu', sans-serif;">${hijriDate}</span></div>` };
+                {
+                    title: 'Event 2 - ' + moment('2024-03-10', 'YYYY-MM-DD').subtract(0, 'day').format('iYYYY/iMM/iDD'),
+                    start: '2024-03-10'
                 }
-            });
+            ],
+            datesSet: function (info) {
+                let gregorianMonth = moment(info.view.currentStart).format('MMMM'); // Gregorian Month (e.g., March)
+                let hijriMonth = moment(info.view.currentStart).subtract(0, 'day').format('iMMMM iYYYY'); // Adjusted Hijri Month and Year
 
-            calendar.render();
+                let titleElement = document.querySelector('.fc-toolbar-title');
+
+                if (titleElement) {
+                    titleElement.innerText = `${gregorianMonth} / ${hijriMonth}`; // Show both Gregorian & adjusted Hijri months
+                }
+
+                console.log("Gregorian Month:", gregorianMonth, "Hijri Month:", hijriMonth); // Debugging: Check months
+            },
+            dayCellContent: function (arg) {
+                var gregorianDate = moment(arg.date).format('D'); // Gregorian Day
+                var hijriDate = moment(arg.date).subtract(1, 'day').format('iD'); // Adjusted Hijri Day
+
+                console.log("Gregorian Date:", gregorianDate, "Hijri Date:", hijriDate); // Debugging: Check dates
+
+                return {
+                    html: `<div>${gregorianDate}<br>${hijriDate}</div>` // Display both Gregorian and adjusted Hijri dates
+                };
+            }
         });
-    </script> -->
 
-    <!-- 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            if (typeof moment().iYear !== 'function') {
-                console.error("moment-hijri plugin is not loaded correctly.");
-                return;
-            }
-
-            var calendarEl = document.getElementById('calendar');
-
-            if (!calendarEl) {
-                console.error("Calendar element not found.");
-                return;
-            }
-
-            var hijriMonthsInUrdu = {
-                0: "محرم",
-                1: "صفر",
-                2: "ربیع الاول",
-                3: "ربیع الثانی",
-                4: "جمادی الاول",
-                5: "جمادی الثانی",
-                6: "رجب",
-                7: "شعبان",
-                8: "رمضان",
-                9: "شوال",
-                10: "ذوالقعدہ",
-                11: "ذوالحجہ"
-            };
-
-            function convertToUrduNumbers(number) {
-                const urduDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-                return number.toString().replace(/\d/g, digit => urduDigits[digit]);
-            }
-
-            function getHijriMonthRange(startDate, endDate) {
-                let startHijriMonth = moment(startDate).iMonth();
-                let endHijriMonth = moment(endDate).iMonth();
-
-                let startHijriMonthUrdu = hijriMonthsInUrdu[startHijriMonth];
-                let endHijriMonthUrdu = hijriMonthsInUrdu[endHijriMonth];
-
-                return startHijriMonthUrdu === endHijriMonthUrdu
-                    ? startHijriMonthUrdu
-                    : `${startHijriMonthUrdu} - ${endHijriMonthUrdu}`;
-            }
-
-            setTimeout(function () {
-                var calendar = new FullCalendar.Calendar(calendarEl, {
-                    initialView: 'dayGridMonth',
-                    locale: 'en',
-                    height: 695,
-                    headerToolbar: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                    },
-                    events: [],
-                    datesSet: function (info) {
-                        let gregorianMonth = moment(info.view.currentStart).format('MMMM');
-
-                        let hijriMonthRange = getHijriMonthRange(info.view.currentStart, info.view.currentEnd);
-
-                        let titleElement = document.querySelector('.fc-toolbar-title');
-                        if (titleElement) {
-                            titleElement.innerText = `${gregorianMonth} / ${hijriMonthRange}`;
-                        }
-
-                        console.log("Gregorian Month:", gregorianMonth, "Hijri Month:", hijriMonthRange);
-                    },
-                    dayCellContent: function (arg) {
-                        var gregorianDate = moment(arg.date).format('D');
-                        var hijriDate = convertToUrduNumbers(moment(arg.date).subtract(1, 'day').iDate());
-
-                        return {
-                            html: `<div>${gregorianDate}<br><span style="font-family: 'Noto Nastaliq Urdu', sans-serif;">${hijriDate}</span></div>`
-                        };
-                    }
-                });
-
-                calendar.render();
-            }, 500); // Set timeout of 500 milliseconds
-        });
-    </script> -->
-
-
-
+        calendar.render();
+    });
+</script> -->
 
 </body>
 
