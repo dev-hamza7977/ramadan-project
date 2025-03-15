@@ -106,16 +106,14 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Get the current page URL
-            let currentPage = window.location.pathname.split("/").pop();
+            let currentPage = new URL(window.location.href).pathname.replace(/\/$/, "").split("/").pop() || "index.html";
 
-            // Get all menu links
             let menuLinks = document.querySelectorAll(".nav-menu-link a");
 
             menuLinks.forEach(link => {
-                let linkHref = link.getAttribute("href");
+                let linkHref = new URL(link.href, window.location.origin).pathname.replace(/\/$/, "").split("/").pop();
 
-                if (currentPage === linkHref) {
+                if (currentPage === linkHref || (currentPage === "index.html" && linkHref === "./")) {
                     link.parentElement.classList.add("nav-active");
                 }
             });

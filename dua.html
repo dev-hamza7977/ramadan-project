@@ -1138,23 +1138,21 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Get the current page URL
-            let currentPage = window.location.pathname.split("/").pop();
+  cript>
+    document.addEventListener("DOMContentLoaded", function () {
+        let currentPage = new URL(window.location.href).pathname.replace(/\/$/, "").split("/").pop() || "index.html";
 
-            // Get all menu links
-            let menuLinks = document.querySelectorAll(".nav-menu-link a");
+        let menuLinks = document.querySelectorAll(".nav-menu-link a");
 
-            menuLinks.forEach(link => {
-                let linkHref = link.getAttribute("href");
+        menuLinks.forEach(link => {
+            let linkHref = new URL(link.href, window.location.origin).pathname.replace(/\/$/, "").split("/").pop();
 
-                if (currentPage === linkHref) {
-                    link.parentElement.classList.add("nav-active");
-                }
-            });
+            if (currentPage === linkHref || (currentPage === "index.html" && linkHref === "./")) {
+                link.parentElement.classList.add("nav-active");
+            }
         });
-    </script>
+    });
+</script>
 
     <script>
 
