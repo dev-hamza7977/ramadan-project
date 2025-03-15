@@ -487,6 +487,13 @@ direction: rtl;
         font-size: 25px;
     }
 
+    /* Contact */
+     .error {
+            color: red;
+            font-size: 0.875rem;
+            display: none;
+        }
+
    
 
 @media screen and (max-width: 768px) { 
@@ -509,6 +516,10 @@ direction: rtl;
     .sehri-iftaar-wrap{
         gap: 30px;
     }
+
+.col-lg-11{
+    padding: 0px;
+}
 
 .background-image {
     background-image: url(img/masjid.png);
@@ -577,7 +588,7 @@ direction: rtl;
 
     .nav-menu-link span{
         
-    font-size: 15px;
+    font-size: 13px;
     }
 
     .side-menu-col{
