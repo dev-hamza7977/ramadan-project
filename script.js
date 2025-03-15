@@ -545,8 +545,7 @@ function convertToMinutes(time) {
 
 async function fetchHijriDate(gregorianDate, maghribTime) {
     try {
-        let response = await fetch(`https://api.aladhan.com/v1/gToH?date=${gregorianDate}`);
-        let data = await response.json();
+ let response = await fetch(`https://api.aladhan.com/v1/gToH?gregorian=${gregorianDate}`);          let data = await response.json();
         
         let hijriDay = parseInt(data.data.hijri.day, 10);
         let hijriMonth = data.data.hijri.month.en;
@@ -556,15 +555,14 @@ async function fetchHijriDate(gregorianDate, maghribTime) {
         let currentMinutes = now.getHours() * 60 + now.getMinutes();
         let maghribMinutes = convertToMinutes(maghribTime);
 
-        // If current time is after Maghrib, adjust the Hijri date forward
+        // If current time is after Maghrib, increase the Hijri date by 1
         if (currentMinutes >= maghribMinutes) {
-            hijriDay += -1;
+            hijriDay += 0;
         }
 
         // Handle month transition if it's the last day of the Hijri month
-        if (hijriDay > 30) { // Adjust if needed for month lengths
-            hijriDay = 1;
-            // Fetch next month name and year if necessary
+        if (hijriDay > 30) {
+            hijriDay = 1; // Reset day
         }
 
         document.querySelector(".islamic-date").innerText = `${hijriDay} ${hijriMonth} ${hijriYear}`;
@@ -573,6 +571,7 @@ async function fetchHijriDate(gregorianDate, maghribTime) {
         document.querySelector(".islamic-date").innerText = "Failed to load date";
     }
 }
+
 
 
 

@@ -77,7 +77,7 @@ body{
 
 .index-note-text{
         z-index: 1000;
-    color: #ffebcd;
+    color: #ffcf41;
     font-weight: 800;
     /* color: indianred; */
     background: aquamarine;
@@ -219,7 +219,27 @@ body{
     font-family: 'Nastaliq', serif;
   */
 
+  footer{
+        text-align: center;
+    z-index: 9999;
+    position: relative;
+    background: #0080807a;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
 
+
+footer p{
+        font-weight: 700;
+    color: blanchedalmond;
+    text-shadow: 0 0 10px #ffd700, 0 0 20px #fff;
+}
+
+
+a{
+    text-decoration: none;
+        color: #005b30;
+}
 /* Hijri Calendar */
 
 #calendar{
@@ -494,12 +514,76 @@ direction: rtl;
             display: none;
         }
 
+        .contact-form form .form-control{
+            background: #d7c8b2;
+        }
+
+        .contact-form form label{
+                font-weight: 700;
+    color: #a99752;
+        }
+
+        .contact-form form button{
+                background: #a99752;
+    border: bisque;
+        }
+
+.contact-form form button:hover{
+    background-color: #918140;
+}
+
+
+.contact-form{
+        padding: 30px;
+    background-color: #fff3cd;
+    border-radius: 20px;
+}
+
+.contact-text{
+    text-align: center;
+    font-weight: 600;
+    color: #a99752;}
+
+input:-internal-autofill-selected {
+     background: #d7c8b2;
+}
+
+        .form-control:focus {
+    border-color: #a99752;
+    box-shadow: 0 0 0 .25rem #a99752;
+}
+
+.form-wrapper{
+    height: 70vh;
+    overflow-y: scroll;
+}
+
+        .form-wrapper::-webkit-scrollbar {
+    width: 8px;
+}
+
+.form-wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.form-wrapper::-webkit-scrollbar-thumb {
+    background:#d7c8b2;
+    border-radius: 10px;
+}
+
+.form-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
    
 
 @media screen and (max-width: 768px) { 
 
 .nav-menu-link{
-    padding: 5px;
+            padding: 5px 10px;
+            width: 75px;
 }
 
 .index-note-text{
@@ -580,6 +664,7 @@ direction: rtl;
     .side-menu{
         display: flex;
         flex-direction: row;
+            padding: 10px 0px;
     }
 
     .nav-menu-link img {
@@ -640,5 +725,15 @@ direction: rtl;
 /* Dua */
 .language-switcher{
     margin-top: 0px;
+}
+
+/* Conatct */
+.form-row{
+        margin: 0px;
+}
+
+.form-wrapper{
+        height: auto;
+    overflow-y: auto;
 }
 }
