@@ -338,6 +338,254 @@
 
 
 
+// document.addEventListener("DOMContentLoaded", function () {
+//     const searchInput = document.querySelector(".form-control");
+//     const searchButton = document.querySelector(".input-group-text");
+//     const prayerCards = document.querySelectorAll(".namaz-card");
+//     const sehriIftariCards = document.querySelectorAll(".sehri-iftar-card");
+
+//     const prayerTimes = {
+//         Fajr: document.querySelector('[data-namaz="Fajr"] .card-subtitle'),
+//         Dhuhr: document.querySelector('[data-namaz="Dhuhr"] .card-subtitle'),
+//         Asr: document.querySelector('[data-namaz="Asr"] .card-subtitle'),
+//         Maghrib: document.querySelector('[data-namaz="Maghrib"] .card-subtitle'),
+//         Isha: document.querySelector('[data-namaz="Isha"] .card-subtitle'),
+//         Sehri: sehriIftariCards.length > 0 ? sehriIftariCards[0].querySelector(".card-subtitle") : null,
+//         Iftari: sehriIftariCards.length > 1 ? sehriIftariCards[1].querySelector(".card-subtitle") : null,
+//     };
+
+//     if (navigator.geolocation) {
+//         navigator.geolocation.getCurrentPosition(
+//             (position) => {
+//                 const { latitude, longitude } = position.coords;
+//                 fetchPrayerTimesByCoords(latitude, longitude);
+//             },
+//             (error) => {
+//                 console.error("Error getting location:", error);
+//                 alert("Location access denied. Please search manually.");
+//             }
+//         );
+//     } else {
+//         alert("Geolocation is not supported by your browser.");
+//     }
+
+//     searchButton.addEventListener("click", function () {
+//         const location = searchInput.value.trim();
+//         if (location) {
+//             fetchPrayerTimesByCity(location);
+//         }
+//     });
+
+//     async function fetchPrayerTimesByCoords(lat, lon) {
+//         try {
+//             let now = new Date();
+//             let today = now.toISOString().split("T")[0]; // YYYY-MM-DD format
+
+//             // Fetch today's prayer times
+//             let response = await fetch(`https://api.aladhan.com/v1/timings/${today}?latitude=${lat}&longitude=${lon}&method=1&school=1`);
+//             let data = await response.json();
+//             let prayerTimings = data.data.timings;
+
+//             // Get Maghrib time in minutes
+//             let maghribTime = convertToMinutes(prayerTimings.Maghrib);
+//             let currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+//             // If it's after Maghrib, fetch tomorrow's prayer times
+//             if (currentMinutes >= maghribTime) {
+//                 let tomorrow = new Date();
+//                 tomorrow.setDate(tomorrow.getDate() + 1);
+//                 let tomorrowFormatted = tomorrow.toISOString().split("T")[0];
+
+//                 response = await fetch(`https://api.aladhan.com/v1/timings/${tomorrowFormatted}?latitude=${lat}&longitude=${lon}&method=1&school=1`);
+//                 data = await response.json();
+//                 prayerTimings = data.data.timings;
+//             }
+
+//             updatePrayerTimes(prayerTimings);
+//             fetchHijriDate(today, prayerTimings.Maghrib);
+//         } catch (error) {
+//             console.error("Error fetching prayer times:", error);
+//             alert("Failed to load prayer times.");
+//         }
+//     }
+
+//     async function fetchPrayerTimesByCity(location) {
+//         try {
+//             const [city, country] = location.split(",").map(str => str.trim());
+//             const apiUrl = country 
+//                 ? `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=1&school=1`
+//                 : `https://api.aladhan.com/v1/timingsByCity?city=${city}&method=1&school=1`;
+
+//             let response = await fetch(apiUrl);
+//             let data = await response.json();
+//             let prayerTimings = data.data.timings;
+
+//             let maghribTime = convertToMinutes(prayerTimings.Maghrib);
+//             let now = new Date();
+//             let currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+//             // If it's after Maghrib, fetch tomorrow's timings
+//             if (currentMinutes >= maghribTime) {
+//                 let tomorrow = new Date();
+//                 tomorrow.setDate(tomorrow.getDate() + 1);
+//                 let tomorrowFormatted = tomorrow.toISOString().split("T")[0];
+
+//                 response = await fetch(`${apiUrl}&date=${tomorrowFormatted}`);
+//                 data = await response.json();
+//                 prayerTimings = data.data.timings;
+//             }
+
+//             updatePrayerTimes(prayerTimings);
+//             fetchHijriDate(data.data.date.gregorian.date, prayerTimings.Maghrib);
+//         } catch (error) {
+//             console.error("Error fetching prayer times:", error);
+//             alert("Failed to load prayer times.");
+//         }
+//     }
+
+//     function adjustTime(time, offset) {
+//         if (!time) return "--:--";
+
+//         let [hours, minutes] = time.split(":").map(Number);
+//         let totalMinutes = (hours * 60 + minutes + offset + 1440) % 1440; // Ensures proper wraparound
+
+//         let adjustedHours = Math.floor(totalMinutes / 60);
+//         let adjustedMinutes = totalMinutes % 60;
+
+//         return `${String(adjustedHours).padStart(2, "0")}:${String(adjustedMinutes).padStart(2, "0")}`;
+//     }
+
+//     function updatePrayerTimes(times) {
+//         if (!times) return;
+
+//         prayerTimes.Fajr.textContent = adjustTime(times.Fajr, -1);
+//         prayerTimes.Dhuhr.textContent = times.Dhuhr || "--:--";
+//         prayerTimes.Asr.textContent = adjustTime(times.Asr, -1);
+//         prayerTimes.Maghrib.textContent = adjustTime(times.Maghrib, 3);
+//         prayerTimes.Isha.textContent = adjustTime(times.Isha, -1);
+//         if (prayerTimes.Sehri) prayerTimes.Sehri.textContent = adjustTime(times.Imsak, -1);
+//         if (prayerTimes.Iftari) prayerTimes.Iftari.textContent = adjustTime(times.Maghrib, 3);
+
+//         // Highlight the correct prayer after times are updated
+//         highlightNextPrayer(times);
+//     }
+
+//     function highlightNextPrayer(times) {
+//         const now = new Date();
+//         const currentTime = now.getHours() * 60 + now.getMinutes();
+
+//         const prayerSchedule = {
+//             Sehri: convertToMinutes(adjustTime(times.Imsak, -1)),
+//             Fajr: convertToMinutes(adjustTime(times.Fajr, -1)),
+//             Dhuhr: convertToMinutes(times.Dhuhr),
+//             Asr: convertToMinutes(adjustTime(times.Asr, -1)),
+//             Maghrib: convertToMinutes(adjustTime(times.Maghrib, 2)),
+//             Isha: convertToMinutes(adjustTime(times.Isha, 2)),
+//             Iftari: convertToMinutes(adjustTime(times.Maghrib, 2)),
+//         };
+
+//         let currentPrayer = null;
+//         let nextPrayer = null;
+//         const prayerNames = Object.keys(prayerSchedule);
+
+//         for (let i = 0; i < prayerNames.length; i++) {
+//             const prayer = prayerNames[i];
+//             const prayerTime = prayerSchedule[prayer];
+//             const nextPrayerTime = prayerSchedule[prayerNames[i + 1]] || prayerSchedule["Sehri"];
+
+//             if (currentTime >= prayerTime && currentTime < nextPrayerTime) {
+//                 currentPrayer = prayer;
+//                 nextPrayer = prayerNames[i + 1] || "Sehri";
+//                 break;
+//             }
+//         }
+
+//         // Special case: If it's past Isha but before Sehri, keep Isha highlighted
+//         if (currentTime >= prayerSchedule["Isha"] || currentTime < prayerSchedule["Fajr"]) {
+//             currentPrayer = "Isha";
+//             nextPrayer = "Sehri";
+//         }
+
+//         document.querySelectorAll(".namaz-card, .sehri-iftar-card").forEach(card => {
+//             card.classList.remove("highlight", "current");
+//         });
+
+//         if (currentPrayer && prayerTimes[currentPrayer]) {
+//             prayerTimes[currentPrayer].closest(".namaz-card, .sehri-iftar-card").classList.add("current");
+//         }
+
+//         if (nextPrayer && prayerTimes[nextPrayer]) {
+//             prayerTimes[nextPrayer].closest(".namaz-card, .sehri-iftar-card").classList.add("highlight");
+//         }
+//     }
+
+//     async function fetchHijriDate(gregorianDate, maghribTime) {
+//         try {
+//             let response = await fetch(`https://api.aladhan.com/v1/gToH?gregorian=${gregorianDate}`);          
+//             let data = await response.json();
+
+//             if (data.code !== 200) throw new Error("Invalid API response");
+
+//             let hijriDate = data.data.hijri;
+//             let hijriDay = parseInt(hijriDate.day, 10);
+//             let hijriMonth = hijriDate.month.en;
+//             let hijriYear = hijriDate.year;
+
+//             let now = new Date();
+//             let currentMinutes = now.getHours() * 60 + now.getMinutes();
+//             let maghribMinutes = convertToMinutes(maghribTime);
+
+//             // If current time is after Maghrib, fetch the next day's Hijri date
+//             if (currentMinutes >= maghribMinutes) {
+//                 let tomorrowGregorian = getNextGregorianDate(gregorianDate);
+//                 let nextResponse = await fetch(`https://api.aladhan.com/v1/gToH?gregorian=${tomorrowGregorian}`);
+//                 let nextData = await nextResponse.json();
+
+//                 if (nextData.code === 200) {
+//                     hijriDate = nextData.data.hijri;
+//                     hijriDay = parseInt(hijriDate.day, 10);
+//                     hijriMonth = hijriDate.month.en;
+//                     hijriYear = hijriDate.year;
+//                 }
+//             }
+
+//             // Update UI
+//             document.querySelector(".islamic-date").innerText = `${hijriDay} ${hijriMonth} ${hijriYear}`;
+//             updateDailyQuote(hijriDay);
+//         } catch (error) {
+//             console.error("Error fetching Hijri date:", error);
+//             document.querySelector(".islamic-date").innerText = "Failed to load date";
+//         }
+//     }
+
+//     // Helper function to get next Gregorian date
+//     function getNextGregorianDate(currentDate) {
+//         let date = new Date(currentDate);
+//         date.setDate(date.getDate() + 1);
+//         return date.toISOString().split('T')[0]; // Format YYYY-MM-DD
+//     }
+
+//     // Convert time (HH:MM) to minutes
+//     function convertToMinutes(timeStr) {
+//         let [hours, minutes] = timeStr.split(":").map(Number);
+//         return hours * 60 + minutes;
+//     }
+
+//     const quotes = [
+//         `"Whoever bows before Allah, <br> Allah makes the world bow before him."`,
+//         `"Indeed, with hardship comes ease. <br> (Quran 94:6)"`,
+//         `"Be like a flower that gives its fragrance <br> even to the hand that crushes it."`,
+//         `"The best among you are those <br> who have the best manners and character."`,
+//         `"A moment of patience in a moment of anger <br> prevents a thousand moments of regret."`
+//     ];
+
+//     function updateDailyQuote(hijriDay) {
+//         let quoteIndex = hijriDay % quotes.length;
+//         document.querySelector(".daily-quote").innerHTML = quotes[quoteIndex];
+//     }
+// });
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const searchInput = document.querySelector(".form-control");
     const searchButton = document.querySelector(".input-group-text");
@@ -357,239 +605,170 @@ document.addEventListener("DOMContentLoaded", function () {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             (position) => {
-                const { latitude, longitude } = position.coords;
-                fetchPrayerTimesByCoords(latitude, longitude);
+                fetchPrayerTimesByCoords(position.coords.latitude, position.coords.longitude);
             },
-            (error) => {
-                console.error("Error getting location:", error);
-                alert("Location access denied. Please search manually.");
-            }
+            () => alert("Location access denied. Please search manually.")
         );
-    } else {
-        alert("Geolocation is not supported by your browser.");
     }
 
     searchButton.addEventListener("click", function () {
         const location = searchInput.value.trim();
-        if (location) {
-            fetchPrayerTimesByCity(location);
-        }
+        if (location) fetchPrayerTimesByCity(location);
     });
+
+    function getEffectiveGregorianDate(maghribTimeStr) {
+        const now = new Date();
+        const currentMinutes = now.getHours() * 60 + now.getMinutes();
+        const maghribMinutes = convertToMinutes(maghribTimeStr);
+
+        let effectiveDate = new Date();
+        if (currentMinutes >= maghribMinutes) {
+            effectiveDate.setDate(effectiveDate.getDate() + 1);
+        }
+        return effectiveDate.toISOString().split("T")[0];
+    }
 
     async function fetchPrayerTimesByCoords(lat, lon) {
         try {
-            const response = await fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=1&school=1`);
-            const data = await response.json();
-            updatePrayerTimes(data.data.timings);
-            fetchHijriDate(data.data.date.gregorian.date);
+            let today = new Date().toISOString().split("T")[0];
+            let response = await fetch(`https://api.aladhan.com/v1/timings/${today}?latitude=${lat}&longitude=${lon}&method=1&school=1`);
+            let data = await response.json();
+            let prayerTimings = data.data.timings;
+
+            updatePrayerTimes(prayerTimings);
+
+            let effectiveDate = getEffectiveGregorianDate(prayerTimings.Maghrib);
+            fetchHijriDate(effectiveDate);
+
         } catch (error) {
-            console.error("Error fetching prayer times:", error);
             alert("Failed to load prayer times.");
         }
     }
 
     async function fetchPrayerTimesByCity(location) {
         try {
-
-
-
             const [city, country] = location.split(",").map(str => str.trim());
-            const apiUrl = country 
+            const apiUrl = country
                 ? `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=1&school=1`
                 : `https://api.aladhan.com/v1/timingsByCity?city=${city}&method=1&school=1`;
-            
-            const response = await fetch(apiUrl);
-            const data = await response.json();
 
-            if (data.code === 200) {
-                updatePrayerTimes(data.data.timings);
-                fetchHijriDate(data.data.date.gregorian.date);
-            } else {
-                alert("Invalid city. Please try again.");
-            }
+            let response = await fetch(apiUrl);
+            let data = await response.json();
+            let prayerTimings = data.data.timings;
+
+            updatePrayerTimes(prayerTimings);
+
+            let effectiveDate = getEffectiveGregorianDate(prayerTimings.Maghrib);
+            fetchHijriDate(effectiveDate);
+
         } catch (error) {
-            console.error("Error fetching prayer times:", error);
             alert("Failed to load prayer times.");
         }
     }
 
     function adjustTime(time, offset) {
-    if (!time) return "--:--";
+        if (!time) return "--:--";
+        let [hours, minutes] = time.split(":").map(Number);
+        let totalMinutes = (hours * 60 + minutes + offset + 1440) % 1440;
+        return `${String(Math.floor(totalMinutes / 60)).padStart(2, "0")}:${String(totalMinutes % 60).padStart(2, "0")}`;
+    }
 
-    let [hours, minutes] = time.split(":").map(Number);
-    let totalMinutes = (hours * 60 + minutes + offset + 1440) % 1440; // Ensures proper wraparound
+    function updatePrayerTimes(times) {
+        if (!times) return;
 
-    let adjustedHours = Math.floor(totalMinutes / 60);
-    let adjustedMinutes = totalMinutes % 60;
+        prayerTimes.Fajr.textContent = adjustTime(times.Fajr, -1);
+        prayerTimes.Dhuhr.textContent = times.Dhuhr || "--:--";
+        prayerTimes.Asr.textContent = adjustTime(times.Asr, -1);
+        prayerTimes.Maghrib.textContent = adjustTime(times.Maghrib, 3);
+        prayerTimes.Isha.textContent = adjustTime(times.Isha, -1);
+        if (prayerTimes.Sehri) prayerTimes.Sehri.textContent = adjustTime(times.Imsak, -1);
+        if (prayerTimes.Iftari) prayerTimes.Iftari.textContent = adjustTime(times.Maghrib, 3);
 
-    return `${String(adjustedHours).padStart(2, "0")}:${String(adjustedMinutes).padStart(2, "0")}`;
-}
+        highlightNextPrayer(times);
+    }
 
+    function highlightNextPrayer(times) {
+        const now = new Date();
+        const currentTime = now.getHours() * 60 + now.getMinutes();
 
-function updatePrayerTimes(times) {
-    if (!times) return;
+        const prayerSchedule = {
+            Sehri: convertToMinutes(adjustTime(times.Imsak, -1)),
+            Fajr: convertToMinutes(adjustTime(times.Fajr, -1)),
+            Dhuhr: convertToMinutes(times.Dhuhr),
+            Asr: convertToMinutes(adjustTime(times.Asr, -1)),
+            Maghrib: convertToMinutes(adjustTime(times.Maghrib, 2)),
+            Isha: convertToMinutes(adjustTime(times.Isha, 2)),
+            Iftari: convertToMinutes(adjustTime(times.Maghrib, 2)),
+        };
 
-    prayerTimes.Fajr.textContent = adjustTime(times.Fajr, -1);
-    prayerTimes.Dhuhr.textContent = times.Dhuhr || "--:--";
-    prayerTimes.Asr.textContent = adjustTime(times.Asr, -1);  // Increased by 1 min
-    prayerTimes.Maghrib.textContent = adjustTime(times.Maghrib, 3); // Increased by 1 min (was +2 before)
-    prayerTimes.Isha.textContent = adjustTime(times.Isha, -1); // Increased by 1 min (was -2 before)
-    prayerTimes.Sehri.textContent = adjustTime(times.Imsak, -1); // Increased by 1 min (was -2 before)
-    prayerTimes.Iftari.textContent = adjustTime(times.Maghrib, 3); // Increased by 1 min (was +2 before)
+        let currentPrayer = null;
+        let nextPrayer = null;
+        const prayerNames = Object.keys(prayerSchedule);
 
-    // Highlight the correct prayer after times are updated
-    setTimeout(() => highlightNextPrayer(times), 100);
-}
+        for (let i = 0; i < prayerNames.length; i++) {
+            const prayer = prayerNames[i];
+            const prayerTime = prayerSchedule[prayer];
+            const nextPrayerTime = prayerSchedule[prayerNames[i + 1]] || prayerSchedule["Sehri"];
 
-function adjustTime(time, offset) {
-    if (!time) return "--:--";
+            if (currentTime >= prayerTime && currentTime < nextPrayerTime) {
+                currentPrayer = prayer;
+                nextPrayer = prayerNames[i + 1] || "Sehri";
+                break;
+            }
+        }
 
-    let [hours, minutes] = time.split(":").map(Number);
-    let totalMinutes = hours * 60 + minutes + offset;
+        if (currentTime >= prayerSchedule["Isha"] || currentTime < prayerSchedule["Fajr"]) {
+            currentPrayer = "Isha";
+            nextPrayer = "Sehri";
+        }
 
-    if (totalMinutes < 0) totalMinutes += 1440; // Ensure time doesn't go negative
-    if (totalMinutes >= 1440) totalMinutes -= 1440; // Ensure time stays within the day
+        document.querySelectorAll(".namaz-card, .sehri-iftar-card").forEach(card => {
+            card.classList.remove("highlight", "current");
+        });
 
-    let adjustedHours = Math.floor(totalMinutes / 60);
-    let adjustedMinutes = totalMinutes % 60;
-
-    return `${String(adjustedHours).padStart(2, "0")}:${String(adjustedMinutes).padStart(2, "0")}`;
-}
-
-
-   function highlightNextPrayer(times) {
-    const now = new Date();
-    const currentTime = now.getHours() * 60 + now.getMinutes();
-
-    const prayerSchedule = {
-        Sehri: convertToMinutes(adjustTime(times.Imsak, -1)),
-        Fajr: convertToMinutes(adjustTime(times.Fajr, -1)),
-        Dhuhr: convertToMinutes(times.Dhuhr),
-        Asr: convertToMinutes(adjustTime(times.Asr, -1)),
-        Maghrib: convertToMinutes(adjustTime(times.Maghrib, 2)),
-        Isha: convertToMinutes(adjustTime(times.Isha, 2)),
-        Iftari: convertToMinutes(adjustTime(times.Maghrib, 2)),
-    };
-
-    let currentPrayer = null;
-    let nextPrayer = null;
-    const prayerNames = Object.keys(prayerSchedule);
-
-    for (let i = 0; i < prayerNames.length; i++) {
-        const prayer = prayerNames[i];
-        const prayerTime = prayerSchedule[prayer];
-        const nextPrayerTime = prayerSchedule[prayerNames[i + 1]] || prayerSchedule["Sehri"];
-
-        if (currentTime >= prayerTime && currentTime < nextPrayerTime) {
-            currentPrayer = prayer;
-            nextPrayer = prayerNames[i + 1] || "Sehri";
-            break;
+        if (currentPrayer && prayerTimes[currentPrayer]) {
+            prayerTimes[currentPrayer].closest(".namaz-card, .sehri-iftar-card").classList.add("current");
+        }
+        if (nextPrayer && prayerTimes[nextPrayer]) {
+            prayerTimes[nextPrayer].closest(".namaz-card, .sehri-iftar-card").classList.add("highlight");
         }
     }
 
-    // Special case: If it's past Isha but before Sehri, keep Isha highlighted
-    if (currentTime >= prayerSchedule["Isha"] || currentTime < prayerSchedule["Fajr"]) {
-        currentPrayer = "Isha";
-        nextPrayer = "Sehri";
-    }
+    async function fetchHijriDate(gregorianDate) {
+        try {
+            let response = await fetch(`https://api.aladhan.com/v1/gToH?gregorian=${gregorianDate}`);
+            let data = await response.json();
 
-    document.querySelectorAll(".namaz-card, .sehri-iftar-card").forEach(card => {
-        card.classList.remove("highlight", "current");
-    });
+            if (data.code !== 200) throw new Error("Invalid API response");
 
-    if (currentPrayer && prayerTimes[currentPrayer]) {
-        prayerTimes[currentPrayer].closest(".namaz-card, .sehri-iftar-card").classList.add("current");
-    }
+            let hijri = data.data.hijri;
+            document.querySelector(".islamic-date").innerText =
+                `${hijri.day} ${hijri.month.en} ${hijri.year}`;
 
-    if (nextPrayer && prayerTimes[nextPrayer]) {
-        prayerTimes[nextPrayer].closest(".namaz-card, .sehri-iftar-card").classList.add("highlight");
-    }
-}
+            updateDailyQuote(parseInt(hijri.day, 10));
 
-
-function convertToMinutes(time) {
-    if (!time) return 0;
-    const [hours, minutes] = time.split(":").map(Number);
-    return hours * 60 + minutes;
-}
-
-
-
-
-
-
-// async function fetchHijriDate(gregorianDate, maghribTime) {
-//     try {
-//         let response = await fetch(`https://api.aladhan.com/v1/gToH?gregorian=${gregorianDate}`);
-//         let data = await response.json();
-        
-//         let hijriDay = parseInt(data.data.hijri.day, 10);
-//         let hijriMonth = data.data.hijri.month.en;
-//         let hijriYear = data.data.hijri.year;
-
-//         let now = new Date();
-//         let currentMinutes = now.getHours() * 60 + now.getMinutes();
-//         let maghribMinutes = convertToMinutes(maghribTime);
-
-//         // If current time is after Maghrib, use the next day's Hijri date
-//         if (currentMinutes >= maghribMinutes) {
-//             hijriDay += 0;
-//         }
-
-//         document.querySelector(".islamic-date").innerText = `${hijriDay} ${hijriMonth} ${hijriYear}`;
-//         updateDailyQuote(hijriDay);
-//     } catch (error) {
-//         document.querySelector(".islamic-date").innerText = "Failed to load date";
-//     }
-// }
-
-async function fetchHijriDate(gregorianDate, maghribTime) {
-    try {
- let response = await fetch(`https://api.aladhan.com/v1/gToH?gregorian=${gregorianDate}`);          let data = await response.json();
-        
-        let hijriDay = parseInt(data.data.hijri.day, 10);
-        let hijriMonth = data.data.hijri.month.en;
-        let hijriYear = data.data.hijri.year;
-
-        let now = new Date();
-        let currentMinutes = now.getHours() * 60 + now.getMinutes();
-        let maghribMinutes = convertToMinutes(maghribTime);
-
-        // If current time is after Maghrib, increase the Hijri date by 1
-        if (currentMinutes >= maghribMinutes) {
-            hijriDay += 0;
+        } catch (error) {
+            document.querySelector(".islamic-date").innerText = "Failed to load date";
         }
-
-        // Handle month transition if it's the last day of the Hijri month
-        if (hijriDay > 30) {
-            hijriDay = 1; // Reset day
-        }
-
-        document.querySelector(".islamic-date").innerText = `${hijriDay} ${hijriMonth} ${hijriYear}`;
-        updateDailyQuote(hijriDay);
-    } catch (error) {
-        document.querySelector(".islamic-date").innerText = "Failed to load date";
     }
-}
 
+    function convertToMinutes(timeStr) {
+        let [hours, minutes] = timeStr.split(":").map(Number);
+        return hours * 60 + minutes;
+    }
 
+    const quotes = [
+        `"Whoever bows before Allah,<br>Allah makes the world bow before him."`,
+        `"Indeed, with hardship comes ease.<br>(Quran 94:6)"`,
+        `"Be like a flower that gives its fragrance<br>even to the hand that crushes it."`,
+        `"The best among you are those<br>who have the best manners and character."`,
+        `"A moment of patience in anger<br>prevents a thousand regrets."`
+    ];
 
-
-
-
-const quotes = [
-    `"Whoever bows before Allah, <br> Allah makes the world bow before him."`,
-    `"Indeed, with hardship comes ease. <br> (Quran 94:6)"`,
-    `"Be like a flower that gives its fragrance <br> even to the hand that crushes it."`,
-    `"The best among you are those <br> who have the best manners and character."`,
-    `"A moment of patience in a moment of anger <br> prevents a thousand moments of regret."`
-];
-
-function updateDailyQuote(hijriDay) {
-    let quoteIndex = hijriDay % quotes.length;
-    document.querySelector(".daily-quote").innerHTML = quotes[quoteIndex];
-}
-
+    function updateDailyQuote(hijriDay) {
+        let quoteIndex = hijriDay % quotes.length;
+        document.querySelector(".daily-quote").innerHTML = quotes[quoteIndex];
+    }
 });
 
 
