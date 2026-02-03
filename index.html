@@ -105,7 +105,20 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="salah-timer">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="next-prayer-timer text-center">
+                                                        Next Salah: <span id="next-prayer-name">--</span> in
+                                                        <span id="countdown-timer">--:--:--</span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
                                     </div>
+
 
 
                                     <div class="namaz-card-wrapper">
@@ -250,24 +263,40 @@
         });
     </script>
     <script>
-        $('.owl-carousel').owlCarousel({
-            stagePadding: 5,
-            loop: false,
-            nav: false,
-            responsive: {
-                0: {
-                    items: 1,
+        var owl;
+        $(document).ready(function () {
+            owl = $('.owl-carousel');
 
-                },
-                600: {
-                    items: 2
-                },
-                1000: {
-                    items: 5
+            owl.owlCarousel({
+                stagePadding: 5,
+                loop: false,
+                nav: false,
+                responsive: {
+                    0: { items: 1 },
+                    600: { items: 2 },
+                    1000: { items: 5 }
                 }
+            });
+        });
+
+        function moveCarouselToCurrentPrayer(prayerName) {
+            const items = document.querySelectorAll('.owl-carousel .item');
+            let indexToMove = 0;
+
+            items.forEach((item, index) => {
+                const card = item.querySelector('.namaz-card');
+                if (card && card.dataset.namaz === prayerName) {
+                    indexToMove = index;
+                }
+            });
+
+            if (owl) {
+                owl.trigger('to.owl.carousel', [indexToMove, 600, true]);
             }
-        })
+        }
+
     </script>
+
     <!-- <script>
         document.addEventListener("DOMContentLoaded", function () {
             let currentPage = window.location.pathname.split("/").pop() || "index.html"; // Default to index.html

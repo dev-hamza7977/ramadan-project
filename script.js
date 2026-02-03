@@ -687,52 +687,64 @@ document.addEventListener("DOMContentLoaded", function () {
         highlightNextPrayer(times);
     }
 
-    function highlightNextPrayer(times) {
-        const now = new Date();
-        const currentTime = now.getHours() * 60 + now.getMinutes();
+  function highlightNextPrayer(times) {
+    const now = new Date();
+    const currentTime = now.getHours() * 60 + now.getMinutes();
 
-        const prayerSchedule = {
-            Sehri: convertToMinutes(adjustTime(times.Imsak, -1)),
-            Fajr: convertToMinutes(adjustTime(times.Fajr, -1)),
-            Dhuhr: convertToMinutes(times.Dhuhr),
-            Asr: convertToMinutes(adjustTime(times.Asr, -1)),
-            Maghrib: convertToMinutes(adjustTime(times.Maghrib, 2)),
-            Isha: convertToMinutes(adjustTime(times.Isha, 2)),
-            Iftari: convertToMinutes(adjustTime(times.Maghrib, 2)),
-        };
+    const prayerSchedule = {
+        Sehri: convertToMinutes(adjustTime(times.Imsak, -1)),
+        Fajr: convertToMinutes(adjustTime(times.Fajr, -1)),
+        Dhuhr: convertToMinutes(times.Dhuhr),
+        Asr: convertToMinutes(adjustTime(times.Asr, -1)),
+        Maghrib: convertToMinutes(adjustTime(times.Maghrib, 2)),
+        Isha: convertToMinutes(adjustTime(times.Isha, 2)),
+        Iftari: convertToMinutes(adjustTime(times.Maghrib, 2)),
+    };
 
-        let currentPrayer = null;
-        let nextPrayer = null;
-        const prayerNames = Object.keys(prayerSchedule);
+    let currentPrayer = null;
+    let nextPrayer = null;
+    const prayerNames = Object.keys(prayerSchedule);
 
-        for (let i = 0; i < prayerNames.length; i++) {
-            const prayer = prayerNames[i];
-            const prayerTime = prayerSchedule[prayer];
-            const nextPrayerTime = prayerSchedule[prayerNames[i + 1]] || prayerSchedule["Sehri"];
+    for (let i = 0; i < prayerNames.length; i++) {
+        const prayer = prayerNames[i];
+        const prayerTime = prayerSchedule[prayer];
+        const nextPrayerTime = prayerSchedule[prayerNames[i + 1]] || prayerSchedule["Sehri"];
 
-            if (currentTime >= prayerTime && currentTime < nextPrayerTime) {
-                currentPrayer = prayer;
-                nextPrayer = prayerNames[i + 1] || "Sehri";
-                break;
-            }
-        }
-
-        if (currentTime >= prayerSchedule["Isha"] || currentTime < prayerSchedule["Fajr"]) {
-            currentPrayer = "Isha";
-            nextPrayer = "Sehri";
-        }
-
-        document.querySelectorAll(".namaz-card, .sehri-iftar-card").forEach(card => {
-            card.classList.remove("highlight", "current");
-        });
-
-        if (currentPrayer && prayerTimes[currentPrayer]) {
-            prayerTimes[currentPrayer].closest(".namaz-card, .sehri-iftar-card").classList.add("current");
-        }
-        if (nextPrayer && prayerTimes[nextPrayer]) {
-            prayerTimes[nextPrayer].closest(".namaz-card, .sehri-iftar-card").classList.add("highlight");
+        if (currentTime >= prayerTime && currentTime < nextPrayerTime) {
+            currentPrayer = prayer;
+            nextPrayer = prayerNames[i + 1] || "Sehri";
+            break;
         }
     }
+
+    if (currentTime >= prayerSchedule["Isha"] || currentTime < prayerSchedule["Fajr"]) {
+        currentPrayer = "Isha";
+        nextPrayer = "Sehri";
+    }
+
+    document.querySelectorAll(".namaz-card, .sehri-iftar-card").forEach(card => {
+        card.classList.remove("highlight", "current");
+    });
+
+    if (currentPrayer && prayerTimes[currentPrayer]) {
+        prayerTimes[currentPrayer].closest(".namaz-card, .sehri-iftar-card").classList.add("current");
+        moveCarouselToCurrentPrayer(currentPrayer);
+    }
+
+    if (nextPrayer && prayerTimes[nextPrayer]) {
+        prayerTimes[nextPrayer].closest(".namaz-card, .sehri-iftar-card").classList.add("highlight");
+    }
+
+    // ✅ ADD COUNTDOWN START RIGHT HERE (END OF FUNCTION)
+    if (nextPrayer && prayerSchedule[nextPrayer]) {
+    startCountdown(nextPrayer, prayerSchedule[nextPrayer]);
+}
+
+// 🌙 AUTO THEME SWITCH
+updateThemeByPrayer(prayerSchedule);
+
+}
+
 
     async function fetchHijriDate(gregorianDate) {
         try {
@@ -769,11 +781,61 @@ document.addEventListener("DOMContentLoaded", function () {
         let quoteIndex = hijriDay % quotes.length;
         document.querySelector(".daily-quote").innerHTML = quotes[quoteIndex];
     }
+
+    
 });
 
 
+let countdownInterval;
+
+function startCountdown(nextPrayerName, nextPrayerTimeMinutes) {
+    clearInterval(countdownInterval);
+
+    const nameEl = document.getElementById("next-prayer-name");
+    const timerEl = document.getElementById("countdown-timer");
+
+    nameEl.textContent = nextPrayerName;
+
+    countdownInterval = setInterval(() => {
+        const now = new Date();
+        const currentMinutes = now.getHours() * 60 + now.getMinutes();
+        let diffMinutes = nextPrayerTimeMinutes - currentMinutes;
+
+        if (diffMinutes < 0) diffMinutes += 1440; // next day wrap
+
+        const hours = Math.floor(diffMinutes / 60);
+        const minutes = diffMinutes % 60;
+        const seconds = 59 - now.getSeconds();
+
+        timerEl.textContent =
+            String(hours).padStart(2, '0') + ":" +
+            String(minutes).padStart(2, '0') + ":" +
+            String(seconds).padStart(2, '0');
+
+    });
 
 
 
+}
 
-    
+function updateThemeByPrayer(prayerSchedule) {
+    const now = new Date();
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+    const maghribTime = prayerSchedule["Maghrib"];
+    const fajrTime = prayerSchedule["Fajr"];
+
+    if (currentMinutes >= maghribTime || currentMinutes < fajrTime) {
+        document.body.classList.add("night-mode");
+    } else {
+        document.body.classList.remove("night-mode");
+    }
+}
+
+
+setInterval(() => {
+    const currentCards = document.querySelectorAll(".namaz-card.current");
+    if (currentCards.length > 0) {
+        const currentPrayer = currentCards[0].dataset.namaz;
+    }
+}, 60000);

@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap");
 @import url("https://fonts.cdnfonts.com/css/chocolate-box");
-@import url('https://fonts.googleapis.com/css2?family=Cairo+Play:wght@200..1000&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@400..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap'); 
-
+@import url("https://fonts.googleapis.com/css2?family=Cairo+Play:wght@200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap");
 
 /* @font-face {
     font-family: 'ChocolateBox';
@@ -15,597 +14,590 @@
     font-style: normal;
 } */
 
-h1,h2,h3,h4,h5,h6{
-    font-family: 'ChocolateBox';
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "ChocolateBox";
 }
 
-body{
-    background-color: antiquewhite;
-     font-family: "Cinzel Decorative", serif;
+body {
+  background-color: antiquewhite;
+  font-family: "Cinzel Decorative", serif;
 }
 
-.side-menu{
-        padding: 20px 0px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+.side-menu {
+  padding: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
-.nav-menu-link{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
+.nav-menu-link {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
 }
 
-.nav-menu-link a{
-    text-decoration: none;
-    color: #a99752;
-    font-weight: 600;
-    font-family: "Cinzel Decorative", serif;
+.nav-menu-link a {
+  text-decoration: none;
+  color: #a99752;
+  font-weight: 600;
+  font-family: "Cinzel Decorative", serif;
 }
 
-.nav-menu-link img{
-    width: 7vh;
+.nav-menu-link img {
+  width: 7vh;
 }
 
-.side-menu-col{
-    background-color: #f4e7cb;
-    box-shadow: 0px 0px 10px 5px #d7c8b2;
-    height: 100vh;
+.side-menu-col {
+  background-color: #f4e7cb;
+  box-shadow: 0px 0px 10px 5px #d7c8b2;
+  height: 100vh;
 }
 
- .nav-active{
-            background: #3b535a;
-    border-radius: 10px;
-    box-shadow: (1px 1px 1px 1px black);
-    box-shadow: 0 0 5px 5px #88b8c7;
-    }
+.nav-active {
+  background: #3b535a;
+  border-radius: 10px;
+  box-shadow: (1px 1px 1px 1px black);
+  box-shadow: 0 0 5px 5px #88b8c7;
+}
 
 .background-image {
-    background-image: url(img/masjid.png);
-    background-repeat: no-repeat;
+  background-image: url(img/masjid.png);
+  background-repeat: no-repeat;
 
-    background-size: cover;
-    margin: 18px;
-    position: relative;
-    border-radius: 30px;
+  background-size: cover;
+  margin: 18px;
+  position: relative;
+  border-radius: 30px;
 }
 
-.index-note-text{
-        z-index: 1000;
-    color: #ffcf41;
-    font-weight: 800;
-    /* color: indianred; */
-    background: aquamarine;
-    background-color: #f4e7cb6e;
-    padding: 10px;
-    border-radius: 15px;
+.index-note-text {
+  z-index: 1000;
+  color: #001d1a;
+  font-weight: 800;
+  /* color: indianred; */
+  background: aquamarine;
+  background-color: #f4e7cb6e;
+  padding: 10px;
+  border-radius: 15px;
 }
 
 .background-image::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgb(0 0 0 / 28%);
-    backdrop-filter: blur(2px);
-    border-radius: 30px;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(0 0 0 / 28%);
+  backdrop-filter: blur(2px);
+  border-radius: 30px;
 }
 
-.namaz-card-wrapper{
-    display: flex;
-    align-items: flex-end;
-    gap: 20px;
+.namaz-card-wrapper {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
 }
 
-.owl-carousel .owl-stage-outer{
-        padding: 10px;
+.owl-carousel .owl-stage-outer {
+  padding: 10px;
 }
 
-.namaz-card,.sehri-iftar-card{
-    background-color: #f4e7cb6e;
-    backdrop-filter: blur(10px);
-    border-radius: 30px;
-    box-shadow: 0 0 5px 5px #f4e7cbe3;
-    width: 15rem;
+.namaz-card,
+.sehri-iftar-card {
+  background-color: #f4e7cb6e;
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  box-shadow: 0 0 5px 5px #f4e7cbe3;
+  width: 15rem;
 }
 
-.namaz-card h5 ,.sehri-iftar-card h5{
-    color: cornsilk;
-    text-align: center;
-    font-size: 30px;
+.namaz-card h5,
+.sehri-iftar-card h5 {
+  color: cornsilk;
+  text-align: center;
+  font-size: 30px;
 }
 
-.namaz-card h6 ,.sehri-iftar-card h6{
-        color: #005c32;
-    text-align: center;
-    font-size: 25px;
+.namaz-card h6,
+.sehri-iftar-card h6 {
+  color: #005c32;
+  text-align: center;
+  font-size: 25px;
 }
 
-.search-bar{
-    display: flex;
-    justify-content: end;
-    padding: 10px 20px;
+.search-bar {
+  display: flex;
+  justify-content: end;
+  padding: 10px 20px;
 }
 
-.search-bar .input-group-text{
-    width: auto;
-   background-color: #f4e7cb6e;
-    backdrop-filter: blur(10px);
-    border-radius: 30px;
+.search-bar .input-group-text {
+  width: auto;
+  background-color: #f4e7cb6e;
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
 }
-
-
 
 .highlight {
-       background-color: #f4e7cb6e;
-    transform: scale(1.05);
-    transition: all 0.3sease-in-out;
-    border: 5px solid #ffc107;
+  background-color: #f4e7cb6e;
+  transform: scale(1.05);
+  transition: all 0.3sease-in-out;
+  border: 5px solid #ffc107;
 }
 
 .current {
-    background-color: #75b79896;
-    box-shadow: 0 0 5px 5px #198754;
+  background-color: #75b79896;
+  box-shadow: 0 0 5px 5px #198754;
 }
 
-.sehri-iftaar-wrap{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-        padding: 10px 20px;
-        align-items: center;
+.sehri-iftaar-wrap {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 20px;
+  align-items: center;
 }
 
-
-
-.search-bar .input-group{
-    width: auto;
-        backdrop-filter: blur(10px);
-    background-color: #f4e7cb6e;
-    border-radius: 30px;
-    box-shadow: 6px 0px 5px 4px #f4e7cbe3;
+.search-bar .input-group {
+  width: auto;
+  backdrop-filter: blur(10px);
+  background-color: #f4e7cb6e;
+  border-radius: 30px;
+  box-shadow: 6px 0px 5px 4px #f4e7cbe3;
 }
 
-
-
-.search-bar input{
-
-    width: auto;
-    background-color: #f4e7cb6e;
-    backdrop-filter: blur(10px);
-    border-radius: 30px;
-    /* box-shadow: 0 0 5px 5px #f4e7cbe3; */
+.search-bar input {
+  width: auto;
+  background-color: #f4e7cb6e;
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  /* box-shadow: 0 0 5px 5px #f4e7cbe3; */
 }
 
-.islamic-date{
-        text-align: center;
-    font-size: 80px;
-       color: rgb(255 254 230);
-    text-shadow: 0 0 10px #000;
+.islamic-date {
+  text-align: center;
+  font-size: 80px;
+  color: rgb(255 254 230);
+  text-shadow: 0 0 10px #000;
 }
 
-.daily-quote{
-    font-family: "Cinzel Decorative", serif;
-    color: blanchedalmond;
-    text-shadow: 0 0 10px #ffd700, 0 0 20px #fff;
-    text-align: center;
-    font-size: 30px;
-    text-decoration: wavy;
-    font-weight: 600;
-
+.daily-quote {
+  font-family: "Cinzel Decorative", serif;
+  color: #fffee6;
+  text-shadow:
+    0 0 10px #ffd700,
+    0 0 20px #fff;
+  text-align: center;
+  font-size: 30px;
+  text-decoration: wavy;
+  font-weight: 600;
 }
 
-.good-advice{
-        z-index: 999;
-    position: relative;
+.good-advice {
+  z-index: 999;
+  position: relative;
 }
 
-.advice-div {
-    height: 44.3vh;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    gap: 10px;
-}
+/* .advice-div {
+  height: 44.3vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+} */
 
 /* 
     font-family: 'Nastaliq', serif;
   */
 
-  footer{
-        text-align: center;
-    z-index: 9999;
-    position: relative;
-    background: #0080807a;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
-  }
-
-
-footer p{
-        font-weight: 700;
-    color: blanchedalmond;
-    text-shadow: 0 0 10px #ffd700, 0 0 20px #fff;
+footer {
+  text-align: center;
+  z-index: 9999;
+  position: relative;
+  background: #0080807a;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
 }
 
+footer p {
+  font-weight: 700;
+  color: blanchedalmond;
+  text-shadow:
+    0 0 10px #ffd700,
+    0 0 20px #fff;
+}
 
-a{
-    text-decoration: none;
-        color: #005b30;
+a {
+  text-decoration: none;
+  color: #005b30;
 }
 /* Hijri Calendar */
 
-#calendar{
-    margin: 20px;
+#calendar {
+  margin: 20px;
 }
 
 .fc .fc-toolbar.fc-header-toolbar {
-    margin-bottom: 0;
-    background: #a99752;
-    padding: 15px;
+  margin-bottom: 0;
+  background: #a99752;
+  padding: 15px;
 }
 
 .fc .fc-toolbar-title {
-    font-size: 1.75em;
-    margin: 0px;
-    color: beige;
-    padding: 10px;
+  font-size: 1.75em;
+  margin: 0px;
+  color: beige;
+  padding: 10px;
 }
 
-.fc-scrollgrid-section-header{
-    background-color: #f6da9d;
+.fc-scrollgrid-section-header {
+  background-color: #f6da9d;
 }
 
 .fc .fc-daygrid-day-frame {
-    min-height: 100%;
-    position: relative;
-    padding: 30px;
-    text-align: center;
-    color: black;
-    height: 20px;
-        display: flex;
-    align-items: center;
-    justify-content: center;
-    /* background: #fff3cd; */
+  min-height: 100%;
+  position: relative;
+  padding: 30px;
+  text-align: center;
+  color: black;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background: #fff3cd; */
 }
 
 .fc .fc-daygrid-day-number {
-    font-weight: 600;
-    padding: 4px;
-    position: relative;
-    z-index: 4;
-    font-size: 20px;
-    color: #a99752;
-    text-decoration: none;
-    font-family: "Cinzel Decorative", serif;
+  font-weight: 600;
+  padding: 4px;
+  position: relative;
+  z-index: 4;
+  font-size: 20px;
+  color: #a99752;
+  text-decoration: none;
+  font-family: "Cinzel Decorative", serif;
 }
 
-.fc-theme-standard td, .fc-theme-standard th {
-    border: 1px solid #ffc107;
-}   
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border: 1px solid #ffc107;
+}
 
 .fc .fc-col-header-cell-cushion {
-    display: inline-block;
-    padding: 2px 4px;
-    font-size: 20px;
-    color: #a99752;
-    text-decoration: none;
-    font-family: 'ChocolateBox';
+  display: inline-block;
+  padding: 2px 4px;
+  font-size: 20px;
+  color: #a99752;
+  text-decoration: none;
+  font-family: "ChocolateBox";
 }
 
-.fc-theme-standard td{
-    background: #fff3cd;
+.fc-theme-standard td {
+  background: #fff3cd;
 }
 
 .fc .fc-daygrid-day.fc-day-today {
-    background-color: #ffe48e;
+  background-color: #ffe48e;
 }
-
 
 /* Ramzan Styling */
-.table-ramzan{
-    height: 70vh;
+.table-ramzan {
+  height: 70vh;
 }
 
-.table-ramzan-inner{
-            border: 1px solid goldenrod;
-
+.table-ramzan-inner {
+  border: 1px solid goldenrod;
 }
 
-.table-ramzan-inner thead .sticky-top th{
-    background-color: #a99752;
-    color: beige;
+.table-ramzan-inner thead .sticky-top th {
+  background-color: #a99752;
+  color: beige;
 }
 
-#ramzan-timetable tr td{
-    background: #fff3cd;
-        color: #a99752;
-    font-weight: 600;
+#ramzan-timetable tr td {
+  background: #fff3cd;
+  color: #a99752;
+  font-weight: 600;
 }
 
-.svg-wrapper{
-      display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
+.svg-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-.ramzan-title svg{
-       fill: #a99752;
-    height: 30vh;
-    width: auto;
-    filter: drop-shadow(2px 4px 1px #ffac71);
-    margin-top: -30px;
+.ramzan-title svg {
+  fill: #a99752;
+  height: 30vh;
+  width: auto;
+  filter: drop-shadow(2px 4px 1px #ffac71);
+  margin-top: -30px;
 }
 
-.ramzan-title h2{
-        color: #a99752;
-    filter: drop-shadow(2px 4px 6px #ffc107);
-    /* color: #ffc107; */
-    font-size: 40px;
-        margin-bottom: 0px;
+.ramzan-title h2 {
+  color: #a99752;
+  filter: drop-shadow(2px 4px 6px #ffc107);
+  /* color: #ffc107; */
+  font-size: 40px;
+  margin-bottom: 0px;
 }
-.ramzan-title p{
-    color: #a99752b8;
-    font-weight: 600;
-    /* text-align: center; */
-    /* justify-content: center; */
-    font-size: 15px;
-    text-decoration: underline;
-    margin-bottom: 0px;
+.ramzan-title p {
+  color: #a99752b8;
+  font-weight: 600;
+  /* text-align: center; */
+  /* justify-content: center; */
+  font-size: 15px;
+  text-decoration: underline;
+  margin-bottom: 0px;
 }
 
-   .ramzan-highlight td {
-            background-color: #75b79896 !important;
-            color: antiquewhite !important;
-            ;
-        }
+.ramzan-highlight td {
+  background-color: #75b79896 !important;
+  color: antiquewhite !important;
+}
 
-        .table-ramzan::-webkit-scrollbar {
-    width: 8px;
+.table-ramzan::-webkit-scrollbar {
+  width: 8px;
 }
 
 .table-ramzan::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
+  background: #f1f1f1;
+  border-radius: 10px;
 }
 
 .table-ramzan::-webkit-scrollbar-thumb {
-    background:#d7c8b2;
-    border-radius: 10px;
+  background: #d7c8b2;
+  border-radius: 10px;
 }
 
 .table-ramzan::-webkit-scrollbar-thumb:hover {
-    background: #555;
+  background: #555;
 }
 
 /* Dua */
 
-.dua-card{
-    background-color: transparent;
-        box-shadow: 0px 0px 9px 11px #ffecad;
-        height: 100%;
-
+.dua-card {
+  background-color: transparent;
+  box-shadow: 0px 0px 9px 11px #ffecad;
+  height: 100%;
 }
 
-.dua-card p{
-    color:#a99852;
-    font-weight: 700;
-    font-size: 17px;
+.dua-card p {
+  color: #a99852;
+  font-weight: 700;
+  font-size: 17px;
 }
 
-.dua-card .card-header{
- background: #a99752;
-    color: #fff3cd;
-
+.dua-card .card-header {
+  background: #a99752;
+  color: #fff3cd;
 }
 
-.dua-crad-wrapper{
-        height: 69vh;
-    overflow-y: scroll;
-    overflow-x: hidden;
+.dua-crad-wrapper {
+  height: 69vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
-
-
-.dua-crad-wrapper .col-lg-4, .dua-crad-wrapper .col-lg-6{
-    padding: 20px;
+.dua-crad-wrapper .col-lg-4,
+.dua-crad-wrapper .col-lg-6 {
+  padding: 20px;
 }
-   
-  .dua-crad-wrapper::-webkit-scrollbar {
-    width: 8px;
+
+.dua-crad-wrapper::-webkit-scrollbar {
+  width: 8px;
 }
 
 .dua-crad-wrapper::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
+  background: #f1f1f1;
+  border-radius: 10px;
 }
 
 .dua-crad-wrapper::-webkit-scrollbar-thumb {
-    background:#d7c8b2;
-    border-radius: 10px;
+  background: #d7c8b2;
+  border-radius: 10px;
 }
 
 .dua-crad-wrapper::-webkit-scrollbar-thumb:hover {
-    background: #555;
+  background: #555;
 }
 
 .language-switcher {
-    display: flex;
-    justify-content: center;
-    margin-top: -50px;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  margin-top: -50px;
+  margin-bottom: 20px;
 }
 
 .toggleContainer {
-   position: relative;
-   display: grid;
-   grid-template-columns: repeat(2, 1fr);
-   width: fit-content;
-   border: 3px solid #343434;
-   border-radius: 20px;
-   background: #a99752;
-   font-weight: bold;
-   color: #343434;
-   cursor: pointer;
- }
- .toggleContainer::before {
-content: '';
-    position: absolute;
-    width: 50%;
-    height: 100%;
-    left: 0%;
-    border-radius: 20px;
-    background: #fff3cd;
-    transition: all 0.3s;
- }
- .toggleCheckbox:checked + .toggleContainer::before {
-    left: 50%;
- }
- .toggleContainer div {
-   padding: 6px;
-   text-align: center;
-   z-index: 1;
- }
- .toggleCheckbox {
-   display: none;
- }
- .toggleCheckbox:checked + .toggleContainer div:first-child{
-   color: white;
-   transition: color 0.3s;
- }
- .toggleCheckbox:checked + .toggleContainer div:last-child{
-   color: #343434;
-   transition: color 0.3s;
- }
- .toggleCheckbox + .toggleContainer div:first-child{
-   color: #343434;
-   transition: color 0.3s;
- }
- .toggleCheckbox + .toggleContainer div:last-child{
-   color: white;
-   transition: color 0.3s;
- }
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: fit-content;
+  border: 3px solid #343434;
+  border-radius: 20px;
+  background: #a99752;
+  font-weight: bold;
+  color: #343434;
+  cursor: pointer;
+}
+.toggleContainer::before {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  left: 0%;
+  border-radius: 20px;
+  background: #fff3cd;
+  transition: all 0.3s;
+}
+.toggleCheckbox:checked + .toggleContainer::before {
+  left: 50%;
+}
+.toggleContainer div {
+  padding: 6px;
+  text-align: center;
+  z-index: 1;
+}
+.toggleCheckbox {
+  display: none;
+}
+.toggleCheckbox:checked + .toggleContainer div:first-child {
+  color: white;
+  transition: color 0.3s;
+}
+.toggleCheckbox:checked + .toggleContainer div:last-child {
+  color: #343434;
+  transition: color 0.3s;
+}
+.toggleCheckbox + .toggleContainer div:first-child {
+  color: #343434;
+  transition: color 0.3s;
+}
+.toggleCheckbox + .toggleContainer div:last-child {
+  color: white;
+  transition: color 0.3s;
+}
 
- .arabic-text {
+.arabic-text {
   font-family: "Cairo Play", sans-serif;
-          direction: rtl;
-          font-size: 25px;
-    }
-
-    /* Urdu font */
-    .urdu-text {
-font-family: "IBM Plex Sans Arabic", sans-serif;     
-direction: rtl;
-        font-size: 25px;
-    }
-
-    /* Contact */
-     .error {
-            color: red;
-            font-size: 0.875rem;
-            display: none;
-        }
-
-        .contact-form form .form-control{
-            background: #d7c8b2;
-        }
-
-        .contact-form form label{
-                font-weight: 700;
-    color: #a99752;
-        }
-
-        .contact-form form button{
-                background: #a99752;
-    border: bisque;
-        }
-
-.contact-form form button:hover{
-    background-color: #918140;
+  direction: rtl;
+  font-size: 25px;
 }
 
-
-.contact-form{
-        padding: 30px;
-    background-color: #fff3cd;
-    border-radius: 20px;
+/* Urdu font */
+.urdu-text {
+  font-family: "IBM Plex Sans Arabic", sans-serif;
+  direction: rtl;
+  font-size: 25px;
 }
 
-.contact-text{
-    text-align: center;
-    font-weight: 600;
-    color: #a99752;}
+/* Contact */
+.error {
+  color: red;
+  font-size: 0.875rem;
+  display: none;
+}
+
+.contact-form form .form-control {
+  background: #d7c8b2;
+}
+
+.contact-form form label {
+  font-weight: 700;
+  color: #a99752;
+}
+
+.contact-form form button {
+  background: #a99752;
+  border: bisque;
+}
+
+.contact-form form button:hover {
+  background-color: #918140;
+}
+
+.contact-form {
+  padding: 30px;
+  background-color: #fff3cd;
+  border-radius: 20px;
+}
+
+.contact-text {
+  text-align: center;
+  font-weight: 600;
+  color: #a99752;
+}
 
 input:-internal-autofill-selected {
-     background: #d7c8b2;
+  background: #d7c8b2;
 }
 
-        .form-control:focus {
-    border-color: #a99752;
-    box-shadow: 0 0 0 .25rem #a99752;
+.form-control:focus {
+  border-color: #a99752;
+  box-shadow: 0 0 0 0.25rem #a99752;
 }
 
-.form-wrapper{
-    height: 70vh;
-    overflow-y: scroll;
+.form-wrapper {
+  height: 70vh;
+  overflow-y: scroll;
 }
 
-        .form-wrapper::-webkit-scrollbar {
-    width: 8px;
+.form-wrapper::-webkit-scrollbar {
+  width: 8px;
 }
 
 .form-wrapper::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
+  background: #f1f1f1;
+  border-radius: 10px;
 }
 
 .form-wrapper::-webkit-scrollbar-thumb {
-    background:#d7c8b2;
-    border-radius: 10px;
+  background: #d7c8b2;
+  border-radius: 10px;
 }
 
 .form-wrapper::-webkit-scrollbar-thumb:hover {
-    background: #555;
+  background: #555;
 }
 
+@media screen and (max-width: 768px) {
+  .nav-menu-link {
+    padding: 5px 10px;
+    width: 75px;
+  }
 
-   
-
-@media screen and (max-width: 768px) { 
-
-.nav-menu-link{
-            padding: 5px 10px;
-            width: 75px;
-}
-
-.index-note-text{
+  .index-note-text {
     font-size: 10px;
-}
+  }
 
-    /* Home Page */
+  /* Home Page */
 
-.search-bar{
+  .search-bar {
     justify-content: center;
-            padding: 30px 0px;
-}
+    padding: 30px 0px;
+  }
 
-    .sehri-iftaar-wrap{
-        gap: 30px;
-    }
+  .sehri-iftaar-wrap {
+    gap: 30px;
+  }
 
-.col-lg-11{
+  .col-lg-11 {
     padding: 0px;
-}
+  }
 
-.background-image {
+  .background-image {
     background-image: url(img/masjid.png);
     background-repeat: no-repeat;
     background-size: cover;
@@ -613,127 +605,152 @@ input:-internal-autofill-selected {
     position: relative;
     border-radius: 30px;
     background-position: center;
-}
+  }
 
-.advice-div{
-    height: 28.3vh;
-}
-
-    .islamic-date {
+  .islamic-date {
     text-align: center;
     font-size: calc(1.375rem + 1.5vw);
     color: rgb(255 254 230);
     text-shadow: 0 0 10px #000;
-}
+  }
 
-.namaz-card,.sehri-iftar-card{
+  .namaz-card,
+  .sehri-iftar-card {
     width: 15rem;
-}
+  }
 
-.owl-carousel .owl-stage-outer {
+  .owl-carousel .owl-stage-outer {
     padding: 10px 0px;
-}
+  }
 
-.mobile-flex{
- display: flex;
+  .mobile-flex {
+    display: flex;
     justify-content: center;
     align-items: center;
-}
+  }
 
-.namaz-card h5, .sehri-iftar-card h5 {
+  .namaz-card h5,
+  .sehri-iftar-card h5 {
     color: cornsilk;
     text-align: center;
     font-size: 1.25rem;
-}
+  }
 
-.namaz-card h6, .sehri-iftar-card h6 {
+  .namaz-card h6,
+  .sehri-iftar-card h6 {
     color: #005c32;
     text-align: center;
-    font-size: 1rem;}
+    font-size: 1rem;
+  }
 
-    .daily-quote{
-        font-size: 1rem;
-    }
+  .daily-quote,
+  .next-prayer-timer {
+    font-size: 1rem;
+  }
 
-    /* Hijr Calender */
-    .fc .fc-toolbar{
-        display: block;
-        text-align: center;
-    }
-
-    .side-menu{
-        display: flex;
-        flex-direction: row;
-            padding: 10px 0px;
-    }
-
-    .nav-menu-link img {
-    width: 5vh;
-    }
-
-    .nav-menu-link span{
-        
-    font-size: 13px;
-    }
-
-    .side-menu-col{
-      height: auto;
-        position: sticky;
-        bottom: 0;
-        z-index: 1;
-        }
-
-#calendar {
-    margin: 20px 0px;
-}
-
-/* Ramzan */
-
-    .ramzan-title svg {
-        width: 100%;
-        height: auto;
-        margin-top: -23px;}
-
-.ramzan-title h2{
-    margin-top: 20px;
-}
-
-.svg-mob{
-    display: none;
-} 
-
-.svg-wrapper{
+  /* Hijr Calender */
+  .fc .fc-toolbar {
     display: block;
-}
+    text-align: center;
+  }
 
-.decoration-ramzan{
+  .side-menu {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0px;
+  }
+
+  .nav-menu-link img {
+    width: 5vh;
+  }
+
+  .nav-menu-link span {
+    font-size: 13px;
+  }
+
+  .side-menu-col {
+    height: auto;
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+  }
+
+  #calendar {
+    margin: 20px 0px;
+  }
+
+  /* Ramzan */
+
+  .ramzan-title svg {
+    width: 100%;
+    height: auto;
+    margin-top: -23px;
+  }
+
+  .ramzan-title h2 {
+    margin-top: 20px;
+  }
+
+  .svg-mob {
     display: none;
-}
+  }
 
-.ramzan-title{
-   display: block;
-        justify-content: center;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-}
+  .svg-wrapper {
+    display: block;
+  }
 
- .ramzan-title p{
+  .decoration-ramzan {
+    display: none;
+  }
+
+  .ramzan-title {
+    display: block;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .ramzan-title p {
     margin-bottom: 0px;
-}
+  }
 
-/* Dua */
-.language-switcher{
+  /* Dua */
+  .language-switcher {
     margin-top: 0px;
-}
+  }
 
-/* Conatct */
-.form-row{
-        margin: 0px;
-}
+  /* Conatct */
+  .form-row {
+    margin: 0px;
+  }
 
-.form-wrapper{
-        height: auto;
+  .form-wrapper {
+    height: auto;
     overflow-y: auto;
+  }
 }
+
+.next-prayer-timer {
+  font-weight: 600;
+  color: #fff;
+  font-size: 25px;
+}
+
+body.night-mode {
+  background: linear-gradient(180deg, #0f2027, #203a43, #2c5364);
+  color: #ffffff;
+}
+
+body.night-mode .card {
+  background-color: #1e2a33;
+  color: #ffffff;
+}
+
+body.night-mode .namaz-card.current {
+  border: 2px solid #00e5ff;
+}
+
+body.night-mode .daily-quote {
+  color: #d4f1ff;
 }
