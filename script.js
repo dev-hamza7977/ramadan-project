@@ -591,6 +591,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const searchButton = document.querySelector(".input-group-text");
     const prayerCards = document.querySelectorAll(".namaz-card");
     const sehriIftariCards = document.querySelectorAll(".sehri-iftar-card");
+    
 
     const prayerTimes = {
         Fajr: document.querySelector('[data-namaz="Fajr"] .card-subtitle'),
@@ -598,6 +599,12 @@ document.addEventListener("DOMContentLoaded", function () {
         Asr: document.querySelector('[data-namaz="Asr"] .card-subtitle'),
         Maghrib: document.querySelector('[data-namaz="Maghrib"] .card-subtitle'),
         Isha: document.querySelector('[data-namaz="Isha"] .card-subtitle'),
+        Chasht: document.querySelector('[data-namaz="Chasht"] .card-subtitle'),
+Ishraq: document.querySelector('[data-namaz="Ishraq"] .card-subtitle'),
+Tahajjud: document.querySelector('[data-namaz="Tahajjud"] .card-subtitle'),
+Awwabeen: document.querySelector('[data-namaz="Awwabeen"] .card-subtitle'),
+
+        
         Sehri: sehriIftariCards.length > 0 ? sehriIftariCards[0].querySelector(".card-subtitle") : null,
         Iftari: sehriIftariCards.length > 1 ? sehriIftariCards[1].querySelector(".card-subtitle") : null,
     };
@@ -681,6 +688,26 @@ document.addEventListener("DOMContentLoaded", function () {
         prayerTimes.Asr.textContent = adjustTime(times.Asr, -1);
         prayerTimes.Maghrib.textContent = adjustTime(times.Maghrib, 3);
         prayerTimes.Isha.textContent = adjustTime(times.Isha, -1);
+        // 🌅 Ishraq = 15 mins after Sunrise
+if (prayerTimes.Ishraq && times.Sunrise) {
+    prayerTimes.Ishraq.textContent = adjustTime(times.Sunrise, 15);
+}
+
+// ☀️ Chasht (Duha) = ~1.5 hours after Sunrise
+if (prayerTimes.Chasht && times.Sunrise) {
+    prayerTimes.Chasht.textContent = adjustTime(times.Sunrise, 90);
+}
+
+// 🌙 Awwabeen = 15 mins after Maghrib
+if (prayerTimes.Awwabeen && times.Maghrib) {
+    prayerTimes.Awwabeen.textContent = adjustTime(times.Maghrib, 15);
+}
+
+// 🌌 Tahajjud = 1 hour before Fajr
+if (prayerTimes.Tahajjud && times.Fajr) {
+    prayerTimes.Tahajjud.textContent = adjustTime(times.Fajr, -60);
+}
+
         if (prayerTimes.Sehri) prayerTimes.Sehri.textContent = adjustTime(times.Imsak, -1);
         if (prayerTimes.Iftari) prayerTimes.Iftari.textContent = adjustTime(times.Maghrib, 3);
 
