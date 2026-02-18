@@ -9,14 +9,10 @@
     <link rel="icon" type="image/png" href="img/logo-n.png">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=1.6">
+    <link rel="stylesheet" href="style.css?v=1.7">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
 
-
-    <style>
-
-    </style>
 </head>
 
 <body>
@@ -893,13 +889,13 @@
         });
     </script>
 
-    <script>
+    <!-- <script>
         document.addEventListener("DOMContentLoaded", function () {
             const lat = "19.0760"; // Mumbai Latitude
             const lon = "72.8777"; // Mumbai Longitude
             const method = 1; // ISNA calculation method
             const school = 1; // Hanafi for Asr
-            const year = 2025; // Year
+            const year = 2026; // Year
 
             const ramzanStart = new Date(2025, 2, 2); // 2nd March 2025
             const ramzanDays = 30;
@@ -968,6 +964,140 @@
                 let year = date.getFullYear();
                 return `${day}-${month}-${year}`;
             }
+        });
+    </script> -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const lat = "19.0760"; // Mumbai
+            const lon = "72.8777";
+            const method = 1;
+            const school = 1;
+            const year = 2026;
+
+            // 🌙 Ramzan 1447 expected start (Tentative)
+            const ramzanStart = new Date(2026, 1, 19); // 18 Feb 2026
+            const ramzanDays = 30;
+
+            const today = new Date();
+            const todayFormatted = formatDate(today);
+
+            Promise.all([
+                fetch(`https://api.aladhan.com/v1/calendar/${year}/2?latitude=${lat}&longitude=${lon}&method=${method}&school=${school}`)
+                    .then(res => res.json()),
+                fetch(`https://api.aladhan.com/v1/calendar/${year}/3?latitude=${lat}&longitude=${lon}&method=${method}&school=${school}`)
+                    .then(res => res.json())
+            ])
+                .then(([febData, marchData]) => {
+
+                    const timetable = document.getElementById("ramzan-timetable");
+                    timetable.innerHTML = "";
+
+                    let allDays = [...febData.data, ...marchData.data];
+                    let ramzanDay = 1;
+
+                    // 🌙 Apply night mode using today's Maghrib/Fajr
+                    let todayData = allDays.find(day =>
+                        day.date.gregorian.date === todayFormatted
+                    );
+
+                    if (todayData) {
+                        applyNightMode(todayData.timings);
+                    }
+
+                    for (let i = 0; i < ramzanDays; i++) {
+
+                        let gregorianDate = new Date(ramzanStart);
+                        gregorianDate.setDate(gregorianDate.getDate() + i);
+
+                        let dayData = allDays.find(day =>
+                            day.date.gregorian.date === formatDate(gregorianDate)
+                        );
+
+                        if (!dayData) continue;
+
+                        const englishDate =
+                            `${dayData.date.gregorian.day} ${dayData.date.gregorian.month.en} ${dayData.date.gregorian.year}`;
+
+                        const hijriDate = `${ramzanDay} Ramadan 1447`;
+
+                        const timings = dayData.timings || {};
+
+                        let sehriTime = adjustTime(timings.Imsak, -1);
+                        let iftarTime = adjustTime(timings.Maghrib, 2);
+
+                        let highlightClass =
+                            formatDate(gregorianDate) === todayFormatted
+                                ? "ramzan-highlight"
+                                : "";
+
+                        const row = `
+                    <tr class="${highlightClass}">
+                        <td>${englishDate}</td>
+                        <td>${hijriDate}</td>
+                        <td>${sehriTime}</td>
+                        <td>${iftarTime}</td>
+                    </tr>
+                `;
+
+                        timetable.innerHTML += row;
+                        ramzanDay++;
+                    }
+
+                })
+                .catch(error => console.error("Error fetching data:", error));
+
+
+            /* ==============================
+               NIGHT MODE LOGIC
+            ============================== */
+            function applyNightMode(timings) {
+
+                if (!timings) return;
+
+                let maghrib = convertToMinutes(timings.Maghrib);
+                let fajr = convertToMinutes(timings.Fajr);
+
+                let now = new Date();
+                let currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+                // Night if after Maghrib OR before Fajr
+                if (currentMinutes >= maghrib || currentMinutes < fajr) {
+                    document.body.classList.add("night-mode");
+                } else {
+                    document.body.classList.remove("night-mode");
+                }
+            }
+
+
+            /* ==============================
+               HELPERS
+            ============================== */
+            function adjustTime(time, offset) {
+                if (!time) return "--:--";
+
+                let [hh, mm] = time.split(" ")[0].split(":").map(Number);
+                let total = (hh * 60 + mm + offset + 1440) % 1440;
+
+                return String(Math.floor(total / 60)).padStart(2, '0') +
+                    ":" +
+                    String(total % 60).padStart(2, '0');
+            }
+
+            function convertToMinutes(time) {
+                if (!time) return 0;
+                let [hh, mm] = time.split(" ")[0].split(":").map(Number);
+                return hh * 60 + mm;
+            }
+
+            function formatDate(date) {
+                let day = String(date.getDate()).padStart(2, '0');
+                let month = String(date.getMonth() + 1).padStart(2, '0');
+                let year = date.getFullYear();
+                return `${day}-${month}-${year}`;
+            }
+
         });
     </script>
 

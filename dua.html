@@ -9,13 +9,108 @@
     <link rel="icon" type="image/png" href="img/logo-n.png">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=1.6">
+    <link rel="stylesheet" href="style.css?v=1.7">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
 
     <style>
+        .highlight-dua {
+            border: 2px solid #0d6efd !important;
+            box-shadow: 0 0 15px rgba(13, 110, 253, 0.5);
+            transition: 0.3s ease;
+        }
 
+        /* ===== CUSTOM GOLD TABS ===== */
+
+        .custom-tabs {
+            position: relative;
+            display: inline-flex;
+            background: #b8a65a;
+            border-radius: 50px;
+            padding: 6px;
+            border: 3px solid #2f2f2f;
+            overflow: hidden;
+        }
+
+        .custom-tabs .tab-btn {
+            position: relative;
+            z-index: 2;
+            background: transparent;
+            border: none;
+            padding: 8px 28px;
+            font-weight: 600;
+            font-size: 14px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .custom-tabs .tab-btn.active {
+            color: #2f2f2f;
+        }
+
+        .custom-tabs .tab-indicator {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            height: calc(100% - 10px);
+            width: 0;
+            background: #f3ead2;
+            border-radius: 40px;
+            transition: 0.3s ease;
+            z-index: 1;
+        }
+
+        .dua-parent-container {
+            height: 48vh;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            padding-top: 20px;
+        }
+
+
+        /* Mobile Responsive */
+        @media (max-width: 576px) {
+            .custom-tabs .tab-btn {
+                padding: 6px 16px;
+                font-size: 12px;
+            }
+
+            .dua-parent-container {
+                OVERFLOW: scroll;
+                HEIGHT: 100VH;
+                height: 30vh;
+                /* padding: 30px 20px; */
+                margin: 30px 0px;
+            }
+
+        }
+
+
+
+        /* ===== NIGHT MODE ===== */
+        body.night-mode {
+            background: #0f1c2e;
+            color: #f5f5f5;
+        }
+
+        body.night-mode .dua-card {
+            background: #16263d;
+            color: #ffffff;
+        }
+
+        body.night-mode .card-header {
+            background: #1d3354;
+        }
+
+        body.night-mode .custom-tabs {
+            background: #8c7a3a;
+        }
+
+        body.night-mode .tab-indicator {
+            background: #ffffff;
+        }
     </style>
 </head>
 
@@ -779,315 +874,63 @@
                                     </svg>
                                 </div>
                             </div>
-                            <div class="language-switcher" id="language-toggle">
+
+                            <!-- LANGUAGE SWITCH -->
+                            <!-- LANGUAGE SWITCH -->
+                            <div class="language-switcher">
                                 <input type="checkbox" id="toggle" class="toggleCheckbox" />
-                                <label for="toggle" class='toggleContainer'>
+                                <label for="toggle" class="toggleContainer">
                                     <div>ENGLISH</div>
                                     <div>عربي</div>
                                 </label>
                             </div>
-                            <div class="dua-crad-wrapper">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="row">
+                            <div class="container mt-4 text-center">
 
-                                            <div class="col-lg-4">
-                                                <div class="card dua-card">
-                                                    <div class="card-header">
-                                                        <h5 class="card-title mb-0 text-center translation animate__animated animate__bounce"
-                                                            data-en="3rd Ashra Dua" data-ur="تیسرے عشرے کی دعا">3rd
-                                                            Ashra Dua</h5>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center transliteration "
-                                                            data-en="Allahumma qina ‘adhab an-naar wa adkhilna jannata ma‘a al-abrar, ya ‘Azizu ya Ghaffar"
-                                                            data-ar="اللهم قنا عذاب النار وأدخلنا الجنة مع الأبرار، يا عزيز يا غفار">
-                                                            Allahumma qina ‘adhab an-naar wa adkhilna jannata ma‘a
-                                                            al-abrar, ya ‘Azizu ya Ghaffar
-                                                        </p>
-                                                        <p class="text-center mb-0"><u>Translation:</u></p>
-                                                        <p class="text-center translation"
-                                                            data-en="O Allah, protect us from the punishment of the Fire and admit us into Paradise with the righteous. O Almighty, O Most Forgiving."
-                                                            data-ur="اے اللہ، ہمیں آگ کے عذاب سے بچا اور ہمیں نیک لوگوں کے ساتھ جنت میں داخل فرما۔ اے زبردست، اے معاف کرنے والے۔">
-                                                            O Allah, protect us from the punishment of the Fire and
-                                                            admit us into Paradise with the
-                                                            righteous. O Almighty, O Most Forgiving.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                <div class="custom-tabs" id="duaTabs">
 
-                                            <div class="col-lg-4">
-                                                <div class="card dua-card">
-                                                    <div class="card-header">
-                                                        <h5 class="card-title mb-0 text-center translation animate__animated animate__bounceInUp"
-                                                            data-en="2nd
-                                                            Ashra Dua" data-ur="دوسرے عشرے کی دعا">2nd
-                                                            Ashra Dua</h5>
+                                    <button class="tab-btn active" data-category="all">
+                                        ALL
+                                    </button>
 
-                                                    </div>
-                                                    <div class="card-body">
+                                    <button class="tab-btn" data-category="dua">
+                                        DUAS
+                                    </button>
 
-                                                        <p class="card-text text-center transliteration"
-                                                            data-en="Allahummaghfir lana zunubana ya arhamar rahimeen"
-                                                            data-ar="اللَّهُمَّ ٱغْفِرْ لَنَا ذُنُوبَنَا يَا أَرْحَمَ ٱلرَّاحِمِينَ">
-                                                            Allahummaghfir lana zunubana ya arhamar rahimeen
-                                                        </p>
-                                                        <p class="text-center mb-0"><u>Translation:</u></p>
-                                                        <p class="text-center translation"
-                                                            data-en="O Allah, forgive our sins, O Most Merciful of the merciful."
-                                                            data-ur="اے اللہ! ہمارے گناہوں کو معاف فرما، اے سب سے زیادہ رحم کرنے والے">
+                                    <button class="tab-btn" data-category="darood">
+                                        DAROOD
+                                    </button>
 
-                                                            O Allah, forgive our sins, O Most Merciful of the merciful.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                    <div class="tab-indicator"></div>
 
-                                            <div class="col-lg-4">
-                                                <div class="card dua-card">
-                                                    <div class="card-header">
-                                                        <h5 class="card-title mb-0 text-center translation animate__animated animate__bounce"
-                                                            data-en="1St
-                                                            Ashra Dua" data-ur="پہلے عشرے کی دعا">1St
-                                                            Ashra Dua</h5>
-
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center transliteration"
-                                                            data-en="Allahumma arhamni Ya  Arham-mar-Rahimeen"
-                                                            data-ar="اللَّهُمَّ ٱرْحَمْنِي يَا أَرْحَمَ ٱلرَّاحِمِينَ">
-                                                            Allahumma arhamni Ya
-                                                            Arham-mar-Rahimeen</p>
-                                                        <p class="text-center"><u>Translation:</u></p>
-                                                        <p class="text-center translation"
-                                                            data-en="O Allah, forgive our sins, O Most Merciful of the merciful."
-                                                            data-ur="اے اللہ! مجھ پر رحم فرما، اے سب سے زیادہ رحم فرمانے والے۔">
-
-                                                            Oh Allah have mercy upon me, O Most Merciful.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-
-                                            <div class="col-lg-4">
-                                                <div class="card dua-card">
-                                                    <div class="card-header">
-                                                        <h5 class="card-title mb-0 text-center translation animate__animated animate__rotateIn"
-                                                            data-en="Iftari Dua" data-ur="افطار کی دعا">Iftari Dua</h5>
-
-                                                    </div>
-                                                    <div class="card-body">
-
-                                                        <p class="card-text text-center transliteration"
-                                                            data-ar="اللَّهُمَّ إِنِّي لَكَ صُمْتُ، وَبِكَ آمَنْتُ، وَعَلَيْكَ تَوَكَّلْتُ، وَعَلَىٰ رِزْقِكَ أَفْطَرْتُ، فَتَقَبَّلْ مِنِّي"
-                                                            data-en="Allahumma inni laka sumtu, wa
-                                                            bika aamantu, wa ‘alayka tawakkaltu, wa ‘ala rizqika
-                                                            aftartu, fataqabbal minni.">Allahumma inni laka sumtu, wa
-                                                            bika aamantu, wa ‘alayka tawakkaltu, wa ‘ala rizqika
-                                                            aftartu, fataqabbal minni.</p>
-                                                        <p class="text-center mb-0"><u>Translation</u></p>
-                                                        <p class="text-center translation"
-                                                            data-ur="اے اللہ! میں نے تیرے لیے روزہ رکھا، تجھ پر ایمان لایا، تجھ پر بھروسہ کیا، اور تیرے رزق سے افطار کیا، پس اسے مجھ سے قبول فرما۔"
-                                                            data-en=" O Allah! I fasted for You, and I believe in You, and I put
-                                                            my trust in You, and with Your sustenance, I break my fast.
-                                                            So accept it from me.">
-
-                                                            O Allah! I fasted for You, and I believe in You, and I put
-                                                            my trust in You, and with Your sustenance, I break my fast.
-                                                            So accept it from me.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-4">
-                                                <div class="card dua-card">
-                                                    <div class="card-header">
-                                                        <h5 class="card-title mb-0 text-center translation animate__animated animate__zoomIn"
-                                                            data-en="lailatul Qadr dua" data-ur="لیلۃ القدر کی دعا">
-                                                            lailatul Qadr Dua</h5>
-
-                                                    </div>
-                                                    <div class="card-body">
-
-                                                        <p class="card-text text-center transliteration"
-                                                            data-ar="اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنَّا يَا كَرِيمُ"
-                                                            data-en=" Allahumma innaka afuwwun
-                                                            tuhibbul afwa fafu anna ya Kareem.">
-                                                            Allahumma innaka afuwwun
-                                                            tuhibbul afwa fafu anna ya Kareem.</p>
-                                                        <p class="mb-0 text-center"><u>Translation:</u></p>
-                                                        <p class="text-center translation" data-en="
-                                                            O Allah, You are Most Forgiving, and You love forgiveness,
-                                                            so forgive us, O Most Generous."
-                                                            data-ur="اے اللہ! بے شک تو معاف کرنے والا ہے، معاف کرنے کو پسند کرتا ہے، پس ہمیں معاف فرما، اے سب سے زیادہ کرم والے!">
-
-                                                            O Allah, You are Most Forgiving, and You love forgiveness,
-                                                            so forgive us, O Most Generous.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-
-                                            <div class="col-lg-4">
-                                                <div class="card dua-card">
-                                                    <div class="card-header">
-                                                        <h5 class="card-title mb-0 text-center translation animate__animated animate__rollIn"
-                                                            data-ur="سحری کی دعا" data-en="Sehri Dua">Sehri Dua</h5>
-
-                                                    </div>
-                                                    <div class="card-body">
-
-                                                        <p class="card-text text-center transliteration"
-                                                            data-ar="نَوَيْتُ أَنْ أَصُومَ غَدًا لِلَّهِ تَعَالَىٰ مِنْ فَرْضِ رَمَضَانَ"
-                                                            data-en="Nawaitu an asuma ghadan lillahi
-                                                            ta'ala min fardi Ramadan.">
-                                                            Nawaitu an asuma ghadan lillahi
-                                                            ta'ala min fardi Ramadan.
-                                                        </p>
-                                                        <p class="text-center mb-0"><u>Translation:</u></p>
-                                                        <p class="text-center translation" data-en=" I intend to fast tomorrow for the sake of Allah, as an
-                                                            obligation of Ramadan."
-                                                            data-ur="میں نے اللہ تعالیٰ کے لیے، فرض رمضان کا روزہ رکھنے کی نیت کی۔">
-                                                            I intend to fast tomorrow for the sake of Allah, as an
-                                                            obligation of Ramadan.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-
-
-
-                                            <div class="col-lg-6">
-                                                <div class="card dua-card">
-                                                    <div class="card-header">
-                                                        <h5 class="card-title mb-0 text-center translation animate__animated animate__zoomInDown"
-                                                            data-ur="تراویح کی دعا" data-en="Taraweeh dua">Taraweeh Dua
-                                                        </h5>
-
-                                                    </div>
-                                                    <div class="card-body">
-
-                                                        <p class="card-text text-center transliteration"
-                                                            data-ar="سُبْحَانَ الْمَلِكِ الْقُدُّوسِ، سُبْحَانَ ذِي الْمُلْكِ وَالْمَلَكُوتِ، سُبْحَانَ ذِي الْعِزَّةِ وَالْعَظَمَةِ وَالْهَيْبَةِ وَالْقُدْرَةِ وَالْكِبْرِيَاءِ وَالْجَبَرُوتِ  سُبْحَانَ الْمَلِكِ الْحَيِّ الَّذِي لَا يُنَامُ وَلَا يَمُوتُ، سُبُّوحٌ، قُدُّوسٌ، رَبُّنَا وَرَبُّ الْمَلَائِكَةِ وَالرُّوحِ، اللَّهُمَّ أَجِرْنِي مِنَ النَّارِ، يَا مُجِيرُ، يَا مُجِيرُ، يَا مُجِيرُ"
-                                                            data-en="Subhanal Malikil Quddus; Subhana dhil Mulki wal Malakuti; Subhana dhil izzati wal aDhmati wal haybati wal
-                                                            Qudrati; wal kibriyaa’i wal jabaroot; Subhanal Malikil hayyil ladhi, la yunaamu wa layamutu; Subbuhun,  Quddusun, Rabbuna Rabbul malaa’ikati war-rooh; Allahumma Ajirnee Minan Naar;  Ya Mujeero, Ya Mujeero, Ya Mujeer.">
-                                                            Subhanal Malikil Quddus;
-                                                            Subhana dhil Mulki wal Malakuti; Subhana dhil
-                                                            izzati wal aDhmati wal haybati wal
-                                                            Qudrati; wal kibriyaa’i wal jabaroot; Subhanal Malikil
-                                                            hayyil ladhi,
-                                                            la yunaamu wa layamutu; Subbuhun,
-                                                            Quddusun, Rabbuna Rabbul malaa’ikati war-rooh; Allahumma
-                                                            Ajirnee Minan
-                                                            Naar; Ya Mujeero, Ya Mujeero, Ya Mujeer.</p>
-                                                        <p class="text-center mb-0"><u>Translation</u></p>
-                                                        <p class="text-center translation" data-ur="زمین اور آسمان کی بادشاہت کے مالک کی پاکی بیان کرتا ہوں۔  
-پاک ہے وہ ذات جو عزت، عظمت، جلال، ہیبت، قدرت، بزرگی اور غلبے کا مالک ہے۔  
-
-پاک ہے وہ بادشاہ، جو ہمیشہ زندہ ہے، نہ سوتا ہے اور نہ مرتا ہے۔  
-وہی سب سے زیادہ تعریف کے لائق، سب سے زیادہ مقدس، ہمارا رب اور تمام فرشتوں اور روح (جبریل علیہ السلام) کا رب ہے۔  
-
-اے اللہ! ہمیں جہنم کی آگ سے بچا لے۔  
-اے محافظ! اے محافظ! اے محافظ!" data-en="  Glory be to the Owner of the Kingdom of the earth and the
-                                                            heavens. Glory be to He who commands Respect and Honour and
-                                                            Magnificence & Awe and Power and Greatness and Omnipotence.
-                                                            Glory be to the Sovereign, the Ever-living. Who does not
-                                                            sleep nor die. He is the Most Praised, the Most Holy, Our
-                                                            Lord and the Lord of all the Angels and the Spirit. O Allah!
-                                                            Save us from the Fire of Hell.
-                                                            O Protector! O Protector! O Protector!">
-
-                                                            Glory be to the Owner of the Kingdom of the earth and the
-                                                            heavens. Glory be to He who commands Respect and Honour and
-                                                            Magnificence & Awe and Power and Greatness and Omnipotence.
-                                                            Glory be to the Sovereign, the Ever-living. Who does not
-                                                            sleep nor die. He is the Most Praised, the Most Holy, Our
-                                                            Lord and the Lord of all the Angels and the Spirit. O Allah!
-                                                            Save us from the Fire of Hell.
-                                                            O Protector! O Protector! O Protector!
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="card dua-card">
-                                                    <div class="card-header">
-                                                        <h5 class="card-title mb-0 text-center translation"
-                                                            data-ur="دو قنوت" data-en="Dua E Qunoot">Dua E Qunoot</h5>
-
-                                                    </div>
-                                                    <div class="card-body">
-
-                                                        <p class="card-text text-center transliteration"
-                                                            data-ar="اللَّهُمَّ إِنَّا نَسْتَعِينُكَ وَنَسْتَغْفِرُكَ وَنُؤْمِنُ بِكَ وَنَتَوَكَّلُ عَلَيْكَ وَنُثْنِي عَلَيْكَ الْخَيْرَ، وَنَشْكُرُكَ وَلَا نَكْفُرُكَ وَنَخْلَعُ وَنَتْرُكُ مَنْ يَفْجُرُكَ، اللَّهُمَّ إِيَّاكَ نَعْبُدُ وَلَكَ نُصَلِّي وَنَسْجُدُ، وَإِلَيْكَ نَسْعَى وَنَحْفِزُ، وَنَرْجُو رَحْمَتَكَ وَنَخْشَى عَذَابَكَ، إِنَّ عَذَابَكَ بِالْكُفَّارِ مُلْحِقٌ."
-                                                            data-en="Allah humma inna nasta-eenoka
-                                                            wa nastaghfiruka wa nu'minu bika wa natawakkalu alaika wa
-                                                            nusni alaikal khair, wa
-                                                            nashkuruka wala nakfuruka wa nakhla-oo wa natruku mai
-                                                            yafjuruka, Allah humma iyyaka na'budu wa laka nusalli wa
-                                                            nasjud;
-                                                            wa ilaika nas aaa wa nahfizu wa narju rahma taka wa nakhshaa
-                                                            azaabaka; inna azaabaka bil kuffari mulhik.">
-                                                            Allah humma inna nasta-eenoka
-                                                            wa nastaghfiruka wa nu'minu bika wa natawakkalu alaika wa
-                                                            nusni alaikal khair, wa
-                                                            nashkuruka wala nakfuruka wa nakhla-oo wa natruku mai
-                                                            yafjuruka, Allah humma iyyaka na'budu wa laka nusalli wa
-                                                            nasjud;
-                                                            wa ilaika nas aaa wa nahfizu wa narju rahma taka wa nakhshaa
-                                                            azaabaka; inna azaabaka bil kuffari mulhik.
-                                                        </p>
-                                                        <p class="text-center mb-0"><u>Translation:</u></p>
-                                                        <p class="text-center translation" data-ur="اے اللہ! ہم تجھ سے مدد طلب کرتے ہیں اور تجھ سے بخشش کے طلبگار ہیں، ہم تجھ پر ایمان رکھتے ہیں، تجھ پر بھروسہ کرتے ہیں، تیری تعریف بیان کرتے ہیں، اور تیرے شکر گزار ہیں، تیرے ناشکرے نہیں ہیں، اور ہم ان لوگوں سے علیحدگی اختیار کرتے ہیں جو تیری نافرمانی کرتے ہیں۔  
-
-اے اللہ! ہم تیری ہی عبادت کرتے ہیں، تیرے لیے ہی نماز پڑھتے اور سجدہ کرتے ہیں، تیرے قریب ہونے کی کوشش کرتے ہیں اور تیری رضا کے لیے خود کو پیش کرتے ہیں۔ ہم تیری رحمت کے امیدوار ہیں اور تیرے عذاب سے ڈرتے ہیں۔  
-
-بے شک، تیرا عذاب کافروں کو گھیر لینے والا ہے، اے اللہ!" data-en=" O Allah! We implore You for help and beg forgiveness of You
-                                                            and believe in You and rely on You and extol You and we are
-                                                            thankful to You and are not ungrateful to You and we
-                                                            alienate and forsake those who disobey You. O Allah! You
-                                                            alone do
-                                                            we worship and for You do we pray and prostrate and we
-                                                            betake to please You and present ourselves for the service
-                                                            in
-                                                            Your cause and we hope for Your mercy and fear Your
-                                                            chastisement. Undoubtedly, Your torment is going to overtake
-                                                            infidels O Allah!">
-
-                                                            O Allah! We implore You for help and beg forgiveness of You
-                                                            and believe in You and rely on You and extol You and we are
-                                                            thankful to You and are not ungrateful to You and we
-                                                            alienate and forsake those who disobey You. O Allah! You
-                                                            alone do
-                                                            we worship and for You do we pray and prostrate and we
-                                                            betake to please You and present ourselves for the service
-                                                            in
-                                                            Your cause and we hope for Your mercy and fear Your
-                                                            chastisement. Undoubtedly, Your torment is going to overtake
-                                                            infidels O Allah!
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-
-                                    </div>
                                 </div>
 
                             </div>
+
+
+                            <div class="container mt-3 position-relative">
+                                <input type="text" id="searchInput" class="form-control" placeholder="Search Dua...">
+
+                                <!-- DROPDOWN RESULTS -->
+                                <div id="searchResults" class="list-group position-absolute w-100"
+                                    style="z-index:999; display:none;"></div>
+                            </div>
+
+
+                            <!-- DUAS CONTAINER -->
+                            <div class="container dua-parent-container mt-4">
+                                <div class="row" id="duaContainer"></div>
+                            </div>
+
+
+
+
+                            <!-- DUAS CONTAINER -->
+                            <div class="dua-card-wrapper mt-4">
+                                <div class="row" id="duaContainer"></div>
+                            </div>
+
                         </div>
+
                         <div class="col-lg-1 side-menu-col">
                             <div class="side-menu">
                                 <div class="nav-menu-link">
@@ -1153,25 +996,378 @@
             });
         });
     </script>
+
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            /* =========================
+               STATE
+            ========================== */
+            let currentLang = "en";
+            let activeCategory = "all";
+
+            const container = document.getElementById("duaContainer");
+            const toggle = document.getElementById("toggle");
+            const switcher = document.querySelector(".language-switcher");
+            const tabs = document.querySelectorAll(".tab-btn");
+            const indicator = document.querySelector(".tab-indicator");
+            const searchInput = document.getElementById("searchInput");
+            const searchResults = document.getElementById("searchResults");
+
+            /* =========================
+               DATA
+            ========================== */
 
 
-        document.getElementById('toggle').addEventListener('change', function () {
-            const transliterations = document.querySelectorAll('.transliteration');
-            const translations = document.querySelectorAll('.translation');
+            const duas = [
 
-            transliterations.forEach(el => {
-                el.innerText = this.checked ? el.dataset.ar : el.dataset.en;
-                el.classList.toggle('arabic-text', this.checked); // Apply Arabic font
+                {
+                    category: "dua",
+                    title: { en: "3rd Ashra Dua", ar: "دعاء العشر الثالث" },
+                    text: {
+                        en: "Allahumma qina ‘adhab an-naar wa adkhilna jannata ma‘a al-abrar, ya ‘Azizu ya Ghaffar",
+                        ar: "اللهم قنا عذاب النار وأدخلنا الجنة مع الأبرار، يا عزيز يا غفار"
+                    },
+                    translation: {
+                        en: "O Allah, protect us from the punishment of the Fire and admit us into Paradise with the righteous. O Almighty, O Most Forgiving.",
+                        ur: "اے اللہ! ہمیں آگ کے عذاب سے بچا اور ہمیں نیک لوگوں کے ساتھ جنت میں داخل فرما۔"
+                    }
+                },
+
+                {
+                    category: "dua",
+                    title: { en: "2nd Ashra Dua", ar: "دعاء العشر الثاني" },
+                    text: {
+                        en: "Allahummaghfir lana zunubana ya arhamar rahimeen",
+                        ar: "اللهم اغفر لنا ذنوبنا يا ارحم الراحمين"
+                    },
+                    translation: {
+                        en: "O Allah, forgive our sins, O Most Merciful of the merciful.",
+                        ur: "اے اللہ! ہمارے گناہوں کو معاف فرما، اے سب سے زیادہ رحم فرمانے والے۔"
+                    }
+                },
+
+                {
+                    category: "dua",
+                    title: { en: "1st Ashra Dua", ar: "دعاء العشر الأول" },
+                    text: {
+                        en: "Allahumma arhamni Ya Arham-mar-Rahimeen",
+                        ar: "اللهم ارحمني يا أرحم الراحمين"
+                    },
+                    translation: {
+                        en: "Oh Allah have mercy upon me, O Most Merciful.",
+                        ur: "اے اللہ! مجھ پر رحم فرما، اے سب سے زیادہ رحم فرمانے والے۔"
+                    }
+                },
+
+                {
+                    category: "dua",
+                    title: { en: "Iftari Dua", ar: "دعاء الإفطار" },
+                    text: {
+                        en: "Allahumma inni laka sumtu, wa bika aamantu, wa ‘alayka tawakkaltu, wa ‘ala rizqika aftartu, fataqabbal minni.",
+                        ar: "اللهم اني لك صمت وبك آمنت وعليك توكلت وعلى رزقك أفطرت فتقبل مني"
+                    },
+                    translation: {
+                        en: "O Allah! I fasted for You, and I believe in You, and I put my trust in You, and with Your sustenance I break my fast. So accept it from me.",
+                        ur: "اے اللہ! میں نے تیرے لیے روزہ رکھا، تجھ پر ایمان لایا، تجھ پر بھروسہ کیا اور تیرے رزق سے افطار کیا۔ اسے مجھ سے قبول فرما۔"
+                    }
+                },
+
+                {
+                    category: "dua",
+                    title: { en: "Lailatul Qadr Dua", ar: "دعاء ليلة القدر" },
+                    text: {
+                        en: "Allahumma innaka afuwwun tuhibbul afwa fafu anna ya Kareem.",
+                        ar: "اللهم إنك عفو تحب العفو فاعف عنا يا كريم"
+                    },
+                    translation: {
+                        en: "O Allah, You are Most Forgiving, and You love forgiveness, so forgive us, O Most Generous.",
+                        ur: "اے اللہ! بے شک تو معاف کرنے والا ہے، معاف کرنا پسند کرتا ہے، پس ہمیں معاف فرما، اے سب سے زیادہ کرم والا!"
+                    }
+                },
+
+                {
+                    category: "dua",
+                    title: { en: "Sehri Dua", ar: "دعاء السحور" },
+                    text: {
+                        en: "Nawaitu an asuma ghadan lillahi ta'ala min fardi Ramadan.",
+                        ar: "نويت أن أصوم غداً لله تعالى من فرض رمضان"
+                    },
+                    translation: {
+                        en: "I intend to fast tomorrow for the sake of Allah, as an obligation of Ramadan.",
+                        ur: "میں اللہ تعالیٰ کے لیے، فرض رمضان کا روزہ رکھنے کی نیت کرتا ہوں۔"
+                    }
+                },
+
+                {
+                    category: "dua",
+                    title: { en: "Taraweeh Dua", ar: "دعاء التراويح" },
+                    text: {
+                        en: "Subhanal Malikil Quddus; Subhana dhil Mulki wal Malakuti; Subhana dhil izzati wal aDhmati wal haybati wal Qudrati; wal kibriyaa’i wal jabaroot; Subhanal Malikil hayyil ladhi, la yunaamu wa la yamutu; Subbuhun, Quddusun, Rabbuna Rabbul malaa’ikati war- rooh; Allahumma Ajirnee Minan Naar; Ya Mujeero, Ya Mujeero, Ya Mujeer",
+                        ar: "سُبْحَانَ الْمَلِكِ الْقُدُّوسِ، سُبْحَانَ ذِي الْمُلْكِ وَالْمَلَكُوتِ، سُبْحَانَ ذِي الْعِزَّةِ وَالْعَظَمَةِ وَالْهَيْبَةِ وَالْقُدْرَةِ وَالْكِبْرِيَاءِ وَالْجَبَرُوتِ، سُبْحَانَ الْمَلِكِ الْحَيِّ الَّذِي لَا يَنَامُ وَلَا يَمُوتُ، سُبُّوحٌ قُدُّوسٌ، رَبُّنَا وَرَبُّ الْمَلَائِكَةِ وَالرُّوحِ، اللَّهُمَّ أَجِرْنِي مِنَ النَّارِ، يَا مُجِيرُ، يَا مُجِيرُ، يَا مُجِيرُ"
+                    },
+                    translation: {
+                        en: "Glory be to the Owner of the Kingdom of the earth and the heavens. Glory be to He who commands Respect and Honour and Magnificence & Awe and Power and Greatness and Omnipotence. Glory be to the Sovereign, the Ever-living. Who does not sleep nor die. He is the Most Praised, the Most Holy, Our Lord and the Lord of all the Angels and the Spirit. O Allah! Save us from the Fire of Hell. O Protector! O Protector! O Protector!",
+                        ur: "زمین اور آسمان کی بادشاہت کے مالک کی پاکی بیان کرتا ہوں۔ پاک ہے وہ ذات جو عزت، عظمت، جلال، ہیبت، قدرت، بزرگی اور غلبے کا مالک ہے۔ پاک ہے وہ بادشاہ، جو ہمیشہ زندہ ہے، نہ سوتا ہے اور نہ مرتا ہے۔ وہی سب سے زیادہ تعریف کے لائق، سب سے زیادہ مقدس، ہمارا رب اور تمام فرشتوں اور روح (جبریل علیہ السلام) کا رب ہے۔ اے اللہ! ہمیں جہنم کی آگ سے بچا لے۔ اے محافظ! اے محافظ! اے محافظ!"
+
+                    }
+                },
+
+                {
+                    category: "dua",
+                    title: { en: "Dua E Qunoot", ar: "دعاء القنوت" },
+                    text: {
+                        en: "Allah humma inna nasta-eenoka wa nastaghfiruka wa nu'minu bika wa natawakkalu alaika wa nusni alaikal khair, wa nashkuruka wala nakfuruka wa nakhla-oo wa natruku mai yafjuruka, Allah humma iyyaka na'budu wa laka nusalli wa nasjud; wa ilaika nasaaa wa nahfizu wa narju rahmataka wa nakhshaa azaabaka; inna azaabaka bil kuffari mulhik.",
+
+                        ar: "اللَّهُمَّ إِنَّا نَسْتَعِينُكَ وَنَسْتَغْفِرُكَ وَنُؤْمِنُ بِكَ وَنَتَوَكَّلُ عَلَيْكَ وَنُثْنِي عَلَيْكَ الْخَيْرَ، وَنَشْكُرُكَ وَلَا نَكْفُرُكَ وَنَخْلَعُ وَنَتْرُكُ مَنْ يَفْجُرُكَ، اللَّهُمَّ إِيَّاكَ نَعْبُدُ وَلَكَ نُصَلِّي وَنَسْجُدُ، وَإِلَيْكَ نَسْعَى وَنَحْفِزُ، وَنَرْجُو رَحْمَتَكَ وَنَخْشَى عَذَابَكَ، إِنَّ عَذَابَكَ بِالْكُفَّارِ مُلْحِقٌ."
+                    },
+                    translation: {
+                        en: "O Allah! We implore You for help and beg forgiveness of You and believe in You and rely on You and extol You and we are thankful to You and are not ungrateful to You and we alienate and forsake those who disobey You. O Allah! You alone do we worship and for You do we pray and prostrate and we betake to please You and present ourselves for the service in Your cause and we hope for Your mercy and fear Your chastisement. Undoubtedly, Your torment is going to overtake infidels O Allah!",
+                        ur: "اے اللہ! ہم تجھ سے مدد طلب کرتے ہیں اور تجھ سے بخشش کے طلبگار ہیں، ہم تجھ پر ایمان رکھتے ہیں، تجھ پر بھروسہ کرتے ہیں، تیری تعریف بیان کرتے ہیں، اور تیرے شکر گزار ہیں، تیرے ناشکرے نہیں ہیں، اور ہم ان لوگوں سے علیحدگی اختیار کرتے ہیں جو تیری نافرمانی کرتے ہیں۔ اے اللہ! ہم تیری ہی عبادت کرتے ہیں، تیرے لیے ہی نماز پڑھتے اور سجدہ کرتے ہیں، تیرے قریب ہونے کی کوشش کرتے ہیں اور تیری رضا کے لیے خود کو پیش کرتے ہیں۔ ہم تیری رحمت کے امیدوار ہیں اور تیرے عذاب سے ڈرتے ہیں۔ بے شک، تیرا عذاب کافروں کو گھیر لینے والا ہے، اے اللہ!"
+
+                    }
+                },
+
+                {
+                    category: "darood",
+                    title: { en: "Darood e Taj", ar: "درود تاج" },
+                    text: {
+                        en: "Allahumma salli ala sayyidina Muhammadin sahibit taaji wal mi'raaji wal burraqi wal alami, daafi'il bala'i wal waba'i wal qahti wal maradi wal alami, ismuhu maktubun marfu'un mashfu'un manqushun fil lawhi wal qalami, sayyidil arabi wal ajami, jismuhu muqaddasun mu'attarun mutahharun munawwarun fil bayti wal harami, shamsid duha badrid duja, sadril ula nuril huda kahfil wara misbahiz zulam, jami'il fadl wal karam, ma'dinil joodi wal karam, Allahumma salli wa sallim wa barik alaih wa ala alihi wa sahbihi adada ma fi ilmika salatan da'imatan bidawami mulkika.",
+                        ar: "اللَّهُمَّ صَلِّ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ صَاحِبِ التَّاجِ وَالْمِعْرَاجِ وَالْبُرَاقِ وَالْعَلَمِ، دَافِعِ الْبَلَاءِ وَالْوَبَاءِ وَالْقَحْطِ وَالْمَرَضِ وَالْأَلَمِ، اسْمُهُ مَكْتُوبٌ مَرْفُوعٌ مَشْفُوعٌ مَنْقُوشٌ فِي اللَّوْحِ وَالْقَلَمِ، سَيِّدِ الْعَرَبِ وَالْعَجَمِ، جِسْمُهُ مُقَدَّسٌ مُعَطَّرٌ مُطَهَّرٌ مُنَوَّرٌ فِي الْبَيْتِ وَالْحَرَمِ، شَمْسِ الضُّحَى بَدْرِ الدُّجَى صَدْرِ الْعُلَى نُورِ الْهُدَى كَهْفِ الْوَرَى مِصْبَاحِ الظُّلَمِ، جَمِيعِ الْفَضْلِ وَالْكَرَمِ، مَعْدِنِ الْجُودِ وَالْكَرَمِ، اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَيْهِ وَعَلَىٰ آلِهِ وَصَحْبِهِ عَدَدَ مَا فِي عِلْمِكَ صَلَاةً دَائِمَةً بِدَوَامِ مُلْكِكَ."
+                    },
+                    translation: {
+                        en: "O Allah, send blessings upon our master Muhammad, the possessor of the crown, the ascension, the Buraq and the banner, the remover of calamity, plague, drought, illness and pain... (complete traditional meaning retained).",
+                        ur: "اے اللہ! ہمارے آقا محمد ﷺ پر درود بھیج جو تاج والے، معراج والے، براق والے اور علم والے ہیں، بلا، وبا، قحط، بیماری اور تکلیف کو دور کرنے والے ہیں... (مکمل روایتی مفہوم برقرار رکھا گیا ہے)"
+                    }
+                },
+                {
+                    category: "darood",
+                    title: { en: "Darood e Tunjina", ar: "درود تنجینا" },
+                    text: {
+                        en: "Allahumma salli ala sayyidina Muhammadin salatan tunjeena biha min jamee'il ahwali wal aafaat, wa taqdee lana biha jamee'al haajaat, wa tutahhiruna biha min jamee'is sayyi'aat, wa tarfa'una biha indaka a'lad darajaat, wa tuballighuna biha aqsal ghaayaat min jamee'il khairati fil hayati wa ba'dal mamaat, innaka ala kulli shay'in qadeer.",
+                        ar: "اللَّهُمَّ صَلِّ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ صَلَاةً تُنْجِينَا بِهَا مِنْ جَمِيعِ الْأَهْوَالِ وَالْآفَاتِ، وَتَقْضِي لَنَا بِهَا جَمِيعَ الْحَاجَاتِ، وَتُطَهِّرُنَا بِهَا مِنْ جَمِيعِ السَّيِّئَاتِ، وَتَرْفَعُنَا بِهَا عِنْدَكَ أَعْلَى الدَّرَجَاتِ، وَتُبَلِّغُنَا بِهَا أَقْصَى الْغَايَاتِ مِنْ جَمِيعِ الْخَيْرَاتِ فِي الْحَيَاةِ وَبَعْدَ الْمَمَاتِ، إِنَّكَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ."
+                    },
+                    translation: {
+                        en: "O Allah, send blessings upon our master Muhammad, such blessings by which You save us from all fears and calamities, fulfill all our needs, purify us from all sins, raise us to the highest ranks, and grant us the ultimate good in this life and after death. Indeed, You are Powerful over everything.",
+                        ur: "اے اللہ! ہمارے آقا محمد ﷺ پر ایسی رحمت نازل فرما جس کے ذریعے تو ہمیں ہر خوف اور آفت سے نجات دے، ہماری تمام حاجات پوری کرے، ہمیں گناہوں سے پاک کرے، ہمیں بلند درجات عطا کرے اور دنیا و آخرت کی بھلائیاں عطا فرمائے۔ بے شک تو ہر چیز پر قادر ہے۔"
+                    }
+                },
+                {
+                    category: "darood",
+                    title: { en: "Darood e Ibrahim", ar: "درود ابراہیمی" },
+                    text: {
+                        en: "Allahumma salli ala Muhammadin wa ala aali Muhammad kama sallaita ala Ibrahima wa ala aali Ibrahima innaka Hameedun Majeed. Allahumma barik ala Muhammadin wa ala aali Muhammad kama barakta ala Ibrahima wa ala aali Ibrahima innaka Hameedun Majeed.",
+                        ar: "اللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَعَلَىٰ آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَىٰ إِبْرَاهِيمَ وَعَلَىٰ آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَىٰ مُحَمَّدٍ وَعَلَىٰ آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَىٰ إِبْرَاهِيمَ وَعَلَىٰ آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ."
+                    },
+                    translation: {
+                        en: "O Allah, send blessings upon Muhammad and the family of Muhammad as You sent blessings upon Ibrahim and the family of Ibrahim. Indeed, You are Praiseworthy and Glorious. O Allah, bless Muhammad and the family of Muhammad as You blessed Ibrahim and the family of Ibrahim. Indeed, You are Praiseworthy and Glorious.",
+                        ur: "اے اللہ! محمد ﷺ اور آلِ محمد ﷺ پر رحمت نازل فرما جس طرح تو نے ابراہیم علیہ السلام اور آلِ ابراہیم پر رحمت نازل فرمائی۔ بے شک تو قابلِ تعریف اور بزرگی والا ہے۔ اے اللہ! محمد ﷺ اور آلِ محمد ﷺ پر برکت نازل فرما جس طرح تو نے ابراہیم علیہ السلام اور آلِ ابراہیم پر برکت نازل فرمائی۔ بے شک تو قابلِ تعریف اور بزرگی والا ہے۔"
+                    }
+                }
+
+
+
+
+            ];
+
+            /* =========================
+               NIGHT MODE LOGIC
+            ========================== */
+
+            function autoNightMode() {
+
+                const now = new Date();
+                const hour = now.getHours();
+
+                // Simple logic:
+                // Night = 6 PM (18) to 5 AM
+                if (hour >= 18 || hour < 5) {
+                    document.body.classList.add("night-mode");
+                } else {
+                    document.body.classList.remove("night-mode");
+                }
+            }
+
+            /* Run on load */
+            autoNightMode();
+
+            /* Check every minute */
+            setInterval(autoNightMode, 60000);
+
+
+            /* =========================
+               RENDER
+            ========================== */
+            function renderDuas(list) {
+
+                container.innerHTML = "";
+
+                list.forEach((dua, index) => {
+
+                    const col = document.createElement("div");
+                    col.className = "col-lg-6 col-md-6 mb-4";
+
+                    col.innerHTML = `
+                <div class="card dua-card h-100" data-index="${index}">
+                    <div class="card-header">
+                        <h5 class="card-title text-center">
+                            ${dua.title[currentLang]}
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-center fw-bold">
+                            ${dua.text[currentLang]}
+                        </p>
+                        <hr>
+                        <p class="text-center">
+                            ${currentLang === "en" ? dua.translation.en : dua.translation.ur}
+                        </p>
+                    </div>
+                </div>
+            `;
+
+                    container.appendChild(col);
+                });
+            }
+
+            /* =========================
+               FILTER
+            ========================== */
+            function filterAndRender() {
+
+                let filtered = duas;
+
+                if (activeCategory !== "all") {
+                    filtered = duas.filter(d => d.category === activeCategory);
+                }
+
+                renderDuas(filtered);
+            }
+
+            /* =========================
+               TAB INDICATOR
+            ========================== */
+            function moveIndicator(element) {
+                if (!indicator) return;
+                indicator.style.width = element.offsetWidth + "px";
+                indicator.style.left = element.offsetLeft + "px";
+            }
+
+            tabs.forEach(tab => {
+
+                tab.addEventListener("click", function () {
+
+                    tabs.forEach(t => t.classList.remove("active"));
+                    this.classList.add("active");
+
+                    activeCategory = this.dataset.category;
+
+                    moveIndicator(this);
+                    filterAndRender();
+                });
+
             });
 
-            translations.forEach(el => {
-                el.innerHTML = this.checked ? el.dataset.ur : el.dataset.en;
-                el.classList.toggle('urdu-text', this.checked); // Apply Urdu font
+            window.addEventListener("load", function () {
+                const activeTab = document.querySelector(".tab-btn.active");
+                if (activeTab) moveIndicator(activeTab);
             });
+
+            /* =========================
+               LANGUAGE TOGGLE
+            ========================== */
+            toggle.addEventListener("change", function () {
+
+                currentLang = this.checked ? "ar" : "en";
+                switcher.classList.toggle("active", this.checked);
+
+                filterAndRender();
+            });
+
+            /* =========================
+               SEARCH
+            ========================== */
+            function performSearch() {
+
+                const value = searchInput.value.toLowerCase().trim();
+                searchResults.innerHTML = "";
+
+                if (!value) {
+                    searchResults.style.display = "none";
+                    return;
+                }
+
+                const filtered = duas
+                    .map((dua, index) => ({ ...dua, index }))
+                    .filter(dua =>
+                        dua.title.en.toLowerCase().includes(value) ||
+                        dua.title.ar.toLowerCase().includes(value)
+                    );
+
+                if (filtered.length === 0) {
+                    searchResults.style.display = "none";
+                    return;
+                }
+
+                filtered.forEach(dua => {
+
+                    const item = document.createElement("a");
+                    item.href = "javascript:void(0)";
+                    item.className = "list-group-item list-group-item-action";
+                    item.innerText = dua.title.en;
+
+                    item.addEventListener("click", function () {
+
+                        activeCategory = "all";
+                        tabs.forEach(t => t.classList.remove("active"));
+                        document.querySelector('[data-category="all"]').classList.add("active");
+                        moveIndicator(document.querySelector('[data-category="all"]'));
+
+                        filterAndRender();
+
+                        setTimeout(() => {
+
+                            const cards = document.querySelectorAll(".dua-card");
+                            const card = cards[dua.index];
+
+                            if (!card) return;
+
+                            card.scrollIntoView({
+                                behavior: "smooth",
+                                block: "center"
+                            });
+
+                            cards.forEach(c => c.classList.remove("highlight-dua"));
+                            card.classList.add("highlight-dua");
+
+                        }, 150);
+
+                        searchResults.style.display = "none";
+                        searchInput.value = "";
+                    });
+
+                    searchResults.appendChild(item);
+                });
+
+                searchResults.style.display = "block";
+            }
+
+            searchInput.addEventListener("input", performSearch);
+
+            document.addEventListener("click", function (e) {
+                if (!e.target.closest(".input-group")) {
+                    searchResults.style.display = "none";
+                }
+            });
+
+            /* =========================
+               INITIAL LOAD
+            ========================== */
+            filterAndRender();
+
         });
-
     </script>
+
 
 </body>
 

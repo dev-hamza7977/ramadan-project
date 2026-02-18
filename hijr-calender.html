@@ -7,39 +7,82 @@
     <title>NOOR E IBADAT | HIJRI CALENDAR</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=1.6">
+    <link rel="stylesheet" href="style.css?v=1.7">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/main.min.css">
     <style>
-        /* Base event style */
+        /* ================= NIGHT MODE ================= */
+
+        body.night-mode {
+            background: #0e1a24;
+            color: #fff;
+        }
+
+        body.night-mode .fc {
+            background: #0e1a24;
+            color: #fff;
+        }
+
+        body.night-mode .fc-theme-standard td,
+        body.night-mode .fc-theme-standard th {
+            border-color: #1f2d3a;
+        }
+
+        body.night-mode .fc-daygrid-day {
+            background: #14222e;
+        }
+
+        body.night-mode .fc-toolbar {
+            background: #14222e;
+        }
+
+        body.night-mode .fc-button {
+            background: #1c2f3e !important;
+            border: none !important;
+            color: #fff !important;
+        }
+
+        body.night-mode .fc-daygrid-day-number {
+            color: #fff;
+        }
+
+        body.night-mode .fc-toolbar-title {
+            color: #fff;
+        }
+
+        body.night-mode .fc-event {
+            opacity: 0.95;
+        }
+
         .fc-event {
             border: none !important;
-            padding: 2px 4px;
-            border-radius: 6px;
+            padding: 3px 6px;
+            border-radius: 8px;
             font-size: 12px;
             font-weight: 600;
             line-height: 1.2;
-        }
-
-        /* Make text wrap nicely */
-        .fc-event-title {
             white-space: normal !important;
         }
 
-        /* Small screens */
+        /* Tablet */
         @media (max-width: 768px) {
-            .fc-event {
-                font-size: 10px;
-                padding: 2px;
-                border-radius: 4px;
-            }
-        }
 
-        /* Very small screens */
-        @media (max-width: 480px) {
+
+
+            .fc {
+                font-size: 13px;
+            }
+
             .fc-event {
-                font-size: 9px;
-                padding: 1px 2px;
+                font-size: 10px !important;
+                padding: 2px 4px !important;
+                border-radius: 6px;
+            }
+
+            .fc-toolbar {
+                flex-direction: column;
+                gap: 6px;
+                text-align: center;
             }
         }
     </style>
@@ -55,11 +98,41 @@
                 </div>
                 <div class="col-lg-1 side-menu-col">
                     <div class="side-menu">
-                        <div class="nav-menu-link"><a href="index.html"><span>Home</span></a></div>
-                        <div class="nav-menu-link"><a href="hijr-calender.html"><span>Hijr</span></a></div>
-                        <div class="nav-menu-link"><a href="ramazan.html"><span>Ramzan</span></a></div>
-                        <div class="nav-menu-link"><a href="dua.html"><span>Dua's</span></a></div>
-                        <div class="nav-menu-link"><a href="contact.html"><span>Contact</span></a></div>
+                        <div class="nav-menu-link">
+                            <a href="index.html">
+                                <img src="img/nav-icon/house.svg" alt="">
+                                <br>
+                                <span>Home</span>
+                            </a>
+                        </div>
+                        <div class="nav-menu-link">
+                            <a href="hijr-calender.html">
+                                <img src="img/nav-icon/hijr-calender.svg" alt="">
+                                <br>
+                                <span>Hijr</span>
+                            </a>
+                        </div>
+                        <div class="nav-menu-link">
+                            <a href="ramazan.html">
+                                <img src="img/nav-icon/ramzan.svg" alt="">
+                                <br>
+                                <span>Ramzan</span>
+                            </a>
+                        </div>
+                        <div class="nav-menu-link">
+                            <a href="dua.html">
+                                <img src="img/nav-icon/dua.svg" alt="">
+                                <br>
+                                <span>Dua's</span>
+                            </a>
+                        </div>
+                        <div class="nav-menu-link">
+                            <a href="contact.html">
+                                <img src="img/nav-icon/contact-us.svg" alt="">
+                                <br>
+                                <span>Contact</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -70,7 +143,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment-hijri@2.1.2/moment-hijri.min.js"></script>
 
-    <script>
+    <!-- <script>
 
 
 
@@ -215,7 +288,283 @@
         });
 
 
+    </script> -->
+
+    <script>
+
+        function convertToArabicNumbers(number) {
+            const arabicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+            return number.toString().replace(/\d/g, d => arabicDigits[d]);
+        }
+
+        /* ==============================
+           ISLAMIC EVENTS
+        ============================== */
+        function getIslamicEventForDate(date) {
+
+            let hijriMoment = moment(date).subtract(1, 'day'); // your logic
+            let hDay = hijriMoment.iDate();
+            let hMonth = hijriMoment.iMonth();
+
+            let events = [];
+
+            if (hMonth === 2 && hDay === 12) events.push({ title: "Eid Milad un Nabi ﷺ", color: "#2e7d32" });
+            if (hMonth === 7 && hDay === 15) events.push({ title: "Shab e Barat", color: "#6a1b9a" });
+            if (hMonth === 9 && hDay === 1) events.push({ title: "Eid ul Fitr", color: "#d84315" });
+            if (hMonth === 11 && hDay === 10) events.push({ title: "Eid ul Adha", color: "#ad1457" });
+
+            if (hDay === 21) events.push({ title: "21vi Sharif", color: "#a99752" });
+            if (hDay === 11) events.push({ title: "11vi Sharif", color: "#00897b" });
+            if (hDay === 6) events.push({ title: "6ti Sharif", color: "#FF9800" });
+
+            if (hMonth === 0 && hDay === 10) events.push({ title: "Ashura", color: "#1565c0" });
+            if (hMonth === 8 && hDay === 21) events.push({ title: "Shadat Maula Ali", color: "#1565c0" });
+            if (hMonth === 3 && hDay === 11) events.push({ title: "Eid E Gausia", color: "#1565c0" });
+            if (hMonth === 6 && hDay === 6) events.push({ title: "Eid E Chishtiya", color: "#1565c0" });
+
+            return events;
+        }
+
+        /* ==============================
+           INDIAN BANK HOLIDAYS
+        ============================== */
+        function getIndianHolidayForDate(date) {
+
+            let d = moment(date).format("MM-DD");
+
+            const holidays = {
+                "01-26": { title: "Republic Day", color: "#444" },
+                "08-15": { title: "Independence Day", color: "#444" },
+                "10-02": { title: "Gandhi Jayanti", color: "#444" },
+                "12-25": { title: "Christmas", color: "#444" }
+            };
+
+            return holidays[d] ? [holidays[d]] : [];
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            var calendarEl = document.getElementById('calendar');
+
+            var hijriMonthsInArabic = {
+                0: "مُحَرَّم", 1: "صَفَر", 2: "رَبِيع ٱلأَوَّل", 3: "رَبِيع ٱلثَّانِي",
+                4: "جُمَادَىٰ ٱلأُولَىٰ", 5: "جُمَادَىٰ ٱلثَّانِيَة", 6: "رَجَب", 7: "شَعْبَان",
+                8: "رَمَضَان", 9: "شَوَّال", 10: "ذُو ٱلْقَعْدَة", 11: "ذُو ٱلْحِجَّة"
+            };
+
+            function getHijriMonthRange(startDate, endDate) {
+                let start = moment(startDate).subtract(1, 'day');
+                let end = moment(endDate).subtract(1, 'day');
+
+                let monthRange = hijriMonthsInArabic[start.iMonth()];
+                let year = convertToArabicNumbers(start.iYear());
+
+                return `${monthRange} ${year}`;
+            }
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+
+                initialView: 'dayGridMonth',
+                height: 695,
+
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth'
+                },
+
+                /* ==============================
+                   EVENTS GENERATOR
+                ============================== */
+                events: function (fetchInfo, successCallback) {
+
+                    let events = [];
+                    let start = moment(fetchInfo.start);
+                    let end = moment(fetchInfo.end);
+
+                    while (start.isBefore(end)) {
+
+                        let dateObj = start.toDate();
+                        let dateStr = start.format("YYYY-MM-DD");
+
+                        let islamicEvents = getIslamicEventForDate(dateObj);
+                        let bankEvents = getIndianHolidayForDate(dateObj);
+
+                        [...islamicEvents, ...bankEvents].forEach(ev => {
+                            events.push({
+                                title: ev.title,
+                                start: dateStr,
+                                allDay: true,
+                                backgroundColor: ev.color,
+                                textColor: "#fff"
+                            });
+                        });
+
+                        start.add(1, 'day');
+                    }
+
+                    successCallback(events);
+                },
+
+                /* ==============================
+                   HEADER TITLE
+                ============================== */
+                datesSet: function (info) {
+
+                    let gregorianMonth = moment(info.view.currentStart).format('MMMM YYYY');
+                    let hijriRange = getHijriMonthRange(info.view.currentStart, info.view.currentEnd);
+
+                    document.querySelector('.fc-toolbar-title').innerText =
+                        `${gregorianMonth} / ${hijriRange}`;
+                },
+
+                /* ==============================
+                   DATE CELL DESIGN
+                ============================== */
+                dayCellContent: function (arg) {
+
+                    let engDate = moment(arg.date).format('D');
+                    let hijriDate = convertToArabicNumbers(
+                        moment(arg.date).subtract(1, 'day').iDate()
+                    );
+
+                    return {
+                        html: `
+                    <div style="text-align:center;">
+                        <div style="font-weight:600;font-size:14px;">
+                            ${engDate}
+                        </div>
+                        <div style="font-size:12px;font-family:'Noto Naskh Arabic';">
+                            ${hijriDate}
+                        </div>
+                    </div>
+                `
+                    };
+                }
+
+            });
+
+            calendar.render();
+        });
+
     </script>
+
+
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const calendarEl = document.getElementById('calendar');
+
+            function convertToArabicNumbers(number) {
+                const arabicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+                return number.toString().replace(/\d/g, d => arabicDigits[d]);
+            }
+
+            function getIslamicEventForDate(date) {
+
+                let hijriMoment = moment(date).subtract(1, 'day');
+                let hDay = hijriMoment.iDate();
+                let hMonth = hijriMoment.iMonth();
+
+                let events = [];
+
+                if (hDay === 21) events.push({ title: "21vi Sharif", color: "#a99752" });
+                if (hDay === 11) events.push({ title: "11vi Sharif", color: "#00897b" });
+                if (hDay === 6) events.push({ title: "6ti Sharif", color: "#FF9800" });
+
+                if (hMonth === 2 && hDay === 12) events.push({ title: "Eid Milad un Nabi ﷺ", color: "#2e7d32" });
+                if (hMonth === 3 && hDay === 11) events.push({ title: "Eid E Gausiya", color: "#2e7d32" });
+                if (hMonth === 10 && hDay === 21) events.push({ title: "Sahadat Maula Ali", color: "#2e7d32" });
+                if (hMonth === 2 && hDay === 12) events.push({ title: "Eid Milad un Nabi ﷺ", color: "#2e7d32" });
+
+
+                return events;
+            }
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+
+                initialView: 'dayGridMonth',
+                height: 695,
+
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth'
+                },
+
+                /* =========================
+                   CUSTOM DATE CELL
+                ========================= */
+
+                dayCellContent: function (arg) {
+
+                    let gregorianDate = moment(arg.date).format('D');
+                    let hijriDate = convertToArabicNumbers(
+                        moment(arg.date).subtract(1, 'day').iDate()
+                    );
+
+                    let events = getIslamicEventForDate(arg.date);
+
+                    let eventsHtml = "";
+
+                    events.forEach(ev => {
+                        eventsHtml += `
+                    <div style="
+                        background:${ev.color};
+                        color:#fff;
+                        border-radius:6px;
+                        padding:2px 4px;
+                        margin-top:4px;
+                        font-size:10px;
+                        text-align:center;
+                    ">
+                        ${ev.title}
+                    </div>
+                `;
+                    });
+
+                    return {
+                        html: `
+                    <div style="text-align:center;">
+                        <div style="font-weight:600; font-size:14px;">
+                            ${gregorianDate}
+                        </div>
+
+                        <div style="font-family:'Noto Naskh Arabic'; font-size:12px;">
+                            ${hijriDate}
+                        </div>
+
+                        ${eventsHtml}
+                    </div>
+                `
+                    };
+                }
+
+            });
+
+            calendar.render();
+        });
+
+    </script> -->
+
+    <script>
+        function autoNightMode() {
+
+            const now = new Date();
+            const hour = now.getHours();
+
+            // Night between 6PM and 6AM
+            if (hour >= 18 || hour < 6) {
+                document.body.classList.add("night-mode");
+            } else {
+                document.body.classList.remove("night-mode");
+            }
+        }
+
+        autoNightMode();
+        setInterval(autoNightMode, 60000); // check every 1 minute
+    </script>
+
 
 </body>
 

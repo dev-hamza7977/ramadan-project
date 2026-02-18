@@ -603,11 +603,12 @@ document.addEventListener("DOMContentLoaded", function () {
 Ishraq: document.querySelector('[data-namaz="Ishraq"] .card-subtitle'),
 Tahajjud: document.querySelector('[data-namaz="Tahajjud"] .card-subtitle'),
 Awwabeen: document.querySelector('[data-namaz="Awwabeen"] .card-subtitle'),
-
-        
         Sehri: sehriIftariCards.length > 0 ? sehriIftariCards[0].querySelector(".card-subtitle") : null,
         Iftari: sehriIftariCards.length > 1 ? sehriIftariCards[1].querySelector(".card-subtitle") : null,
     };
+
+
+
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -866,3 +867,5 @@ setInterval(() => {
         const currentPrayer = currentCards[0].dataset.namaz;
     }
 }, 60000);
+
+

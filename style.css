@@ -130,7 +130,7 @@ body {
 
 .namaz-card h6,
 .sehri-iftar-card h6 {
-  color: #103524;       
+  color: #103524;
   text-align: center;
   font-size: 25px;
 }
@@ -160,12 +160,16 @@ body {
   box-shadow: 0 0 5px 5px #198754;
 }
 
-.sehri-iftaar-wrap {
+.sehri-iftar-wrap-web {
   display: flex;
   justify-content: space-between;
   width: 100%;
   padding: 10px 20px;
   align-items: center;
+}
+
+.sehri-iftar-wrap-mob {
+  display: none;
 }
 
 .search-bar .input-group {
@@ -275,6 +279,7 @@ a {
   align-items: center;
   justify-content: center;
   /* background: #fff3cd; */
+  /* flex-direction: column; */
 }
 
 .fc .fc-daygrid-day-number {
@@ -572,25 +577,91 @@ input:-internal-autofill-selected {
   background: #555;
 }
 
+body.night-mode table {
+  background-color: #13263d;
+}
+
+body.night-mode tr {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.night-mode .ramzan-title svg {
+  filter: none;
+}
+
+body.night-mode #ramzan-timetable tr td {
+  background-color: #182e36;
+}
 @media screen and (max-width: 768px) {
   .nav-menu-link {
     padding: 5px 10px;
     width: 75px;
   }
 
+  .dua-crad-wrapper {
+    height: 70vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-bottom: 230px;
+  }
+
+  body {
+    overflow: hidden;
+  }
+
+  .table-ramzan {
+    height: 70vh;
+    overflow: scroll;
+    padding-bottom: 170px;
+  }
+
+  .sehri-iftar-wrap-web {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .sehri-iftar-wrap-web .card {
+    width: 100%;
+    margin: 0;
+  }
+
+  .fc-theme-standard td {
+    height: 155px;
+  }
+
+  .fc .fc-daygrid-day-frame {
+    flex-direction: column;
+  }
+
+  /* Make Sehri and Iftari appear first */
+  .sehri-iftar-wrap-web .sehri-iftar-card:first-child {
+    order: 0;
+  }
+
+  .sehri-iftar-wrap-web .sehri-iftar-card:last-child {
+    order: -1;
+  }
+
+  .nafl-card .card-body {
+    padding: 3px;
+  }
+
+  /* Optional: equal height */
+  .sehri-iftar-wrap-web .card-body {
+    text-align: center;
+  }
+
   .index-note-text {
-    font-size: 10px;
+    font-size: 14px;
+    margin-top: 20px;
   }
 
   /* Home Page */
 
   .search-bar {
     justify-content: center;
-    padding: 30px 0px;
-  }
-
-  .sehri-iftaar-wrap {
-    gap: 30px;
+    padding: 10px 0px;
   }
 
   .col-lg-11 {
@@ -787,4 +858,12 @@ body.night-mode .side-menu-col {
 body.night-mode .nafl-card {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nafl-wrap {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 20px;
+  align-items: center;
 }
