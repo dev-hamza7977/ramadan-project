@@ -289,7 +289,21 @@
 
 
     </script> -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let currentPage = new URL(window.location.href).pathname.replace(/\/$/, "").split("/").pop() || "index.html";
 
+            let menuLinks = document.querySelectorAll(".nav-menu-link a");
+
+            menuLinks.forEach(link => {
+                let linkHref = new URL(link.href, window.location.origin).pathname.replace(/\/$/, "").split("/").pop();
+
+                if (currentPage === linkHref || (currentPage === "index.html" && linkHref === "./")) {
+                    link.parentElement.classList.add("nav-active");
+                }
+            });
+        });
+    </script>
     <script>
 
         function convertToArabicNumbers(number) {

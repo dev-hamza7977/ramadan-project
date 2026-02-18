@@ -79,9 +79,7 @@
 
             .dua-parent-container {
                 OVERFLOW: scroll;
-                HEIGHT: 100VH;
-                height: 30vh;
-                /* padding: 30px 20px; */
+
                 margin: 30px 0px;
             }
 
@@ -874,61 +872,62 @@
                                     </svg>
                                 </div>
                             </div>
+                            <div class="dua-parent-container">
+                                <!-- LANGUAGE SWITCH -->
+                                <!-- LANGUAGE SWITCH -->
+                                <div class="language-switcher">
+                                    <input type="checkbox" id="toggle" class="toggleCheckbox" />
+                                    <label for="toggle" class="toggleContainer">
+                                        <div>ENGLISH</div>
+                                        <div>عربي</div>
+                                    </label>
+                                </div>
+                                <div class="container mt-4 text-center">
 
-                            <!-- LANGUAGE SWITCH -->
-                            <!-- LANGUAGE SWITCH -->
-                            <div class="language-switcher">
-                                <input type="checkbox" id="toggle" class="toggleCheckbox" />
-                                <label for="toggle" class="toggleContainer">
-                                    <div>ENGLISH</div>
-                                    <div>عربي</div>
-                                </label>
-                            </div>
-                            <div class="container mt-4 text-center">
+                                    <div class="custom-tabs" id="duaTabs">
 
-                                <div class="custom-tabs" id="duaTabs">
+                                        <button class="tab-btn active" data-category="all">
+                                            ALL
+                                        </button>
 
-                                    <button class="tab-btn active" data-category="all">
-                                        ALL
-                                    </button>
+                                        <button class="tab-btn" data-category="dua">
+                                            DUAS
+                                        </button>
 
-                                    <button class="tab-btn" data-category="dua">
-                                        DUAS
-                                    </button>
+                                        <button class="tab-btn" data-category="darood">
+                                            DAROOD
+                                        </button>
 
-                                    <button class="tab-btn" data-category="darood">
-                                        DAROOD
-                                    </button>
+                                        <div class="tab-indicator"></div>
 
-                                    <div class="tab-indicator"></div>
+                                    </div>
 
                                 </div>
 
+
+                                <div class="container mt-3 position-relative">
+                                    <input type="text" id="searchInput" class="form-control"
+                                        placeholder="Search Dua...">
+
+                                    <!-- DROPDOWN RESULTS -->
+                                    <div id="searchResults" class="list-group position-absolute w-100"
+                                        style="z-index:999; display:none;"></div>
+                                </div>
+
+
+                                <!-- DUAS CONTAINER -->
+                                <div class="container mt-4">
+                                    <div class="row" id="duaContainer"></div>
+                                </div>
+
+
+
+
+                                <!-- DUAS CONTAINER -->
+                                <div class="dua-card-wrapper mt-4">
+                                    <div class="row" id="duaContainer"></div>
+                                </div>
                             </div>
-
-
-                            <div class="container mt-3 position-relative">
-                                <input type="text" id="searchInput" class="form-control" placeholder="Search Dua...">
-
-                                <!-- DROPDOWN RESULTS -->
-                                <div id="searchResults" class="list-group position-absolute w-100"
-                                    style="z-index:999; display:none;"></div>
-                            </div>
-
-
-                            <!-- DUAS CONTAINER -->
-                            <div class="container dua-parent-container mt-4">
-                                <div class="row" id="duaContainer"></div>
-                            </div>
-
-
-
-
-                            <!-- DUAS CONTAINER -->
-                            <div class="dua-card-wrapper mt-4">
-                                <div class="row" id="duaContainer"></div>
-                            </div>
-
                         </div>
 
                         <div class="col-lg-1 side-menu-col">

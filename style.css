@@ -605,10 +605,6 @@ body.night-mode #ramzan-timetable tr td {
     padding-bottom: 230px;
   }
 
-  body {
-    overflow: hidden;
-  }
-
   .table-ramzan {
     height: 70vh;
     overflow: scroll;
